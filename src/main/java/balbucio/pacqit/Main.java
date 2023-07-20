@@ -151,6 +151,7 @@ public class Main {
         project.setMainClass(f.getByIndex(2).asString());
         projectBuild.setProject(project);
         projectBuild.createPath();
+        project.save(parse.getProjectDir());
     }
 
     public void projectPathSettingsForm(){
@@ -162,13 +163,15 @@ public class Main {
                 .addText("Output Path:", project.getOutputPath())
                 .addText("Compile Path:", project.getCompílePath())
                 .addText("Generated Path:", project.getGeneratedPath()).show();
-        project.setSourcePath(f.getByIndex(3).asString());
-        project.setResourcePath(f.getByIndex(4).asString());
-        project.setBuildPluginsPath(f.getByIndex(5).asString());
-        project.setLocalLibrariesPath(f.getByIndex(6).asString());
-        project.setOutputPath(f.getByIndex(7).asString());
-        project.setCompílePath(f.getByIndex(8).asString());
-        project.setGeneratedPath(f.getByIndex(9).asString());
+        project.setSourcePath(f.getByIndex(0).asString());
+        project.setResourcePath(f.getByIndex(1).asString());
+        project.setBuildPluginsPath(f.getByIndex(2).asString());
+        project.setLocalLibrariesPath(f.getByIndex(3).asString());
+        project.setOutputPath(f.getByIndex(4).asString());
+        project.setCompílePath(f.getByIndex(5).asString());
+        project.setGeneratedPath(f.getByIndex(6).asString());
+        project.save(parse.getProjectDir());
+        projectBuild.createPath();
     }
 
     public void projectCompileSettingsForm(){
@@ -181,9 +184,11 @@ public class Main {
                     uiBooster.showInfoDialog("Select the folder where Java is installed. Do not select the bin folder.");
                     project.setJAVA_HOME(uiBooster.showDirectorySelection().getAbsolutePath());
                 }).show();
-        project.setExecutableJar((boolean) f.getByIndex(10).getValue());
-        project.setJarName(f.getByIndex(11).asString());
-        project.setJavaVersion(f.getByIndex(12).asString());
-        project.setJAVA_HOME(f.getByIndex(13).asString());
+        project.setExecutableJar((boolean) f.getByIndex(0).getValue());
+        project.setJarName(f.getByIndex(1).asString());
+        project.setJavaVersion(f.getByIndex(2).asString());
+        project.setJAVA_HOME(f.getByIndex(3).asString());
+        project.save(parse.getProjectDir());
+        projectBuild.createPath();
     }
 }
