@@ -4,15 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/ProjectBuild.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/ClasseUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/JarUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/PackageUtils.java" afterDir="false" />
+    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Sistema para compilar;">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/logger/BuildLoggerFormat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/logger/LoggerFormat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/ProjectAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/ArgParse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/ArgParse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/ProjectBuild.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/JarUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/JarUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,12 +46,16 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
@@ -61,11 +69,24 @@
       <option name="presentableId" value="Default" />
       <updated>1689813772459</updated>
       <workItem from="1689813773864" duration="3000" />
-      <workItem from="1689862403885" duration="9623000" />
+      <workItem from="1689862403885" duration="17892000" />
     </task>
+    <task id="LOCAL-00001" summary="Sistema para compilar;">
+      <option name="closed" value="true" />
+      <created>1689876736643</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1689876736643</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Sistema para compilar;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Sistema para compilar;" />
   </component>
 </project>
