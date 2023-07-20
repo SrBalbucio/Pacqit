@@ -1,5 +1,6 @@
 package balbucio.pacqit;
 
+import balbucio.pacqit.command.CommandManager;
 import balbucio.pacqit.logger.LoggerFormat;
 import balbucio.pacqit.model.Project;
 import balbucio.pacqit.compiler.ProjectBuild;
@@ -19,9 +20,10 @@ public class Main {
         new Main(parse);
     }
 
-    private Logger LOGGER = Logger.getLogger("PACQIT");
+    public Logger LOGGER = Logger.getLogger("PACQIT");
     private ArgParse parse;
     private Project project;
+    private CommandManager commandManager;
     private ProjectBuild projectBuild;
     private UiBooster uiBooster;
     private Scanner input;
@@ -34,6 +36,7 @@ public class Main {
         this.parse = parse;
         this.input = new Scanner(System.in);
         this.uiBooster = new UiBooster();
+        this.commandManager = new CommandManager(this);
         this.project = Project.loadProject(parse.getProjectDir());
         if(project != null) {
             this.projectBuild = new ProjectBuild(project, parse);
@@ -43,6 +46,18 @@ public class Main {
         switch (parse.getAction()){
 
             case CLEAN -> {
+                if(project == null){
+                    uiBooster.showConfirmDialog(
+                            "There is no project in this folder, do you want to create it now?",
+                            "Project not exists",
+                            () -> {
+                                createProjectForm();
+                            },
+                            () -> {});
+                    return;
+                }
+
+                projectBuild.clean();
             }
             case COMPILE -> {
                 if(project == null){
@@ -50,9 +65,9 @@ public class Main {
                             "There is no project in this folder, do you want to create it now?",
                             "Project not exists",
                             () -> {
+                                createProjectForm();
                             },
-                            () -> {
-                            });
+                            () -> {});
                     return;
                 }
 
@@ -64,9 +79,9 @@ public class Main {
                             "There is no project in this folder, do you want to create it now?",
                             "Project not exists",
                             () -> {
+                                createProjectForm();
                             },
-                            () -> {
-                            });
+                            () -> {});
                     return;
                 }
 
@@ -75,7 +90,7 @@ public class Main {
             case CREATE_NEW_PROJECT -> {
                 if(!parse.isConsoleOnly() ){
                     if(!GraphicsEnvironment.isHeadless()){
-
+                        createProjectForm();
                     } else{
                         LOGGER.severe("The device does not have GUI support, so you must create a new project via console using the --new-project command together with --console-only.\n" +
                                 "Example: pacqit --console-only --new-project\n" +
@@ -96,6 +111,10 @@ public class Main {
                 }
             }
             case NONE -> {
+                System.out.println("Pacqit is waiting for commands:");
+                while(input.hasNext()){
+                    commandManager.resolve(input.next());
+                }
             }
         }
     }
@@ -110,10 +129,13 @@ public class Main {
         project.setName(form.getByIndex(0).asString());
         project.setProjectPackage(form.getByIndex(1).asString());
         project.setMainClass(form.getByIndex(2).asString());
+        projectBuild = new ProjectBuild(project, parse);
+        projectSettingsForm();
     }
 
     public void projectSettingsForm(){
         FormBuilder form = uiBooster.createForm("Project Settings");
+        Form f = null;
         form.addText("Project Name:")
                 .addText("Project Package:", project.getProjectPackage())
                 .addText("Project Version:", project.getVersion())
@@ -131,11 +153,9 @@ public class Main {
                 .addText("Java Home:", project.getJAVA_HOME())
                 .addButton("Select another Java Home", () -> {
                     uiBooster.showInfoDialog("Select the folder where Java is installed. Do not select the bin folder.");
-                    form.close();
                     project.setJAVA_HOME(uiBooster.showDirectorySelection().getAbsolutePath());
-                    form.show();
                 });
-        Form f = form.show();
+        f = form.show();
         project.setProjectPackage(f.getByIndex(0).asString());
         project.setVersion(f.getByIndex(1).asString());
         project.setMainClass(f.getByIndex(2).asString());
@@ -150,5 +170,7 @@ public class Main {
         project.setJarName(f.getByIndex(11).asString());
         project.setJavaVersion(f.getByIndex(12).asString());
         project.setJAVA_HOME(f.getByIndex(13).asString());
+        projectBuild.setProject(project);
+        projectBuild.createPath();
     }
 }

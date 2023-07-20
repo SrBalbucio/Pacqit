@@ -190,4 +190,10 @@ public class ProjectBuild {
         BUILD_LOGGER.info("Dependencies packaged successfully in "+(init - System.currentTimeMillis())+"ms! The JARs were created.");
         return true;
     }
+
+    public void clean(){
+        getGeneratedPath().delete();
+        getCompilePath().delete();
+        BUILD_LOGGER.info("Project was cleaned!");
+    }
 }

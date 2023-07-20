@@ -4,19 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Sistema para compilar;">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/logger/BuildLoggerFormat.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/logger/LoggerFormat.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/ProjectAction.java" afterDir="false" />
+    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Adicionado sistema de compilação;&#10;Adicionado settings frame;&#10;Adicionado create project frame;">
+      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/command/Command.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/command/CommandManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/ArgParse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/ArgParse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/ProjectBuild.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/JarUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/JarUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +20,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -69,7 +63,7 @@
       <option name="presentableId" value="Default" />
       <updated>1689813772459</updated>
       <workItem from="1689813773864" duration="3000" />
-      <workItem from="1689862403885" duration="17892000" />
+      <workItem from="1689862403885" duration="19166000" />
     </task>
     <task id="LOCAL-00001" summary="Sistema para compilar;">
       <option name="closed" value="true" />
@@ -79,7 +73,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689876736643</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Adicionado sistema de compilação;&#10;Adicionado settings frame;&#10;Adicionado create project frame;">
+      <option name="closed" value="true" />
+      <created>1689885422426</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1689885422426</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -87,6 +89,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Sistema para compilar;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Sistema para compilar;" />
+    <MESSAGE value="Adicionado sistema de compilação;&#10;Adicionado settings frame;&#10;Adicionado create project frame;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adicionado sistema de compilação;&#10;Adicionado settings frame;&#10;Adicionado create project frame;" />
   </component>
 </project>
