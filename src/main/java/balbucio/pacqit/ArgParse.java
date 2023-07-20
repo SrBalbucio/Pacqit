@@ -22,7 +22,7 @@ public class ArgParse {
         this.args = args;
     }
 
-    private void configure(){
+    public void configure(){
         for(String c : args){
             if(c.equalsIgnoreCase("--console-only")){
                 consoleOnly = true;
@@ -34,6 +34,10 @@ public class ArgParse {
                 action = ProjectAction.COMPILE;
             } else if(c.equalsIgnoreCase("--build")){
                 action = ProjectAction.BUILD;
+            } else if(c.equalsIgnoreCase("--new-project")){
+                action = ProjectAction.CREATE_NEW_PROJECT;
+            }else if(c.equalsIgnoreCase("--clean")){
+                action = ProjectAction.CLEAN;
             }else {
                 String[] option = c.split("=");
                 if(option[0].equalsIgnoreCase("--projectdir")){
