@@ -142,7 +142,9 @@ public class Main {
         form.addText("Project Name:", project.getName())
                 .addText("Project Package:", project.getProjectPackage())
                 .addText("Project Version:", project.getVersion())
-                .addText("Main Class:", project.getMainClass());
+                .addText("Main Class:", project.getMainClass())
+                .addButton("Path Configuration", () -> projectPathSettingsForm())
+                .addButton("Build Configuration", () -> projectCompileSettingsForm());
         f = form.show();
         project.setProjectPackage(f.getByIndex(0).asString());
         project.setVersion(f.getByIndex(1).asString());
