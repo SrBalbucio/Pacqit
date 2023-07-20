@@ -139,7 +139,7 @@ public class Main {
     public void projectSettingsForm(){
         FormBuilder form = uiBooster.createForm("Project Settings");
         Form f = null;
-        form.addText("Project Name:")
+        form.addText("Project Name:", project.getName())
                 .addText("Project Package:", project.getProjectPackage())
                 .addText("Project Version:", project.getVersion())
                 .addText("Main Class:", project.getMainClass())
