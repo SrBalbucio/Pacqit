@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Adicionado sistema de compilação;&#10;Adicionado settings frame;&#10;Adicionado create project frame;">
-      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/command/Command.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/command/CommandManager.java" afterDir="false" />
+    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Adicionado sistema de commands;">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pacqit.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +42,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/srbal/Documents/Pacqit/src/main/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -54,6 +54,31 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\srbal\Documents\Pacqit\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="balbucio.pacqit.Main" />
+      <module name="Pacqit" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="balbucio.pacqit.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -63,7 +88,7 @@
       <option name="presentableId" value="Default" />
       <updated>1689813772459</updated>
       <workItem from="1689813773864" duration="3000" />
-      <workItem from="1689862403885" duration="19166000" />
+      <workItem from="1689862403885" duration="20319000" />
     </task>
     <task id="LOCAL-00001" summary="Sistema para compilar;">
       <option name="closed" value="true" />
@@ -81,7 +106,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689885422426</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Adicionado sistema de commands;">
+      <option name="closed" value="true" />
+      <created>1689886305288</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1689886305288</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -90,6 +123,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Sistema para compilar;" />
     <MESSAGE value="Adicionado sistema de compilação;&#10;Adicionado settings frame;&#10;Adicionado create project frame;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adicionado sistema de compilação;&#10;Adicionado settings frame;&#10;Adicionado create project frame;" />
+    <MESSAGE value="Adicionado sistema de commands;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adicionado sistema de commands;" />
   </component>
 </project>

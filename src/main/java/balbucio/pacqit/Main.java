@@ -7,6 +7,7 @@ import balbucio.pacqit.compiler.ProjectBuild;
 import de.milchreis.uibooster.UiBooster;
 import de.milchreis.uibooster.model.Form;
 import de.milchreis.uibooster.model.FormBuilder;
+import de.milchreis.uibooster.model.UiBoosterOptions;
 
 import java.awt.*;
 import java.util.Scanner;
@@ -33,9 +34,10 @@ public class Main {
         ConsoleHandler handler = new ConsoleHandler();
         handler.setFormatter(new LoggerFormat());
         LOGGER.addHandler(handler);
+        LOGGER.info("Pacqit initialized successfully!");
         this.parse = parse;
         this.input = new Scanner(System.in);
-        this.uiBooster = new UiBooster();
+        this.uiBooster = new UiBooster(UiBoosterOptions.Theme.DEFAULT, "/pacqit.png");
         this.commandManager = new CommandManager(this);
         this.project = Project.loadProject(parse.getProjectDir());
         if(project != null) {
@@ -111,7 +113,7 @@ public class Main {
                 }
             }
             case NONE -> {
-                System.out.println("Pacqit is waiting for commands:");
+                LOGGER.info("Pacqit is waiting for commands:");
                 while(input.hasNext()){
                     commandManager.resolve(input.next());
                 }

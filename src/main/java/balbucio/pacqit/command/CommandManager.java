@@ -22,7 +22,7 @@ public class CommandManager {
         if(c != null) {
             c.run(a, app);
         } else{
-            System.out.println("Command does not exist!");
+           app.LOGGER.info("Command does not exist!");
         }
     }
 }
