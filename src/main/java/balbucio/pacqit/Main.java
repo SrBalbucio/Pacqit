@@ -142,26 +142,24 @@ public class Main {
         form.addText("Project Name:", project.getName())
                 .addText("Project Package:", project.getProjectPackage())
                 .addText("Project Version:", project.getVersion())
-                .addText("Main Class:", project.getMainClass())
+                .addText("Main Class:", project.getMainClass());
+        f = form.show();
+        project.setProjectPackage(f.getByIndex(0).asString());
+        project.setVersion(f.getByIndex(1).asString());
+        project.setMainClass(f.getByIndex(2).asString());
+        projectBuild.setProject(project);
+        projectBuild.createPath();
+    }
+
+    public void projectPathSettingsForm(){
+        Form f = uiBooster.createForm("Project Path Configuration")
                 .addText("Source Path:", project.getSourcePath())
                 .addText("Resource Path:", project.getResourcePath())
                 .addText("Build Plugins Path:", project.getBuildPluginsPath())
                 .addText("Local Libraries Path:", project.getLocalLibrariesPath())
                 .addText("Output Path:", project.getOutputPath())
                 .addText("Compile Path:", project.getCompílePath())
-                .addText("Generated Path:", project.getGeneratedPath())
-                .addCheckbox("Executable Jar?", project.isExecutableJar())
-                .addText("Jar Name:", project.getJarName())
-                .addText("Java Version", project.getJavaVersion())
-                .addText("Java Home:", project.getJAVA_HOME())
-                .addButton("Select another Java Home", () -> {
-                    uiBooster.showInfoDialog("Select the folder where Java is installed. Do not select the bin folder.");
-                    project.setJAVA_HOME(uiBooster.showDirectorySelection().getAbsolutePath());
-                });
-        f = form.show();
-        project.setProjectPackage(f.getByIndex(0).asString());
-        project.setVersion(f.getByIndex(1).asString());
-        project.setMainClass(f.getByIndex(2).asString());
+                .addText("Generated Path:", project.getGeneratedPath()).show();
         project.setSourcePath(f.getByIndex(3).asString());
         project.setResourcePath(f.getByIndex(4).asString());
         project.setBuildPluginsPath(f.getByIndex(5).asString());
@@ -169,11 +167,21 @@ public class Main {
         project.setOutputPath(f.getByIndex(7).asString());
         project.setCompílePath(f.getByIndex(8).asString());
         project.setGeneratedPath(f.getByIndex(9).asString());
+    }
+
+    public void projectCompileSettingsForm(){
+        Form f = uiBooster.createForm("Project Build Configuration")
+                .addCheckbox("Executable Jar?", project.isExecutableJar())
+                .addText("Jar Name:", project.getJarName())
+                .addText("Java Version", project.getJavaVersion())
+                .addText("Java Home:", project.getJAVA_HOME())
+                .addButton("Select another Java Home", () -> {
+                    uiBooster.showInfoDialog("Select the folder where Java is installed. Do not select the bin folder.");
+                    project.setJAVA_HOME(uiBooster.showDirectorySelection().getAbsolutePath());
+                }).show();
         project.setExecutableJar((boolean) f.getByIndex(10).getValue());
         project.setJarName(f.getByIndex(11).asString());
         project.setJavaVersion(f.getByIndex(12).asString());
         project.setJAVA_HOME(f.getByIndex(13).asString());
-        projectBuild.setProject(project);
-        projectBuild.createPath();
     }
 }
