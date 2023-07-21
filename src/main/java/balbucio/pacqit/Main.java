@@ -52,13 +52,7 @@ public class Main {
 
             case CLEAN -> {
                 if(project == null){
-                    uiBooster.showConfirmDialog(
-                            "There is no project in this folder, do you want to create it now?",
-                            "Project not exists",
-                            () -> {
-                                createProjectForm();
-                            },
-                            () -> {});
+                    confirmProjectCreate();
                     return;
                 }
 
@@ -66,13 +60,7 @@ public class Main {
             }
             case COMPILE -> {
                 if(project == null){
-                    uiBooster.showConfirmDialog(
-                            "There is no project in this folder, do you want to create it now?",
-                            "Project not exists",
-                            () -> {
-                                createProjectForm();
-                            },
-                            () -> {});
+                    confirmProjectCreate();
                     return;
                 }
 
@@ -80,13 +68,7 @@ public class Main {
             }
             case BUILD -> {
                 if(project == null){
-                    uiBooster.showConfirmDialog(
-                            "There is no project in this folder, do you want to create it now?",
-                            "Project not exists",
-                            () -> {
-                                createProjectForm();
-                            },
-                            () -> {});
+                    confirmProjectCreate();
                     return;
                 }
 
@@ -117,11 +99,24 @@ public class Main {
             }
             case NONE -> {
                 LOGGER.info("Pacqit is waiting for commands:");
+                System.out.print(">");
                 while(input.hasNext()){
                     commandManager.resolve(input.next());
+                    LOGGER.info("Pacqit is waiting for commands:");
+                    System.out.print(">");
                 }
             }
         }
+    }
+
+    public void confirmProjectCreate(){
+        uiBooster.showConfirmDialog(
+                "There is no project in this folder, do you want to create it now?",
+                "Project not exists",
+                () -> {
+                    createProjectForm();
+                },
+                () -> {});
     }
 
     public void createProjectForm(){

@@ -11,6 +11,7 @@ public class ExitCommand implements Command {
 
     @Override
     public void run(String[] args, Main app) {
+        app.LOGGER.info("Bye!");
         System.exit(0);
     }
 }
