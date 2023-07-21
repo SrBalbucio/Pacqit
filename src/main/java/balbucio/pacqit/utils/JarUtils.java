@@ -1,17 +1,17 @@
 package balbucio.pacqit.utils;
 
+import balbucio.pacqit.model.Manifest;
 import org.apache.commons.io.FilenameUtils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.jar.JarInputStream;
 import java.util.jar.JarOutputStream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 public class JarUtils {
 
@@ -35,9 +35,16 @@ public class JarUtils {
         return jars;
     }
 
-    public static void directoryToJar(File jarFile, File... directory) throws Exception {
+    public static void directoryToJar(File jarFile, Manifest manifest, File... directory) throws Exception {
 
-        JarOutputStream jarOutputStream = new JarOutputStream(new FileOutputStream(jarFile));
+        JarOutputStream jarOutputStream;
+
+        if(manifest != null){
+            jarOutputStream = new JarOutputStream(new FileOutputStream(jarFile), manifest.getRealManifest());
+        } else{
+            jarOutputStream = new JarOutputStream(new FileOutputStream(jarFile));
+        }
+
         for(File dir : directory) {
             if(dir != null) {
                 for (File file : dir.listFiles()) {
@@ -45,6 +52,7 @@ public class JarUtils {
                 }
             }
         }
+        jarOutputStream.flush();
         jarOutputStream.close();
     }
 
@@ -57,7 +65,7 @@ public class JarUtils {
                 if (!entryName.endsWith("/")) {
                     entryName += "/";
                 }
-                JarEntry jarEntry = new JarEntry(entryName);
+                JarEntry jarEntry = new JarEntry(entryName.replace("\\", "/"));
                 jarOutputStream.putNextEntry(jarEntry);
                 jarOutputStream.closeEntry();
             }
@@ -65,7 +73,7 @@ public class JarUtils {
                 addFilesToJar(file, entryName, jarOutputStream);
             }
         } else {
-            JarEntry jarEntry = new JarEntry(entryName);
+            JarEntry jarEntry = new JarEntry(entryName.replace("\\", "/"));
             jarOutputStream.putNextEntry(jarEntry);
 
             FileInputStream inputStream = new FileInputStream(source);

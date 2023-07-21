@@ -1,12 +1,12 @@
 package balbucio.pacqit.model;
 
+import balbucio.pacqit.PacqitConst;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
+import java.io.*;
+import java.util.jar.Attributes;
 
 @Data
 @NoArgsConstructor
@@ -15,19 +15,32 @@ public class Manifest {
 
     private String version = "1.0";
     private String mainClass;
-    private String createdBy = "Pacqit 1.0";
     private String jdkSpec = "20";
 
-    public void save(File file){
+    public void save(File file) throws IOException {
         file.getParentFile().mkdirs();
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            writer.write("Manifest-Version: "+version+"\n");
-            writer.write("Created-By: " + createdBy + "\n");
-            writer.write("Build-Jdk-Spec: " + jdkSpec + "\n");
-            writer.write("Main-Class: " + mainClass + "\n");
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+        file.delete();
+        java.util.jar.Manifest rm = new java.util.jar.Manifest();
+        Attributes attributes = rm.getMainAttributes();
+
+        attributes.put(Attributes.Name.MANIFEST_VERSION, "1.0");
+        attributes.put(Attributes.Name.MAIN_CLASS, mainClass);
+        attributes.put(Attributes.Name.SPECIFICATION_VERSION, jdkSpec);
+        attributes.put(Attributes.Name.IMPLEMENTATION_TITLE, "Pacqit Jar Builder");
+        attributes.put(Attributes.Name.IMPLEMENTATION_VENDOR, "Pacqit");
+        attributes.put(Attributes.Name.IMPLEMENTATION_VERSION, PacqitConst.VERSION);
+
+        rm.write(new FileOutputStream(file));
+
+    }
+
+    public java.util.jar.Manifest getRealManifest(){
+        java.util.jar.Manifest rm = new java.util.jar.Manifest();
+        Attributes attributes = rm.getMainAttributes();
+
+        attributes.put(Attributes.Name.MANIFEST_VERSION, "1.0");
+        attributes.put(Attributes.Name.MAIN_CLASS, mainClass);
+        return rm;
     }
 
 }
