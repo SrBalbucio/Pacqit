@@ -8,12 +8,14 @@ import de.milchreis.uibooster.UiBooster;
 import de.milchreis.uibooster.model.Form;
 import de.milchreis.uibooster.model.FormBuilder;
 import de.milchreis.uibooster.model.UiBoosterOptions;
+import lombok.Data;
 
 import java.awt.*;
 import java.util.Scanner;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Logger;
 
+@Data
 public class Main {
 
     public static void main(String[] args) {
@@ -147,8 +149,8 @@ public class Main {
                 .addButton("Build Configuration", () -> projectCompileSettingsForm());
         f = form.show();
         project.setProjectPackage(f.getByIndex(0).asString());
-        project.setVersion(f.getByIndex(1).asString());
-        project.setMainClass(f.getByIndex(2).asString());
+        project.setVersion(f.getByIndex(2).asString());
+        project.setMainClass(f.getByIndex(1).asString());
         projectBuild.setProject(project);
         projectBuild.createPath();
         project.save(parse.getProjectDir());

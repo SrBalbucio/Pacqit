@@ -130,7 +130,9 @@ public class ProjectBuild {
         StringBuilder command = new StringBuilder();
         command.append(cmdFile.toString());
         command.append(" -target "+project.getJavaVersion());
-        command.append(" -verbose");
+        if(parse.isCompileDebug()) {
+            command.append(" -verbose");
+        }
         command.append(" -d \""+getCompilePath().getAbsolutePath()+"\"");
         command.append(" -sourcepath \""+getSourcePath().getAbsolutePath()+"\"");
         command.append(" "+classpath.toString()+"");
@@ -186,11 +188,15 @@ public class ProjectBuild {
      */
     public boolean buildProject(){
         long init = System.currentTimeMillis();
+
+        // compilar classes
         boolean compiled = compileClasses();
         if(!compiled){
             BUILD_LOGGER.severe("There was some problem compiling the classes, package cancelled, check previous logs.");
             return false;
         }
+
+        // pack jar
         BUILD_LOGGER.info("Packing the classes into a JAR...");
         File outputJar;
         try {
@@ -204,6 +210,8 @@ public class ProjectBuild {
             BUILD_LOGGER.severe("Unable to package the classes into a JAR.");
             return false;
         }
+
+        // add deps
         BUILD_LOGGER.info("Unpacking dependencies and adding them to a shaded JAR;");
         File outputShadedJar = new File(getOutputPath(), project.replace(project.getJarName())+"-shaded.jar");
         JarUtils.getJarFiles(getLocalLibrariesPath()).forEach(l -> {
