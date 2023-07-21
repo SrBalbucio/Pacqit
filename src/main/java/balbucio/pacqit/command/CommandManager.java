@@ -1,7 +1,7 @@
 package balbucio.pacqit.command;
 
 import balbucio.pacqit.Main;
-import balbucio.pacqit.command.impl.OpenSettingsCommand;
+import balbucio.pacqit.command.impl.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +14,10 @@ public class CommandManager {
     public CommandManager(Main app){
         this.app = app;
         commandList.add(new OpenSettingsCommand());
+        commandList.add(new CompileCommand());
+        commandList.add(new BuildCommand());
+        commandList.add(new ExitCommand());
+        commandList.add(new CleanCommand());
     }
 
     public void resolve(String message){
