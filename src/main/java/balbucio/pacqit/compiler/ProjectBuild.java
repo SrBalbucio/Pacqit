@@ -307,7 +307,8 @@ public class ProjectBuild {
             ProcessBuilder builder = new ProcessBuilder(cmdFile.toString());
             builder.redirectOutput(ProcessBuilder.Redirect.INHERIT);
             builder.redirectErrorStream(true);
-            builder.start();
+            Process process = builder.start();
+            process.waitFor();
             return true;
         } catch (Exception e){
             e.printStackTrace();
