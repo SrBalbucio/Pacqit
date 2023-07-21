@@ -2,6 +2,7 @@ package balbucio.pacqit.compiler;
 
 import balbucio.pacqit.ArgParse;
 import balbucio.pacqit.logger.BuildLoggerFormat;
+import balbucio.pacqit.model.Manifest;
 import balbucio.pacqit.model.Project;
 import balbucio.pacqit.utils.ClasseUtils;
 import balbucio.pacqit.utils.JarUtils;
@@ -172,6 +173,10 @@ public class ProjectBuild {
         File outputJar;
         try {
             outputJar = JarUtils.createJar(new File(getOutputPath(), project.replace(project.getJarName())+".jar"), getCompilePath());
+            JarUtils.addFolderToJar(outputJar, getResourcePath());
+            if(project.isExecutableJar()){
+                createManifest();
+            }
         } catch (Exception e){
             e.printStackTrace();
             BUILD_LOGGER.severe("Unable to package the classes into a JAR.");
@@ -189,6 +194,13 @@ public class ProjectBuild {
         });
         BUILD_LOGGER.info("Dependencies packaged successfully in "+(init - System.currentTimeMillis())+"ms! The JARs were created.");
         return true;
+    }
+
+    public void createManifest(){
+        long init = System.currentTimeMillis();
+        Manifest manifest = new Manifest();
+        manifest.setMainClass(project.getProjectPackage()+"."+project.getMainClass());
+        manifest.save(new File(getResourcePath()+"/META-INF", "MANIFEST.mf"));
     }
 
     public void clean(){
