@@ -66,9 +66,16 @@ public class ProjectBuild {
     public File getGeneratedPath(){
         return parse.getProjectDir() != null ? new File(parse.getProjectDir(), project.getGeneratedPath()) : new File(project.getGeneratedPath());
     }
-
     public File getJavaHome(){
         return new File(project.getJAVA_HOME());
+    }
+
+    public File getJAR(){
+        return new File(getOutputPath(), project.replace(project.getJarName())+".jar");
+    }
+
+    public File getShadedJAR(){
+        return new File(getOutputPath(), project.replace(project.getJarName())+"-shaded.jar");
     }
 
     public void createPath(){
@@ -263,5 +270,29 @@ public class ProjectBuild {
         getGeneratedPath().delete();
         getCompilePath().delete();
         BUILD_LOGGER.info("Project was cleaned!");
+    }
+
+    public boolean run(){
+        if(!getShadedJAR().exists()){
+            buildProject();
+        }
+
+        StringBuilder cmdFile = new StringBuilder();
+
+        cmdFile.append("\"");
+        cmdFile.append(getJavaHome().getAbsolutePath());
+        cmdFile.append("/bin/java.exe");
+        cmdFile.append("\" -jar \""+getShadedJAR().getAbsolutePath()+"\"");
+
+        try {
+            ProcessBuilder builder = new ProcessBuilder(cmdFile.toString());
+            builder.redirectOutput(ProcessBuilder.Redirect.INHERIT);
+            builder.redirectErrorStream(true);
+            builder.start();
+            return true;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 }
