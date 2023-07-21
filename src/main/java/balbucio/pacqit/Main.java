@@ -183,7 +183,9 @@ public class Main {
                 .addButton("Select another Java Home", () -> {
                     uiBooster.showInfoDialog("Select the folder where Java is installed. Do not select the bin folder.");
                     project.setJAVA_HOME(uiBooster.showDirectorySelection().getAbsolutePath());
+                    project.save(parse.getProjectDir());
                 }).show();
+        f.getByIndex(3).setValue(project.getJAVA_HOME());
         project.setExecutableJar((boolean) f.getByIndex(0).getValue());
         project.setJarName(f.getByIndex(1).asString());
         project.setJavaVersion(f.getByIndex(2).asString());

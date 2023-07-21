@@ -19,10 +19,10 @@ public class ClasseUtils {
         }
         for (File file : files) {
             if (file.isDirectory()) {
-                String packageName = currentPackage.isEmpty() ? file.getName() : currentPackage + "." + file.getName();
+                String packageName = currentPackage.isEmpty() ? file.getName() : currentPackage + "/" + file.getName();
                 processDirectory(file, packageName, classes);
             } else if (file.isFile() && file.getName().endsWith(".java")) {
-                String className = currentPackage.isEmpty() ? file.getName() : currentPackage + "." + file.getName();
+                String className = currentPackage.isEmpty() ? file.getName() : currentPackage + "/" + file.getName();
                 classes.add(className);
             }
         }

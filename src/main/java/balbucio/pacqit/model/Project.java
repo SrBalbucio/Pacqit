@@ -4,9 +4,12 @@ import balbucio.pacqit.ArgParse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
+import org.yaml.snakeyaml.inspector.TagInspector;
+import org.yaml.snakeyaml.representer.Representer;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -47,7 +50,11 @@ public class Project {
         File configFile = dir != null ? new File(dir, "project-config.yml") : new File("project-config.yml");
         try {
             PrintWriter writer = new PrintWriter(configFile);
-            Yaml yml = new Yaml(new Constructor(Project.class, new LoaderOptions()));
+            DumperOptions options = new DumperOptions();
+            options.setIndent(2);
+            options.setPrettyFlow(true);
+            options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
+            Yaml yml = new Yaml(new Constructor(Project.class, new LoaderOptions()), new Representer(options));
             yml.dump(this, writer);
         } catch (Exception e){
             e.printStackTrace();
@@ -60,7 +67,11 @@ public class Project {
 
         if(configFile.exists()){
             try {
-                Yaml yml = new Yaml(new Constructor(Project.class, new LoaderOptions()));
+                var loaderoptions = new LoaderOptions();
+                TagInspector taginspector =
+                        tag -> tag.getClassName().equals(Project.class.getName());
+                loaderoptions.setTagInspector(taginspector);
+                Yaml yml = new Yaml(new Constructor(Project.class, loaderoptions));
                 project = yml.load(new FileInputStream(configFile));
             } catch (Exception e){
                 e.printStackTrace();

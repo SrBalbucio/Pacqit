@@ -7,17 +7,15 @@ import balbucio.pacqit.model.Project;
 import balbucio.pacqit.utils.ClasseUtils;
 import balbucio.pacqit.utils.JarUtils;
 import balbucio.pacqit.utils.PackageUtils;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.SystemUtils;
 
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStream;
-import java.util.ArrayList;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Logger;
 
@@ -103,27 +101,49 @@ public class ProjectBuild {
         //generate compile command
         BUILD_LOGGER.info("Preparing the javac.");
         StringBuilder classpath = new StringBuilder();
-        classpath.append("-cp .");
+        classpath.append("-cp \".");
         String separator = SystemUtils.IS_OS_LINUX || SystemUtils.IS_OS_MAC ? ":" : ";";
         packages.forEach(p -> classpath.append(separator+getSourcePath().getAbsolutePath()+"/"+p));
         JarUtils.getJars(getLocalLibrariesPath()).forEach(j -> classpath.append(separator+j));
-        classpath.append(" ");
+        classpath.append("\"");
 
         StringBuilder classesToCompile = new StringBuilder();
-        classes.forEach(c -> classesToCompile.append(" "+c));
+        AtomicInteger va = new AtomicInteger(0);
+
+        classes.forEach(c -> {
+            if(va.get() > 0){
+                classesToCompile.append(" \""+c+"\"");
+            } else{
+                classesToCompile.append("\""+c+"\"");
+            }
+            va.incrementAndGet();
+        });
+
+        StringBuilder cmdFile = new StringBuilder();
+
+        cmdFile.append("\"");
+        cmdFile.append(getJavaHome().getAbsolutePath());
+        cmdFile.append("/bin/javac.exe");
+        cmdFile.append("\"");
 
         // create command builder
         StringBuilder command = new StringBuilder();
-        command.append("javac");
-        command.append(" -d "+getCompilePath().getAbsolutePath());
+        command.append(cmdFile.toString());
         command.append(" -target "+project.getJavaVersion());
-        command.append(" "+classpath.toString());
+        command.append(" -verbose");
+        command.append(" -d \""+getCompilePath().getAbsolutePath()+"\"");
+        command.append(" -sourcepath \""+getSourcePath().getAbsolutePath()+"\"");
+        command.append(" "+classpath.toString()+"");
         command.append(" "+classesToCompile.toString());
 
         // compile classes
         BUILD_LOGGER.info("Compiling and writing classes with javac...");
         try {
-            ProcessBuilder builder = new ProcessBuilder(command.toString());
+            String[] cmds = new String[1];
+            //cmds[0] = "\"cd "+getSourcePath().getAbsolutePath()+"\"";
+            cmds[0] = command.toString();
+            System.out.println(cmds[0]);
+            ProcessBuilder builder = new ProcessBuilder(cmds);
 
             if(!getJavaHome().exists()){
                 BUILD_LOGGER.severe("The specified JAVA_HOME could not be found! Check your Java installation.");
@@ -134,8 +154,9 @@ public class ProjectBuild {
                 BUILD_LOGGER.severe("Could not find javac.exe within the specified JAVA_HOME, this is an installation problem, please reinstall Java and try again.");
                 return false;
             }
-
-            builder.directory(new File(project.getJAVA_HOME()));
+            builder.redirectOutput(ProcessBuilder.Redirect.INHERIT);
+            builder.redirectErrorStream(true);
+            builder.directory(getSourcePath());
             Process process = builder.start();
 
             Scanner errscanner = new Scanner(process.getErrorStream());
@@ -144,13 +165,14 @@ public class ProjectBuild {
             }
 
             if(parse.isCompileDebug()) {
-                Scanner outscanner = new Scanner(process.getInputStream());
-                while (outscanner.hasNext()) {
-                    BUILD_LOGGER.fine(outscanner.next());
-                }
+                String line;
+                BufferedReader outscanner =
+                        new BufferedReader(new InputStreamReader(process.getInputStream()));
+                while ((line = outscanner.readLine()) != null)
+                    BUILD_LOGGER.fine(line);
             }
             int exitcode = process.waitFor();
-            BUILD_LOGGER.info("Compilation finished in "+(init - System.currentTimeMillis())+"ms! (exit code "+exitcode+")");
+            BUILD_LOGGER.info("Compilation finished in "+(System.currentTimeMillis() - init)+"ms! (exit code "+exitcode+")");
             return true;
         } catch (Exception e){
             e.printStackTrace();
@@ -192,7 +214,7 @@ public class ProjectBuild {
                 BUILD_LOGGER.severe("Unable to package dependency: "+l.getName());
             }
         });
-        BUILD_LOGGER.info("Dependencies packaged successfully in "+(init - System.currentTimeMillis())+"ms! The JARs were created.");
+        BUILD_LOGGER.info("Dependencies packaged successfully in "+(System.currentTimeMillis() - init)+"ms! The JARs were created.");
         return true;
     }
 

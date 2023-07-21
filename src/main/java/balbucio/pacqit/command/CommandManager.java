@@ -1,6 +1,7 @@
 package balbucio.pacqit.command;
 
 import balbucio.pacqit.Main;
+import balbucio.pacqit.command.impl.OpenSettingsCommand;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ public class CommandManager {
 
     public CommandManager(Main app){
         this.app = app;
+        commandList.add(new OpenSettingsCommand());
     }
 
     public void resolve(String message){

@@ -19,7 +19,7 @@ public class PackageUtils {
         }
         for (File file : files) {
             if (file.isDirectory()) {
-                String packageName = currentPackage.isEmpty() ? file.getName() : currentPackage + "." + file.getName();
+                String packageName = currentPackage.isEmpty() ? file.getName() : currentPackage + "/" + file.getName();
                 packages.add(packageName);
                 processDirectory(file, packageName, packages);
             }

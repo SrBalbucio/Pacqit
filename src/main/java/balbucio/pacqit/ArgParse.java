@@ -11,7 +11,7 @@ public class ArgParse {
     private String[] args;
     private boolean consoleOnly = false;
     private boolean verbose = false;
-    private boolean compileDebug = false;
+    private boolean compileDebug = true;
     private File projectDir = null;
     private ProjectAction action = ProjectAction.NONE;
 
@@ -28,7 +28,7 @@ public class ArgParse {
                 consoleOnly = true;
             } else if(c.equalsIgnoreCase("--verbose")){
                 verbose = true;
-            } else if(c.equalsIgnoreCase("--compile-debug")){
+            } else if(c.equalsIgnoreCase("--debug")){
                 compileDebug = true;
             } else if (c.equalsIgnoreCase("--compile")){
                 action = ProjectAction.COMPILE;
