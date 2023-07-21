@@ -1,12 +1,14 @@
 package balbucio.pacqit.compiler;
 
 import balbucio.pacqit.ArgParse;
+import balbucio.pacqit.Main;
 import balbucio.pacqit.logger.BuildLoggerFormat;
 import balbucio.pacqit.model.Manifest;
 import balbucio.pacqit.model.Project;
 import balbucio.pacqit.utils.ClasseUtils;
 import balbucio.pacqit.utils.JarUtils;
 import balbucio.pacqit.utils.PackageUtils;
+import de.milchreis.uibooster.components.WaitingDialog;
 import lombok.Data;
 import org.apache.commons.lang3.SystemUtils;
 
@@ -27,10 +29,13 @@ public class ProjectBuild {
     public Logger BUILD_LOGGER;
     private Project project;
     private ArgParse parse;
+    private Main app;
+    private BuildLoggerFormat format;
 
-    public ProjectBuild(Project project, ArgParse parse){
+    public ProjectBuild(Project project, ArgParse parse, Main app){
         this.project = project;
         this.parse = parse;
+        this.app = app;
         configureLogger();
     }
 
@@ -38,7 +43,8 @@ public class ProjectBuild {
         BUILD_LOGGER = Logger.getLogger("BUILD "+project.getName());
         BUILD_LOGGER.setUseParentHandlers(false);
         ConsoleHandler handler = new ConsoleHandler();
-        handler.setFormatter(new BuildLoggerFormat(this));
+        format = new BuildLoggerFormat(this, null);
+        handler.setFormatter(format);
         BUILD_LOGGER.addHandler(handler);
     }
 
@@ -201,8 +207,14 @@ public class ProjectBuild {
     /**
      * Método para criar uma nova build do projeto
      */
-    public boolean buildProject(){
+    public boolean buildProject(boolean gui){
+        WaitingDialog dialog = null;
         long init = System.currentTimeMillis();
+
+        if(gui){
+            dialog = app.getUiBooster().showWaitingDialog("Spinning the contraptions...", "Building project");
+            format.setDialog(dialog);
+        }
 
         // compilar classes
         boolean compiled = compileClasses();
@@ -218,6 +230,7 @@ public class ProjectBuild {
             } catch (Exception e){
                 e.printStackTrace();
                 BUILD_LOGGER.severe("Unable to package dependency: "+l.getName());
+                app.getUiBooster().showException("An error occurred while compiling the project!", ":C", e);
             }
         });
 
@@ -254,6 +267,7 @@ public class ProjectBuild {
         } catch (Exception e){
             e.printStackTrace();
             BUILD_LOGGER.severe("Unable to package the classes into a JAR.");
+            app.getUiBooster().showException("An error occurred while compiling the project!", ":C", e);
             return false;
         }
 
@@ -265,6 +279,7 @@ public class ProjectBuild {
         } catch (Exception e){
             e.printStackTrace();
             BUILD_LOGGER.severe("The JARs did not pass the build check, we are going to do an extensive check on the project, please wait.");
+            app.getUiBooster().showException("An error occurred while compiling the project!", ":C", e);
         }
 
         BUILD_LOGGER.info("Dependencies packaged successfully in "+(System.currentTimeMillis() - init)+"ms! The JARs were created.");
@@ -280,6 +295,7 @@ public class ProjectBuild {
             manifest.save(new File(getResourcePath() + "/META-INF", "MANIFEST.mf"));
         } catch (Exception e){
             e.printStackTrace();
+            app.getUiBooster().showException("An error occurred while compiling the project!", ":C", e);
         }
         BUILD_LOGGER.info("Manifest generated in "+(System.currentTimeMillis() - init)+"ms!");
         return manifest;
@@ -291,9 +307,9 @@ public class ProjectBuild {
         BUILD_LOGGER.info("Project was cleaned!");
     }
 
-    public boolean run(){
+    public boolean run(boolean gui){
         if(!getShadedJAR().exists()){
-            buildProject();
+            buildProject(gui);
         }
 
         StringBuilder cmdFile = new StringBuilder();
@@ -312,6 +328,7 @@ public class ProjectBuild {
             return true;
         } catch (Exception e){
             e.printStackTrace();
+            app.getUiBooster().showException("An error occurred while execute the project!", ":C", e);
             return false;
         }
     }

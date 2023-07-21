@@ -20,9 +20,9 @@ public class BuildCommand implements Command {
         if(run){
             app.LOGGER.info("After compiling the application will run!");
         }
-        boolean build = app.getProjectBuild().buildProject();
+        boolean build = app.getProjectBuild().buildProject(false);
         if(build && run){
-            app.getProjectBuild().run();
+            app.getProjectBuild().run(false);
         }
     }
 }

@@ -44,7 +44,7 @@ public class Main {
         this.commandManager = new CommandManager(this);
         this.project = Project.loadProject(parse.getProjectDir());
         if(project != null) {
-            this.projectBuild = new ProjectBuild(project, parse);
+            this.projectBuild = new ProjectBuild(project, parse, this);
             projectBuild.createPath();
         }
 
@@ -72,7 +72,7 @@ public class Main {
                     return;
                 }
 
-                projectBuild.buildProject();
+                projectBuild.buildProject(false);
             }
             case CREATE_NEW_PROJECT -> {
                 if(!parse.isConsoleOnly() ){
@@ -98,15 +98,41 @@ public class Main {
                 }
             }
             case NONE -> {
-                LOGGER.info("Pacqit is waiting for commands:");
-                System.out.print(">");
-                while(input.hasNextLine()){
-                    commandManager.resolve(input.nextLine());
+                if(!parse.isConsoleOnly() && !GraphicsEnvironment.isHeadless()){
+                    openMenuForm();
+                } else {
                     LOGGER.info("Pacqit is waiting for commands:");
                     System.out.print(">");
+                    while (input.hasNextLine()) {
+                        commandManager.resolve(input.nextLine());
+                        LOGGER.info("Pacqit is waiting for commands:");
+                        System.out.print(">");
+                    }
                 }
             }
         }
+    }
+
+    public void openMenuForm(){
+        FormBuilder builder = uiBooster.createForm("Pacqit");
+        if(project == null){
+            builder.addLabel("There are no projects here!");
+            builder.addButton("Create new Project", () -> createProjectForm());
+        } else{
+            builder.addLabel("Project Name: "+project.getName());
+            builder.addButton("Open settings", () -> projectSettingsForm());
+            builder.addButton("Open Dependencies Settings", () -> {});
+            builder.addButton("Build and run", () -> {
+                boolean build = projectBuild.buildProject(true);
+                if(build) {
+                    projectBuild.run(true);
+                }
+            });
+            builder.addButton("Build and obfuscate", () -> {});
+            builder.addButton("Convert to nasm and build", () -> {});
+            builder.addButton("Clean", () -> projectBuild.clean());
+        }
+        Form f = builder.show();
     }
 
     public void confirmProjectCreate(){
@@ -129,7 +155,7 @@ public class Main {
         project.setName(form.getByIndex(0).asString());
         project.setProjectPackage(form.getByIndex(1).asString());
         project.setMainClass(form.getByIndex(2).asString());
-        projectBuild = new ProjectBuild(project, parse);
+        projectBuild = new ProjectBuild(project, parse, this);
         projectSettingsForm();
     }
 
