@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Agora o run espera o processo ser finalizado;">
+    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Adicionado build run, para buildar e executar;">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/command/impl/BuildCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/command/impl/BuildCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/command/impl/RunCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/command/impl/RunCommand.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +62,7 @@
       <recent name="C:\Users\srbal\Documents\Pacqit\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="JAR Application.FakeProject-1.0-SNAPSHOT.jar">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="balbucio.pacqit.Main" />
       <module name="Pacqit" />
@@ -80,13 +83,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FakeProject-1.0-SNAPSHOT.jar" type="JarApplication" temporary="true">
-      <option name="JAR_PATH" value="$PROJECT_DIR$/fakeproject/build/release/FakeProject-1.0-SNAPSHOT.jar" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JAR Application.FakeProject-1.0-SNAPSHOT.jar" />
         <item itemvalue="Application.ProcessTest" />
         <item itemvalue="Application.Main" />
       </list>
@@ -104,7 +102,7 @@
       <workItem from="1689862403885" duration="25659000" />
       <workItem from="1689905493868" duration="7744000" />
       <workItem from="1689945104597" duration="1363000" />
-      <workItem from="1689948400246" duration="15037000" />
+      <workItem from="1689948400246" duration="15658000" />
     </task>
     <task id="LOCAL-00001" summary="Sistema para compilar;">
       <option name="closed" value="true" />
@@ -250,7 +248,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689963511514</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Adicionado build run, para buildar e executar;">
+      <option name="closed" value="true" />
+      <created>1689963619016</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1689963619016</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -288,6 +294,7 @@
     <MESSAGE value="Adicionado comando para executar o app;" />
     <MESSAGE value="Corrigido erro do manifest;" />
     <MESSAGE value="Agora o run espera o processo ser finalizado;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Agora o run espera o processo ser finalizado;" />
+    <MESSAGE value="Adicionado build run, para buildar e executar;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adicionado build run, para buildar e executar;" />
   </component>
 </project>

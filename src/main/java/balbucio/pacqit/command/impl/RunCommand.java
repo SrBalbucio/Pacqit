@@ -11,6 +11,7 @@ public class RunCommand implements Command {
 
     @Override
     public void run(String[] args, Main app) {
+        app.LOGGER.info("Starting...");
         app.getProjectBuild().run();
     }
 }

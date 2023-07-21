@@ -100,8 +100,8 @@ public class Main {
             case NONE -> {
                 LOGGER.info("Pacqit is waiting for commands:");
                 System.out.print(">");
-                while(input.hasNext()){
-                    commandManager.resolve(input.next());
+                while(input.hasNextLine()){
+                    commandManager.resolve(input.nextLine());
                     LOGGER.info("Pacqit is waiting for commands:");
                     System.out.print(">");
                 }
