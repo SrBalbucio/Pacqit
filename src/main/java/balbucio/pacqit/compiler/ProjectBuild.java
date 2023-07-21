@@ -84,6 +84,12 @@ public class ProjectBuild {
         if(!getLocalLibrariesPath().exists()){
             getLocalLibrariesPath().mkdirs();
         }
+        if(!getOutputPath().exists()){
+            getOutputPath().mkdirs();
+        }
+        if(!getGeneratedPath().exists()){
+            getGeneratedPath().mkdirs();
+        }
     }
 
     /**
@@ -91,6 +97,7 @@ public class ProjectBuild {
      */
     public boolean compileClasses(){
         long init = System.currentTimeMillis();
+        createPath();
         BUILD_LOGGER.info("Starting to compile the project.");
         List<String> classes = ClasseUtils.getClassesInDirectory(getSourcePath());
         List<String> packages = PackageUtils.getPackagesInDirectory(getSourcePath());
@@ -144,7 +151,6 @@ public class ProjectBuild {
             String[] cmds = new String[1];
             //cmds[0] = "\"cd "+getSourcePath().getAbsolutePath()+"\"";
             cmds[0] = command.toString();
-            System.out.println(cmds[0]);
             ProcessBuilder builder = new ProcessBuilder(cmds);
 
             if(!getJavaHome().exists()){
@@ -156,7 +162,7 @@ public class ProjectBuild {
                 BUILD_LOGGER.severe("Could not find javac.exe within the specified JAVA_HOME, this is an installation problem, please reinstall Java and try again.");
                 return false;
             }
-            builder.redirectOutput(ProcessBuilder.Redirect.INHERIT);
+            builder.redirectOutput(parse.isCompileDebug() ? ProcessBuilder.Redirect.INHERIT : ProcessBuilder.Redirect.DISCARD);
             builder.redirectErrorStream(true);
             builder.directory(getSourcePath());
             Process process = builder.start();
@@ -196,32 +202,51 @@ public class ProjectBuild {
             return false;
         }
 
+        BUILD_LOGGER.info("Unpacking dependencies...");
+        JarUtils.getJarFiles(getLocalLibrariesPath()).forEach(l -> {
+            try {
+                JarUtils.extractJar(l, getGeneratedPath());
+            } catch (Exception e){
+                e.printStackTrace();
+                BUILD_LOGGER.severe("Unable to package dependency: "+l.getName());
+            }
+        });
+
         // pack jar
         BUILD_LOGGER.info("Packing the classes into a JAR...");
-        File outputJar;
+        File outputJar = new File(getOutputPath(), project.replace(project.getJarName())+".jar");
+        File outputShadedJar = new File(getOutputPath(), project.replace(project.getJarName())+"-shaded.jar");
         try {
-            outputJar = JarUtils.createJar(new File(getOutputPath(), project.replace(project.getJarName())+".jar"), getCompilePath());
-            JarUtils.addFolderToJar(outputJar, getResourcePath());
+            boolean deleted = true;
+            if(outputJar.exists()){
+                deleted = outputJar.delete();
+            }
+
+            if(outputShadedJar.exists()){
+                deleted = outputShadedJar.delete();
+            }
+
+            if(!deleted){
+                BUILD_LOGGER.severe("Pacqit is unable to delete the previous file. Do this manually and run the build command again.");
+                return false;
+            }
+
+            outputJar.createNewFile();
+            outputShadedJar.createNewFile();
+
             if(project.isExecutableJar()){
                 createManifest();
             }
+
+            JarUtils.directoryToJar(outputJar, getCompilePath(), getResourcePath());
+            BUILD_LOGGER.info("Packing shaded JAR with dependencies...");
+            JarUtils.directoryToJar(outputShadedJar, getCompilePath(), getResourcePath(), getGeneratedPath());
         } catch (Exception e){
             e.printStackTrace();
             BUILD_LOGGER.severe("Unable to package the classes into a JAR.");
             return false;
         }
 
-        // add deps
-        BUILD_LOGGER.info("Unpacking dependencies and adding them to a shaded JAR;");
-        File outputShadedJar = new File(getOutputPath(), project.replace(project.getJarName())+"-shaded.jar");
-        JarUtils.getJarFiles(getLocalLibrariesPath()).forEach(l -> {
-            try {
-                JarUtils.combineJars(outputJar, l, outputShadedJar, getGeneratedPath());
-            } catch (Exception e){
-                e.printStackTrace();
-                BUILD_LOGGER.severe("Unable to package dependency: "+l.getName());
-            }
-        });
         BUILD_LOGGER.info("Dependencies packaged successfully in "+(System.currentTimeMillis() - init)+"ms! The JARs were created.");
         return true;
     }
@@ -231,6 +256,7 @@ public class ProjectBuild {
         Manifest manifest = new Manifest();
         manifest.setMainClass(project.getProjectPackage()+"."+project.getMainClass());
         manifest.save(new File(getResourcePath()+"/META-INF", "MANIFEST.mf"));
+        BUILD_LOGGER.info("Manifest generated in "+(System.currentTimeMillis() - init)+"ms!");
     }
 
     public void clean(){

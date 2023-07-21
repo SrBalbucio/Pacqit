@@ -143,9 +143,10 @@ public class Main {
                 .addButton("Path Configuration", () -> projectPathSettingsForm())
                 .addButton("Build Configuration", () -> projectCompileSettingsForm());
         f = form.show();
-        project.setProjectPackage(f.getByIndex(0).asString());
+        project.setName(f.getByIndex(0).asString());
+        project.setProjectPackage(f.getByIndex(1).asString());
         project.setVersion(f.getByIndex(2).asString());
-        project.setMainClass(f.getByIndex(1).asString());
+        project.setMainClass(f.getByIndex(3).asString());
         projectBuild.setProject(project);
         projectBuild.createPath();
         project.save(parse.getProjectDir());

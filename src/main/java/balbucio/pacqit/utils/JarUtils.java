@@ -5,9 +5,11 @@ import org.apache.commons.io.FilenameUtils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 import java.util.jar.JarInputStream;
 import java.util.jar.JarOutputStream;
 
@@ -33,214 +35,73 @@ public class JarUtils {
         return jars;
     }
 
-    public static File createJar(File jarFile, File clazzDirectory) throws Exception {
-        if (!jarFile.exists()) {
-            jarFile.createNewFile();
-        }
-        List<String> classFiles = getClassFilesInDirectory(clazzDirectory);
+    public static void directoryToJar(File jarFile, File... directory) throws Exception {
 
         JarOutputStream jarOutputStream = new JarOutputStream(new FileOutputStream(jarFile));
-        for (String classFilePath : classFiles) {
-            File classFile = new File(clazzDirectory, classFilePath);
-            addClassToJar(classFile, classFilePath, jarOutputStream);
-        }
-        return jarFile;
-    }
-
-    public static List<String> getClassFilesInDirectory(File directory) {
-        List<String> classFiles = new ArrayList<>();
-        processDirectory(directory, classFiles);
-        return classFiles;
-    }
-
-    private static void processDirectory(File directory, List<String> classFiles) {
-        File[] files = directory.listFiles();
-        if (files == null) {
-            return;
-        }
-        for (File file : files) {
-            if (file.isDirectory()) {
-                processDirectory(file, classFiles);
-            } else if (file.isFile() && file.getName().endsWith(".class")) {
-                String classFilePath = file.getAbsolutePath().replace(directory.getAbsolutePath(), "");
-                if (classFilePath.startsWith(File.separator)) {
-                    classFilePath = classFilePath.substring(1);
+        for(File dir : directory) {
+            if(dir != null) {
+                for (File file : dir.listFiles()) {
+                    addFilesToJar(file, "", jarOutputStream);
                 }
-
-                classFilePath = classFilePath.replace(File.separator, ".");
-
-                classFiles.add(classFilePath);
             }
         }
+        jarOutputStream.close();
     }
 
-    private static void addClassToJar(File classFile, String classFilePath, JarOutputStream jarOutputStream) throws Exception {
-        JarEntry jarEntry = new JarEntry(classFilePath);
-        jarOutputStream.putNextEntry(jarEntry);
-
+    private static void addFilesToJar(File source, String parentPath, JarOutputStream jarOutputStream) throws Exception {
         byte[] buffer = new byte[1024];
-        int bytesRead;
-        FileInputStream stream = new FileInputStream(classFile);
-        while ((bytesRead = stream.read(buffer)) != -1) {
-            jarOutputStream.write(buffer, 0, bytesRead);
-        }
+        String entryName = parentPath + source.getName();
 
-        jarOutputStream.closeEntry();
-    }
-
-    public static void combineJars(File jar1Path, File jar2Path, File outputJarPath, File tempDir) throws Exception {
-        // Criar diretório temporário para desempacotar os JARs originais
-        tempDir.mkdirs();
-
-        // Desempacotar o primeiro JAR para o diretório temporário
-        unpackJar(jar1Path, tempDir);
-        // Desempacotar o segundo JAR para o diretório temporário
-        unpackJar(jar2Path, tempDir);
-
-        // Criar novo JAR com os arquivos do diretório temporário
-        packJar(tempDir, outputJarPath);
-
-        // Excluir o diretório temporário
-        deleteDirectory(tempDir);
-    }
-
-    public static void unpackJar(File jarPath, File targetDir) throws Exception {
-        try (JarInputStream jarInputStream = new JarInputStream(new FileInputStream(jarPath))) {
-            JarEntry entry;
-            while ((entry = jarInputStream.getNextJarEntry()) != null) {
-                if (!entry.isDirectory()) {
-                    File file = new File(targetDir, entry.getName());
-                    file.getParentFile().mkdirs();
-                    try (FileOutputStream fos = new FileOutputStream(file)) {
-                        byte[] buffer = new byte[1024];
-                        int bytesRead;
-                        while ((bytesRead = jarInputStream.read(buffer)) != -1) {
-                            fos.write(buffer, 0, bytesRead);
-                        }
-                    }
+        if (source.isDirectory()) {
+            if (!entryName.isEmpty()) {
+                if (!entryName.endsWith("/")) {
+                    entryName += "/";
                 }
+                JarEntry jarEntry = new JarEntry(entryName);
+                jarOutputStream.putNextEntry(jarEntry);
+                jarOutputStream.closeEntry();
             }
-        }
-    }
-
-    public static void packJar(File directory, File jarPath) throws Exception {
-        try (JarOutputStream jarOutputStream = new JarOutputStream(new FileOutputStream(jarPath))) {
-            pack(directory, directory, jarOutputStream);
-        }
-    }
-
-    private static void pack(File rootDir, File currentDir, JarOutputStream jarOutputStream) throws Exception {
-        File[] files = currentDir.listFiles();
-        if (files != null) {
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    pack(rootDir, file, jarOutputStream);
-                } else {
-                    String relativePath = rootDir.toURI().relativize(file.toURI()).getPath();
-                    JarEntry jarEntry = new JarEntry(relativePath);
-                    jarOutputStream.putNextEntry(jarEntry);
-
-                    try (FileInputStream fis = new FileInputStream(file)) {
-                        byte[] buffer = new byte[1024];
-                        int bytesRead;
-                        while ((bytesRead = fis.read(buffer)) != -1) {
-                            jarOutputStream.write(buffer, 0, bytesRead);
-                        }
-                    }
-                }
+            for (File file : source.listFiles()) {
+                addFilesToJar(file, entryName, jarOutputStream);
             }
-        }
-    }
-
-    public static void deleteDirectory(File directory) {
-        File[] files = directory.listFiles();
-        if (files != null) {
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    deleteDirectory(file);
-                } else {
-                    file.delete();
-                }
-            }
-        }
-        directory.delete();
-    }
-
-    public static void addFileToJar(File jar, File fileToAdd) throws Exception {
-
-        // Criar uma entrada para o arquivo que será adicionado ao JAR
-        JarEntry jarEntry = new JarEntry(fileToAdd.getName());
-
-        try (JarOutputStream jarOutputStream = new JarOutputStream(new FileOutputStream(jar, true))) {
-            // Adicionar a entrada ao JAR
+        } else {
+            JarEntry jarEntry = new JarEntry(entryName);
             jarOutputStream.putNextEntry(jarEntry);
 
-            // Escrever o conteúdo do arquivo no JAR
-            try (FileInputStream fileInputStream = new FileInputStream(fileToAdd)) {
-                byte[] buffer = new byte[1024];
-                int bytesRead;
-                while ((bytesRead = fileInputStream.read(buffer)) != -1) {
-                    jarOutputStream.write(buffer, 0, bytesRead);
-                }
+            FileInputStream inputStream = new FileInputStream(source);
+            int length;
+            while ((length = inputStream.read(buffer)) > 0) {
+                jarOutputStream.write(buffer, 0, length);
             }
 
+            inputStream.close();
             jarOutputStream.closeEntry();
         }
     }
 
-    public static void addFolderToJar(File jarFilePath, File folderToAdd) throws Exception {
+    public static void extractJar(File jarFilePath, File destDir) throws Exception {
 
-        // Criar um JAR temporário para armazenar os arquivos originais e o conteúdo da pasta adicionada
-        File tempJarFile = new File(jarFilePath.getName() + ".temp");
-        tempJarFile.deleteOnExit();
-
-        try (JarOutputStream tempJarOutputStream = new JarOutputStream(new FileOutputStream(tempJarFile))) {
-            // Copiar os arquivos originais para o JAR temporário
-            try (JarInputStream jarInputStream = new JarInputStream(new FileInputStream(jarFilePath))) {
-                JarEntry jarEntry;
-                while ((jarEntry = jarInputStream.getNextJarEntry()) != null) {
-                    if (!jarEntry.getName().startsWith(folderToAdd.getName() + "/")) {
-                        tempJarOutputStream.putNextEntry(jarEntry);
-                        byte[] buffer = new byte[1024];
-                        int bytesRead;
-                        while ((bytesRead = jarInputStream.read(buffer)) != -1) {
-                            tempJarOutputStream.write(buffer, 0, bytesRead);
-                        }
-                        tempJarOutputStream.closeEntry();
-                    }
-                }
-            }
-
-            // Adicionar a pasta e seus arquivos ao JAR temporário
-            addFolderContentToJar(folderToAdd, tempJarOutputStream);
+        if (!destDir.exists()) {
+            destDir.mkdirs();
         }
 
-        jarFilePath.delete();
-        tempJarFile.renameTo(new File(jarFilePath.getName()));
-    }
-
-    private static void addFolderContentToJar(File folder, JarOutputStream jarOutputStream) throws Exception {
-        File[] files = folder.listFiles();
-        if (files != null) {
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    // Criar uma entrada para a pasta e recursivamente adicionar o conteúdo da pasta ao JAR
-                    JarEntry jarEntry = new JarEntry(file.getName() + "/");
-                    jarOutputStream.putNextEntry(jarEntry);
-                    jarOutputStream.closeEntry();
-                    addFolderContentToJar(file, jarOutputStream);
-                } else {
-                    // Criar uma entrada para o arquivo e adicionar o conteúdo do arquivo ao JAR
-                    JarEntry jarEntry = new JarEntry(file.getName());
-                    jarOutputStream.putNextEntry(jarEntry);
-                    try (FileInputStream fileInputStream = new FileInputStream(file)) {
+        try (JarFile jarFile = new JarFile(jarFilePath)) {
+            for (JarEntry entry : jarFile.stream().toArray(JarEntry[]::new)) {
+                if (!entry.isDirectory()) {
+                    String entryName = entry.getName();
+                    File outFile = new File(destDir, entryName);
+                    File parent = outFile.getParentFile();
+                    if (!parent.exists()) {
+                        parent.mkdirs();
+                    }
+                    try (InputStream inputStream = jarFile.getInputStream(entry);
+                         FileOutputStream outputStream = new FileOutputStream(outFile)) {
                         byte[] buffer = new byte[1024];
                         int bytesRead;
-                        while ((bytesRead = fileInputStream.read(buffer)) != -1) {
-                            jarOutputStream.write(buffer, 0, bytesRead);
+                        while ((bytesRead = inputStream.read(buffer)) != -1) {
+                            outputStream.write(buffer, 0, bytesRead);
                         }
                     }
-                    jarOutputStream.closeEntry();
                 }
             }
         }

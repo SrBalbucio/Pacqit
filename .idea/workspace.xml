@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Corrigido erro de criação de processo;">
+    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Comando de clean adicionado;">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/ArgParse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/ArgParse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/JarUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/JarUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +102,7 @@
       <workItem from="1689862403885" duration="25659000" />
       <workItem from="1689905493868" duration="7744000" />
       <workItem from="1689945104597" duration="1363000" />
-      <workItem from="1689948400246" duration="5421000" />
+      <workItem from="1689948400246" duration="8977000" />
     </task>
     <task id="LOCAL-00001" summary="Sistema para compilar;">
       <option name="closed" value="true" />
@@ -188,7 +192,31 @@
       <option name="project" value="LOCAL" />
       <updated>1689953713510</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Adicionado novos comandos básicos;">
+      <option name="closed" value="true" />
+      <created>1689954141704</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1689954141704</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Código otimizado">
+      <option name="closed" value="true" />
+      <created>1689954311127</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1689954311127</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Comando de clean adicionado;">
+      <option name="closed" value="true" />
+      <created>1689956249591</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1689956249591</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,6 +247,9 @@
     <MESSAGE value="Corrigido erro de index do menu;" />
     <MESSAGE value="Adicionado criação de manifest;&#10;Adicionado resources ao JAR;" />
     <MESSAGE value="Corrigido erro de criação de processo;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrigido erro de criação de processo;" />
+    <MESSAGE value="Adicionado novos comandos básicos;" />
+    <MESSAGE value="Código otimizado" />
+    <MESSAGE value="Comando de clean adicionado;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Comando de clean adicionado;" />
   </component>
 </project>

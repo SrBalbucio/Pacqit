@@ -11,7 +11,7 @@ public class ArgParse {
     private String[] args;
     private boolean consoleOnly = false;
     private boolean verbose = false;
-    private boolean compileDebug = true;
+    private boolean compileDebug = false;
     private File projectDir = null;
     private ProjectAction action = ProjectAction.NONE;
 
