@@ -43,7 +43,7 @@ public class ProjectBuild {
         BUILD_LOGGER = Logger.getLogger("BUILD "+project.getName());
         BUILD_LOGGER.setUseParentHandlers(false);
         ConsoleHandler handler = new ConsoleHandler();
-        format = new BuildLoggerFormat(this, null);
+        format = new BuildLoggerFormat(this, null, new String());
         handler.setFormatter(format);
         BUILD_LOGGER.addHandler(handler);
     }
@@ -220,6 +220,9 @@ public class ProjectBuild {
         boolean compiled = compileClasses();
         if(!compiled){
             BUILD_LOGGER.severe("There was some problem compiling the classes, package cancelled, check previous logs.");
+            if(gui){
+                dialog.close();
+            }
             return false;
         }
 
@@ -250,6 +253,9 @@ public class ProjectBuild {
 
             if(!deleted){
                 BUILD_LOGGER.severe("Pacqit is unable to delete the previous file. Do this manually and run the build command again.");
+                if(gui){
+                    dialog.close();
+                }
                 return false;
             }
 
@@ -267,6 +273,9 @@ public class ProjectBuild {
         } catch (Exception e){
             e.printStackTrace();
             BUILD_LOGGER.severe("Unable to package the classes into a JAR.");
+            if(gui){
+                dialog.close();
+            }
             app.getUiBooster().showException("An error occurred while compiling the project!", ":C", e);
             return false;
         }
@@ -279,9 +288,14 @@ public class ProjectBuild {
         } catch (Exception e){
             e.printStackTrace();
             BUILD_LOGGER.severe("The JARs did not pass the build check, we are going to do an extensive check on the project, please wait.");
+            if(gui){
+                dialog.close();
+            }
             app.getUiBooster().showException("An error occurred while compiling the project!", ":C", e);
         }
-
+        if(gui){
+            dialog.close();
+        }
         BUILD_LOGGER.info("Dependencies packaged successfully in "+(System.currentTimeMillis() - init)+"ms! The JARs were created.");
         return true;
     }

@@ -13,6 +13,13 @@ import java.util.logging.LogRecord;
 public class BuildLoggerFormat extends Formatter {
     private ProjectBuild build;
     private WaitingDialog dialog;
+    private String log;
+
+    public void setDialog(WaitingDialog dialog) {
+        this.dialog = dialog;
+        this.log = new String();
+    }
+
     @Override
     public String format(LogRecord record) {
         StringBuilder builder = new StringBuilder(1000);
@@ -25,7 +32,8 @@ public class BuildLoggerFormat extends Formatter {
         }
         builder.append("\n");
         if(dialog != null) {
-            dialog.addToLargeMessage(builder.toString());
+            log += builder.toString();
+            dialog.setLargeMessage(log);
         }
         return builder.toString();
     }

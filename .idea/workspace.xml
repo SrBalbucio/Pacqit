@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Correção do sistema de comandos;">
+    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Adicionado opções ao GUI;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/command/impl/BuildCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/command/impl/BuildCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/command/impl/RunCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/command/impl/RunCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/logger/BuildLoggerFormat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/logger/BuildLoggerFormat.java" afterDir="false" />
     </list>
@@ -60,6 +58,7 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\srbal\Documents\Pacqit\fakeproject" />
+      <recent name="C:\Users\srbal\Documents\Pacqit" />
       <recent name="C:\Users\srbal\Documents\Pacqit\fakeproject\src\main\resource" />
       <recent name="C:\Users\srbal\Documents\Pacqit\src\main\resources" />
     </key>
@@ -104,7 +103,7 @@
       <workItem from="1689862403885" duration="25659000" />
       <workItem from="1689905493868" duration="7744000" />
       <workItem from="1689945104597" duration="1363000" />
-      <workItem from="1689948400246" duration="16731000" />
+      <workItem from="1689948400246" duration="18124000" />
     </task>
     <task id="LOCAL-00001" summary="Sistema para compilar;">
       <option name="closed" value="true" />
@@ -266,7 +265,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689964312550</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Adicionado opções ao GUI;">
+      <option name="closed" value="true" />
+      <created>1689965462093</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1689965462093</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -306,6 +313,7 @@
     <MESSAGE value="Agora o run espera o processo ser finalizado;" />
     <MESSAGE value="Adicionado build run, para buildar e executar;" />
     <MESSAGE value="Correção do sistema de comandos;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correção do sistema de comandos;" />
+    <MESSAGE value="Adicionado opções ao GUI;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adicionado opções ao GUI;" />
   </component>
 </project>

@@ -122,6 +122,7 @@ public class Main {
             builder.addLabel("Project Name: "+project.getName());
             builder.addButton("Open settings", () -> projectSettingsForm());
             builder.addButton("Open Dependencies Settings", () -> {});
+            builder.addButton("Build", () -> projectBuild.buildProject(true));
             builder.addButton("Build and run", () -> {
                 boolean build = projectBuild.buildProject(true);
                 if(build) {
@@ -131,6 +132,7 @@ public class Main {
             builder.addButton("Build and obfuscate", () -> {});
             builder.addButton("Convert to nasm and build", () -> {});
             builder.addButton("Clean", () -> projectBuild.clean());
+            builder.setID("menu");
         }
         Form f = builder.show();
     }
