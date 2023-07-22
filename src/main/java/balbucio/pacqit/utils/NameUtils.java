@@ -11,6 +11,8 @@ public class NameUtils {
         int tamanho = 24 + random.nextInt(56);
         StringBuilder nomeAleatorio = new StringBuilder();
 
+        nomeAleatorio.append("pacqit");
+
         for (int i = 0; i < tamanho; i++) {
             int indice = random.nextInt(CARACTERES_VALIDOS.length());
             char caractere = CARACTERES_VALIDOS.charAt(indice);

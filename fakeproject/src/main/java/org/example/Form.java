@@ -13,4 +13,7 @@ public class Form {
     public void open(){
         JOptionPane.showMessageDialog(null, "TESTE", "TESTE1", JOptionPane.INFORMATION_MESSAGE);
     }
+    public void chups(){
+        JOptionPane.showMessageDialog(null, "SLFKENRFTRJKOGKLRKOERNTJIK", "TESTE1", JOptionPane.INFORMATION_MESSAGE);
+    }
 }

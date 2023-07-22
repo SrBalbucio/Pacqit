@@ -84,8 +84,6 @@ public class JarLoader {
         progress(40);
         allFieldGen.forEach(e -> manipulationEvent.modifyField(e.getValue()));
         progress(60);
-        checkAndSaveAll();
-        progress(100);
         closeGUI();
     }
 
@@ -163,7 +161,10 @@ public class JarLoader {
                 }
             });
             try {
-                classgen.getJavaClass().dump(config.OUT_PATH.getAbsolutePath()+"/"+e.getValue().getFileName().replace(".", "/"));
+                File folder = new File(config.OUT_PATH, extractPackage(classgen).replace(".", "/"));
+                folder.mkdirs();
+                System.out.println(extractClassName(classgen));
+                classgen.getJavaClass().dump(new File(folder, extractClassName(classgen)+".class"));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -196,6 +197,21 @@ public class JarLoader {
 
     public Method getMethodInJavaClass(JavaClass clazz, String methodName) {
         return Arrays.stream(clazz.getMethods()).filter(m -> m.getName().equals(methodName)).findFirst().orElse(null);
+    }
+
+    public String extractPackage(ClassGen classgen){
+        String className = classgen.getClassName();
+
+        int lastDotIndex = className.lastIndexOf('.');
+        if (lastDotIndex != -1) {
+            return className.substring(0, lastDotIndex);
+        } else {
+            return "";
+        }
+    }
+
+    public String extractClassName(ClassGen classgen){
+        return classgen.getClassName().replace(extractPackage(classgen), "");
     }
 
     public List<Method> getMethodsInJavaClass(JavaClass clazz) {

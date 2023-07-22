@@ -4,17 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Removido load no construtor do JarLoader;">
+    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Correção de bugs;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fakeproject/src/main/java/org/example/Form.java" beforeDir="false" afterPath="$PROJECT_DIR$/fakeproject/src/main/java/org/example/Form.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fakeproject/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/fakeproject/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/bytecode/BytecodeLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/bytecode/BytecodeLogger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/bytecode/JarLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/bytecode/JarLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/bytecode/LoaderConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/bytecode/LoaderConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/obfuscation/ProjectObfuscator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/obfuscation/ProjectObfuscator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/obfuscation/impl/HandlerObfuscation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/obfuscation/impl/HandlerObfuscation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/ClasseUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/ClasseUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/NameUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/NameUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +106,7 @@
       <workItem from="1689945104597" duration="1363000" />
       <workItem from="1689948400246" duration="19701000" />
       <workItem from="1689972981657" duration="3868000" />
-      <workItem from="1690038100519" duration="23930000" />
+      <workItem from="1690038100519" duration="25362000" />
     </task>
     <task id="LOCAL-00001" summary="Sistema para compilar;">
       <option name="closed" value="true" />
@@ -337,7 +332,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690059714592</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Correção de bugs;">
+      <option name="closed" value="true" />
+      <created>1690064163176</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1690064163176</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -358,7 +361,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Adicionado sistema de commands;" />
     <MESSAGE value="Atualização dos formatadores de log;" />
     <MESSAGE value="Corrigido erro de inicialização;" />
     <MESSAGE value="Corrigido erro do frame de configuração;" />
@@ -383,7 +385,8 @@
     <MESSAGE value="Corrigido bugs do JarLoader;" />
     <MESSAGE value="Adicionado novas pastas ao menu;" />
     <MESSAGE value="Removido load no construtor do JarLoader;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removido load no construtor do JarLoader;" />
+    <MESSAGE value="Correção de bugs;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correção de bugs;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

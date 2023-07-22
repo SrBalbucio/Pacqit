@@ -53,6 +53,7 @@ public class ProjectObfuscator {
                             .build());
             loader.setManipulationEvent(new HandlerObfuscation());
             loader.startLoad();
+            loader.checkAndSaveAll();
         } catch (Exception e){
             e.printStackTrace();
         }

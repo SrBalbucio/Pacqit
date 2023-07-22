@@ -10,6 +10,7 @@ public class Main {
         System.out.println("Estou funcionando!");
         Form form = new Form(this);
         form.open();
+        form.chups();
     }
 
     public void chamadaTeste(String teste){

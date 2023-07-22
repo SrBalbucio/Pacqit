@@ -13,7 +13,7 @@ public class BytecodeLogger {
         try {
             String methodName = methodGen.getName();
             if(methodName.equalsIgnoreCase("<init>")){
-                methodName = "constructor";
+                methodName = "constructor-"+methodGen.getClassName();
             }
             File file = new File(pathFile, methodName + ".log");
             file.delete();
