@@ -24,6 +24,9 @@ import java.util.jar.JarFile;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Logger;
 
+/**
+ * É nesta classe onde todos as ações relacionadas a compilação e build são feitas
+ */
 @Data
 public class ProjectBuild {
 
@@ -114,18 +117,21 @@ public class ProjectBuild {
 
     /**
      * Método para compilar as classes do projeto
+     *
+     * Este método utiliza o javac para compilar as classes
      */
     public boolean compileClasses(){
         long init = System.currentTimeMillis();
         createPath();
         BUILD_LOGGER.info("Starting to compile the project.");
+        // pega todos os packages e classes do seu projeto para criar o classpath
         List<String> classes = ClasseUtils.getClassesInDirectory(getSourcePath());
         List<String> packages = PackageUtils.getPackagesInDirectory(getSourcePath());
 
         // process java file
         BUILD_LOGGER.info("Formatting and checking java classes.");
 
-        //generate compile command
+        // gera o comando de classpath adicionando todas as dependencias e packages
         BUILD_LOGGER.info("Preparing the javac.");
         StringBuilder classpath = new StringBuilder();
         classpath.append("-cp \".");
@@ -134,6 +140,7 @@ public class ProjectBuild {
         JarUtils.getJars(getLocalLibrariesPath()).forEach(j -> classpath.append(separator+j));
         classpath.append("\"");
 
+        // cria o parametro de arquivos para compilação
         StringBuilder classesToCompile = new StringBuilder();
         AtomicInteger va = new AtomicInteger(0);
 
@@ -146,14 +153,14 @@ public class ProjectBuild {
             va.incrementAndGet();
         });
 
+        // cria o comando para o local do java
         StringBuilder cmdFile = new StringBuilder();
-
         cmdFile.append("\"");
         cmdFile.append(getJavaHome().getAbsolutePath());
         cmdFile.append("/bin/javac.exe");
         cmdFile.append("\"");
 
-        // create command builder
+        // finalmente cria o comando final
         StringBuilder command = new StringBuilder();
         command.append(cmdFile.toString());
         command.append(" -target "+project.getJavaVersion());
@@ -168,10 +175,7 @@ public class ProjectBuild {
         // compile classes
         BUILD_LOGGER.info("Compiling and writing classes with javac...");
         try {
-            String[] cmds = new String[1];
-            //cmds[0] = "\"cd "+getSourcePath().getAbsolutePath()+"\"";
-            cmds[0] = command.toString();
-            ProcessBuilder builder = new ProcessBuilder(cmds);
+            ProcessBuilder builder = new ProcessBuilder(command.toString());
 
             if(!getJavaHome().exists()){
                 BUILD_LOGGER.severe("The specified JAVA_HOME could not be found! Check your Java installation.");
@@ -182,23 +186,12 @@ public class ProjectBuild {
                 BUILD_LOGGER.severe("Could not find javac.exe within the specified JAVA_HOME, this is an installation problem, please reinstall Java and try again.");
                 return false;
             }
+
+            // configura o processo
             builder.redirectOutput(parse.isCompileDebug() ? ProcessBuilder.Redirect.INHERIT : ProcessBuilder.Redirect.DISCARD);
             builder.redirectErrorStream(true);
             builder.directory(getSourcePath());
             Process process = builder.start();
-
-            Scanner errscanner = new Scanner(process.getErrorStream());
-            while (errscanner.hasNext()){
-                BUILD_LOGGER.fine(errscanner.next());
-            }
-
-            if(parse.isCompileDebug()) {
-                String line;
-                BufferedReader outscanner =
-                        new BufferedReader(new InputStreamReader(process.getInputStream()));
-                while ((line = outscanner.readLine()) != null)
-                    BUILD_LOGGER.fine(line);
-            }
             int exitcode = process.waitFor();
             BUILD_LOGGER.info("Compilation finished in "+(System.currentTimeMillis() - init)+"ms! (exit code "+exitcode+")");
             return true;
@@ -221,7 +214,7 @@ public class ProjectBuild {
             format.setDialog(dialog);
         }
 
-        // compilar classes
+        // compila as classes
         boolean compiled = compileClasses();
         if(!compiled){
             BUILD_LOGGER.severe("There was some problem compiling the classes, package cancelled, check previous logs.");
@@ -285,6 +278,7 @@ public class ProjectBuild {
             return false;
         }
 
+        // verifica se os JARs estão corrompidos, se eles não carregarem aqui significa que estão
         try {
             JarFile j1 = new JarFile(outputJar);
             BUILD_LOGGER.info("JarFile Original: Successfully compiled and packaged!");
@@ -297,7 +291,9 @@ public class ProjectBuild {
                 dialog.close();
             }
             app.getUiBooster().showException("An error occurred while compiling the project!", ":C", e);
+            return false;
         }
+
         if(gui){
             dialog.close();
         }
