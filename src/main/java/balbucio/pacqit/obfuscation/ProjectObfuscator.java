@@ -51,6 +51,7 @@ public class ProjectObfuscator {
                             .LOAD_ALL_CLASSES(true)
                             .build());
             loader.setManipulationEvent(new HandlerObfuscation());
+            loader.startLoad();
         } catch (Exception e){
             e.printStackTrace();
         }

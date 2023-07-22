@@ -31,7 +31,6 @@ public class JarLoader {
         createGUI();
         ClassPath classPath = new ClassPath(jarFile.getAbsolutePath());
         this.repository = new ClassPathRepository(classPath);
-        startLoad();
     }
 
     private ProgressDialog dialog;
