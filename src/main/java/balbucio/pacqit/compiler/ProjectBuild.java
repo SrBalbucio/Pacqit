@@ -78,6 +78,7 @@ public class ProjectBuild {
     public File getGeneratedPath(){
         return parse.getProjectDir() != null ? new File(parse.getProjectDir(), project.getGeneratedPath()) : new File(project.getGeneratedPath());
     }
+
     public File getJavaHome(){
         return new File(project.getJAVA_HOME());
     }

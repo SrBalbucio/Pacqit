@@ -4,6 +4,7 @@ import balbucio.pacqit.command.CommandManager;
 import balbucio.pacqit.logger.LoggerFormat;
 import balbucio.pacqit.model.Project;
 import balbucio.pacqit.compiler.ProjectBuild;
+import balbucio.pacqit.obfuscation.ProjectObfuscator;
 import de.milchreis.uibooster.UiBooster;
 import de.milchreis.uibooster.model.Form;
 import de.milchreis.uibooster.model.FormBuilder;
@@ -67,7 +68,13 @@ public class Main {
                     projectBuild.run(true);
                 }
             });
-            builder.addButton("Build and obfuscate", () -> {});
+            builder.addButton("Build and obfuscate", () -> {
+                boolean build = projectBuild.buildProject(true);
+                if(build){
+                    ProjectObfuscator obsfucator = projectBuild.createObsfucator();
+                    obsfucator.build();
+                }
+            });
             builder.addButton("Convert to nasm and build", () -> {});
             builder.addButton("Clean", () -> projectBuild.clean());
             builder.setID("menu");
