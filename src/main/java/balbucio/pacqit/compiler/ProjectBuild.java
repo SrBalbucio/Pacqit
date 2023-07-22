@@ -5,6 +5,7 @@ import balbucio.pacqit.Main;
 import balbucio.pacqit.logger.BuildLoggerFormat;
 import balbucio.pacqit.model.Manifest;
 import balbucio.pacqit.model.Project;
+import balbucio.pacqit.obfuscation.ProjectObfuscator;
 import balbucio.pacqit.utils.ClasseUtils;
 import balbucio.pacqit.utils.JarUtils;
 import balbucio.pacqit.utils.PackageUtils;
@@ -105,6 +106,10 @@ public class ProjectBuild {
         if(!getGeneratedPath().exists()){
             getGeneratedPath().mkdirs();
         }
+    }
+
+    public ProjectObfuscator createObsfucator(){
+        return new ProjectObfuscator(project, this, parse, app);
     }
 
     /**

@@ -32,6 +32,7 @@ public class Project {
     private String outputPath = "build/release";
     private String compílePath = "target/classes";
     private String generatedPath = "target/generated";
+    private String obfuscationPath = "target/obfuscation";
     private boolean executableJar = false;
     private String mainClass = "org.example.Main";
     private String jarName = "${project.name}-${project.version}";

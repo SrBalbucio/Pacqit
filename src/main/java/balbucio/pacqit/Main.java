@@ -42,75 +42,13 @@ public class Main {
         this.input = new Scanner(System.in);
         this.uiBooster = new UiBooster(UiBoosterOptions.Theme.DEFAULT, "/pacqit.png");
         this.commandManager = new CommandManager(this);
+
         this.project = Project.loadProject(parse.getProjectDir());
         if(project != null) {
             this.projectBuild = new ProjectBuild(project, parse, this);
             projectBuild.createPath();
         }
-
-        switch (parse.getAction()){
-
-            case CLEAN -> {
-                if(project == null){
-                    confirmProjectCreate();
-                    return;
-                }
-
-                projectBuild.clean();
-            }
-            case COMPILE -> {
-                if(project == null){
-                    confirmProjectCreate();
-                    return;
-                }
-
-                projectBuild.compileClasses();
-            }
-            case BUILD -> {
-                if(project == null){
-                    confirmProjectCreate();
-                    return;
-                }
-
-                projectBuild.buildProject(false);
-            }
-            case CREATE_NEW_PROJECT -> {
-                if(!parse.isConsoleOnly() ){
-                    if(!GraphicsEnvironment.isHeadless()){
-                        createProjectForm();
-                    } else{
-                        LOGGER.severe("The device does not have GUI support, so you must create a new project via console using the --new-project command together with --console-only.\n" +
-                                "Example: pacqit --console-only --new-project\n" +
-                                "\n" +
-                                "If you prefer, you can create a project-config.yml template using the --new-config-template command.\n" +
-                                "Example: pacqit --console-only --new-config-template");
-                    }
-                } else {
-                    project = new Project();
-                    System.out.println("What is the name of the project?");
-                    project.setName(input.next());
-                    System.out.println("What will the project package be? (eg: org.example)");
-                    project.setProjectPackage(input.next());
-                    System.out.println("What will the name of the main class be? (Ex.: Main)");
-                    project.setMainClass(project.getProjectPackage()+"."+input.next());
-                    project.save(parse.getProjectDir());
-                    System.out.println("The project has been generated, you can change its settings through the project-config.yml file or via the console.");
-                }
-            }
-            case NONE -> {
-                if(!parse.isConsoleOnly() && !GraphicsEnvironment.isHeadless()){
-                    openMenuForm();
-                } else {
-                    LOGGER.info("Pacqit is waiting for commands:");
-                    System.out.print(">");
-                    while (input.hasNextLine()) {
-                        commandManager.resolve(input.nextLine());
-                        LOGGER.info("Pacqit is waiting for commands:");
-                        System.out.print(">");
-                    }
-                }
-            }
-        }
+        parse.runAction(this);
     }
 
     public void openMenuForm(){

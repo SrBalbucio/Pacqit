@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Adicionado opções ao GUI;">
+    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Adicionado gui de log no build project;">
+      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/obfuscation/ProjectObfuscator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/obfuscation/visitor/ClazzVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/logger/BuildLoggerFormat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/logger/BuildLoggerFormat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/Project.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +44,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/srbal/Documents/Pacqit/fakeproject",
+    "last_opened_file_path": "C:/Users/srbal/Documents/obfuscator",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -51,7 +53,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -69,7 +71,7 @@
       <module name="Pacqit" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="balbucio.pacqit.*" />
+          <option name="PATTERN" value="balbucio.pacqit.obfuscation.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -103,7 +105,8 @@
       <workItem from="1689862403885" duration="25659000" />
       <workItem from="1689905493868" duration="7744000" />
       <workItem from="1689945104597" duration="1363000" />
-      <workItem from="1689948400246" duration="18124000" />
+      <workItem from="1689948400246" duration="19701000" />
+      <workItem from="1689972981657" duration="3868000" />
     </task>
     <task id="LOCAL-00001" summary="Sistema para compilar;">
       <option name="closed" value="true" />
@@ -273,7 +276,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689965462093</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Adicionado gui de log no build project;">
+      <option name="closed" value="true" />
+      <created>1689966796720</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1689966796720</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -314,6 +325,7 @@
     <MESSAGE value="Adicionado build run, para buildar e executar;" />
     <MESSAGE value="Correção do sistema de comandos;" />
     <MESSAGE value="Adicionado opções ao GUI;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adicionado opções ao GUI;" />
+    <MESSAGE value="Adicionado gui de log no build project;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adicionado gui de log no build project;" />
   </component>
 </project>
