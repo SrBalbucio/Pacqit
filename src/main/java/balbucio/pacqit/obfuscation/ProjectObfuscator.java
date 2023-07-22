@@ -43,11 +43,12 @@ public class ProjectObfuscator {
             Files.copy(build.getShadedJAR().toPath(), workJar.toPath());
             JarLoader loader = new JarLoader(
                     workJar,
-                    ClasseUtils.getClassNames(build.getSourcePath()),
+                    ClasseUtils.getClassesInDirectory(build.getSourcePath()),
                     LoaderConfig.builder()
                             .LOG_PATH(build.getLogsPath())
                             .GUI(gui)
                             .app(app)
+                            .OUT_PATH(getObfuscationPath())
                             .LOAD_ALL_CLASSES(true)
                             .build());
             loader.setManipulationEvent(new HandlerObfuscation());

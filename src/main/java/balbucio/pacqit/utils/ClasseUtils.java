@@ -11,7 +11,9 @@ public class ClasseUtils {
 
     public static List<String> getClassNames(File directory){
         List<String> names = new ArrayList<>();
-        getClassesInDirectory(directory).forEach(c -> names.add(extractClassName(directory.getAbsolutePath()+"/"+c)));
+        getClassesInDirectory(directory).forEach(c -> {
+            names.add(extractClassName(directory.getAbsolutePath()+"/"+c));
+        });
         return names;
     }
 

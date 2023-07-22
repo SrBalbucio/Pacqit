@@ -8,7 +8,7 @@ public class NameUtils {
 
     public static String generateJavaValidName() {
         Random random = new Random();
-        int tamanho = 8 + random.nextInt(24);
+        int tamanho = 24 + random.nextInt(56);
         StringBuilder nomeAleatorio = new StringBuilder();
 
         for (int i = 0; i < tamanho; i++) {

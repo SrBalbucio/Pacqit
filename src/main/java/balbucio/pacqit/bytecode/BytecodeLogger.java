@@ -12,7 +12,11 @@ public class BytecodeLogger {
     public static void logMethodInfo(MethodGen methodGen, File pathFile) {
         try {
             String methodName = methodGen.getName();
+            if(methodName.equalsIgnoreCase("<init>")){
+                methodName = "constructor";
+            }
             File file = new File(pathFile, methodName + ".log");
+            file.delete();
 
             PrintWriter writer = new PrintWriter(new FileWriter(file));
             writer.println("Nome do método: " + methodGen.getName());
@@ -41,7 +45,8 @@ public class BytecodeLogger {
                     writer.println();
                 }
             }
-
+            writer.flush();
+            writer.close();
             System.out.println("Log do método '" + methodName + "' criado com sucesso.");
         } catch (Exception e) {
             e.printStackTrace();
@@ -52,7 +57,7 @@ public class BytecodeLogger {
         try {
             String fieldName = fieldGen.getName();
             File file = new File(pathFile, fieldName + ".log");
-
+            file.delete();
             PrintWriter writer = new PrintWriter(new FileWriter(file));
             writer.println("Nome do campo: " + fieldGen.getName());
             writer.println("Tipo do campo: " + fieldGen.getType());
@@ -64,6 +69,8 @@ public class BytecodeLogger {
             }
 
             writer.println();
+            writer.flush();
+            writer.close();
 
             System.out.println("Log do campo '" + fieldName + "' criado com sucesso.");
         } catch (Exception e) {
@@ -75,7 +82,7 @@ public class BytecodeLogger {
         try {
             String className = classGen.getClassName();
             File file = new File(pathFile, className + ".log");
-
+            file.delete();
             PrintWriter writer = new PrintWriter(new FileWriter(file));
             writer.println("Nome da classe: " + className);
 
@@ -92,6 +99,8 @@ public class BytecodeLogger {
             }
 
             writer.println();
+            writer.flush();
+            writer.close();
 
             System.out.println("Log da classe '" + className + "' criado com sucesso.");
         } catch (Exception e) {

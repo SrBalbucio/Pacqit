@@ -4,7 +4,13 @@ import javax.swing.*;
 
 public class Form {
 
-    public static void open(){
+    private Main main;
+
+    public Form(Main main){
+        this.main = main;
+    }
+
+    public void open(){
         JOptionPane.showMessageDialog(null, "TESTE", "TESTE1", JOptionPane.INFORMATION_MESSAGE);
     }
 }

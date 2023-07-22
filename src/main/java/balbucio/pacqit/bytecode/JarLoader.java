@@ -4,9 +4,7 @@ import balbucio.pacqit.bytecode.event.JarLoadEvent;
 import balbucio.pacqit.bytecode.event.JarManipulationEvent;
 import balbucio.pacqit.utils.SimpleEntry;
 import de.milchreis.uibooster.components.ProgressDialog;
-import org.apache.bcel.classfile.Field;
-import org.apache.bcel.classfile.JavaClass;
-import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.*;
 import org.apache.bcel.generic.*;
 import org.apache.bcel.util.ClassPath;
 import org.apache.bcel.util.ClassPathRepository;
@@ -67,7 +65,14 @@ public class JarLoader {
 
     public void startLoad() {
         progress(0);
-        classes.forEach(cname -> classProducer(repository.findClass(cname)));
+        classes.forEach(cname -> {
+            try {
+                System.out.println(cname);
+                classProducer(repository.loadClass(cname.replace(".java", "").replace("/", ".")));
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        });
         progress(10);
         allClassGen.forEach(e -> {
             getMethodsInJavaClass(e.getKey()).forEach(m -> methodProducer(m, e.getValue(), e.getValue2()));
@@ -81,6 +86,7 @@ public class JarLoader {
         progress(60);
         checkAndSaveAll();
         progress(100);
+        closeGUI();
     }
 
     public void classProducer(JavaClass clazz) {
@@ -90,6 +96,11 @@ public class JarLoader {
             ConstantPoolGen cpGen = classGen.getConstantPool();
             allClassGen.add(new SimpleEntry<>(clazz, classGen, cpGen));
             BytecodeLogger.logClassInfo(classGen, config.LOG_PATH);
+            int classNameIndex = classGen.getClassNameIndex();
+            ConstantClass constant = (ConstantClass) cpGen.getConstant(classNameIndex);
+
+            cpGen.setConstant(classNameIndex, new ConstantClass(constant));
+            classGen.setConstantPool(cpGen);
         }
     }
 
@@ -152,7 +163,7 @@ public class JarLoader {
                 }
             });
             try {
-                classgen.getJavaClass().dump(e.getKey().getFileName());
+                classgen.getJavaClass().dump(config.OUT_PATH.getAbsolutePath()+"/"+e.getValue().getFileName().replace(".", "/"));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -168,7 +179,7 @@ public class JarLoader {
     }
 
     public boolean hasMethodGen(String method) {
-        return allMethodsGen.stream().anyMatch(e -> e.getKey().equals(method));
+        return allMethodsGen.stream().anyMatch(e -> e.getKey().getName().equals(method));
     }
 
     public MethodGen getMethodGen(String method) {

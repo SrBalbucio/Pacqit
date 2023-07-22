@@ -25,6 +25,7 @@ public class LoaderConfig {
     public boolean VERBOSE = false;
 
     public File LOG_PATH = new File("build-logs");
+    public File OUT_PATH = new File("target/obfuscation");
     public boolean GUI = false;
     public Main app;
 }
