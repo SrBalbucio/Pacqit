@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Adicionado analisador e modificador de bytecode;">
-      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/bytecode/BytecodeLogger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Corrigido bugs do JarLoader;">
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/bytecode/JarLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/bytecode/JarLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/bytecode/LoaderConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/bytecode/LoaderConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/obfuscation/ProjectObfuscator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/obfuscation/ProjectObfuscator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/ClasseUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/ClasseUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +103,7 @@
       <workItem from="1689945104597" duration="1363000" />
       <workItem from="1689948400246" duration="19701000" />
       <workItem from="1689972981657" duration="3868000" />
-      <workItem from="1690038100519" duration="18998000" />
+      <workItem from="1690038100519" duration="19448000" />
     </task>
     <task id="LOCAL-00001" summary="Sistema para compilar;">
       <option name="closed" value="true" />
@@ -312,7 +305,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690056145701</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Corrigido bugs do JarLoader;">
+      <option name="closed" value="true" />
+      <created>1690059195484</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1690059195484</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -357,7 +358,8 @@
     <MESSAGE value="Código otimizado e limpo;" />
     <MESSAGE value="Adicionado alguns comentários ao código;" />
     <MESSAGE value="Adicionado analisador e modificador de bytecode;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adicionado analisador e modificador de bytecode;" />
+    <MESSAGE value="Corrigido bugs do JarLoader;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrigido bugs do JarLoader;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

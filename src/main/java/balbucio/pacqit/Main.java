@@ -133,7 +133,10 @@ public class Main {
                 .addText("Local Libraries Path:", project.getLocalLibrariesPath())
                 .addText("Output Path:", project.getOutputPath())
                 .addText("Compile Path:", project.getCompílePath())
-                .addText("Generated Path:", project.getGeneratedPath()).show();
+                .addText("Generated Path:", project.getGeneratedPath())
+                .addText("Obsfucation Path:", project.getObfuscationPath())
+                .addText("Logs Path:", project.getLogsPath())
+                .show();
         project.setSourcePath(f.getByIndex(0).asString());
         project.setResourcePath(f.getByIndex(1).asString());
         project.setBuildPluginsPath(f.getByIndex(2).asString());
@@ -141,6 +144,8 @@ public class Main {
         project.setOutputPath(f.getByIndex(4).asString());
         project.setCompílePath(f.getByIndex(5).asString());
         project.setGeneratedPath(f.getByIndex(6).asString());
+        project.setObfuscationPath(f.getByIndex(7).asString());
+        project.setLogsPath(f.getByIndex(8).asString());
         project.save(parse.getProjectDir());
         projectBuild.createPath();
     }
