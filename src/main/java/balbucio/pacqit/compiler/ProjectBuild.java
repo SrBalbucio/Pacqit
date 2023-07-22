@@ -79,6 +79,10 @@ public class ProjectBuild {
         return parse.getProjectDir() != null ? new File(parse.getProjectDir(), project.getGeneratedPath()) : new File(project.getGeneratedPath());
     }
 
+    public File getLogsPath(){
+        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), project.getLogsPath()) : new File(project.getLogsPath());
+    }
+
     public File getJavaHome(){
         return new File(project.getJAVA_HOME());
     }
@@ -109,6 +113,9 @@ public class ProjectBuild {
         }
         if(!getGeneratedPath().exists()){
             getGeneratedPath().mkdirs();
+        }
+        if(!getLogsPath().exists()){
+            getLogsPath().mkdirs();
         }
     }
 

@@ -11,12 +11,7 @@ import balbucio.pacqit.utils.ClasseUtils;
 import lombok.NoArgsConstructor;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 
 @NoArgsConstructor
 public class ProjectObfuscator {
@@ -37,13 +32,24 @@ public class ProjectObfuscator {
         return parse.getProjectDir() != null ? new File(parse.getProjectDir(), project.getObfuscationPath()) : new File(project.getObfuscationPath());
     }
 
-    public void build() {
+    public void build(boolean gui) {
         getObfuscationPath().mkdirs();
         long init = System.currentTimeMillis();
         File workJar = new File(getObfuscationPath(), project.replace(project.getJarName())+"-working.jar");
         try{
+            if(workJar.exists()) {
+                workJar.delete();
+            }
             Files.copy(build.getShadedJAR().toPath(), workJar.toPath());
-            JarLoader loader = new JarLoader(workJar, new ArrayList<>(), new LoaderConfig());
+            JarLoader loader = new JarLoader(
+                    workJar,
+                    ClasseUtils.getClassNames(build.getSourcePath()),
+                    LoaderConfig.builder()
+                            .LOG_PATH(build.getLogsPath())
+                            .GUI(gui)
+                            .app(app)
+                            .LOAD_ALL_CLASSES(true)
+                            .build());
             loader.setManipulationEvent(new HandlerObfuscation());
         } catch (Exception e){
             e.printStackTrace();

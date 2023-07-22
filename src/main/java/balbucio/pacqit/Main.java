@@ -72,7 +72,7 @@ public class Main {
                 boolean build = projectBuild.buildProject(true);
                 if(build){
                     ProjectObfuscator obsfucator = projectBuild.createObsfucator();
-                    obsfucator.build();
+                    obsfucator.build(true);
                 }
             });
             builder.addButton("Convert to nasm and build", () -> {});

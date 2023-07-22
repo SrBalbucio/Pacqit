@@ -4,13 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Adicionado gui de log no build project;">
-      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/obfuscation/ProjectObfuscator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/obfuscation/visitor/ClazzVisitor.java" afterDir="false" />
+    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Adicionado analisador e modificador de bytecode;">
+      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/bytecode/BytecodeLogger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/bytecode/JarLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/bytecode/JarLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/bytecode/LoaderConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/bytecode/LoaderConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/obfuscation/ProjectObfuscator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/obfuscation/ProjectObfuscator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/ClasseUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/ClasseUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +47,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/srbal/Documents/obfuscator",
+    "last_opened_file_path": "C:/Users/srbal/Documents/Pacqit/fakeproject",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -88,8 +91,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ProcessTest" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.ProcessTest" />
       </list>
     </recent_temporary>
   </component>
@@ -107,6 +110,7 @@
       <workItem from="1689945104597" duration="1363000" />
       <workItem from="1689948400246" duration="19701000" />
       <workItem from="1689972981657" duration="3868000" />
+      <workItem from="1690038100519" duration="18998000" />
     </task>
     <task id="LOCAL-00001" summary="Sistema para compilar;">
       <option name="closed" value="true" />
@@ -284,7 +288,31 @@
       <option name="project" value="LOCAL" />
       <updated>1689966796720</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Código otimizado e limpo;">
+      <option name="closed" value="true" />
+      <created>1690038802000</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1690038802000</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Adicionado alguns comentários ao código;">
+      <option name="closed" value="true" />
+      <created>1690039306362</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1690039306362</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Adicionado analisador e modificador de bytecode;">
+      <option name="closed" value="true" />
+      <created>1690056145701</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1690056145701</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -326,6 +354,20 @@
     <MESSAGE value="Correção do sistema de comandos;" />
     <MESSAGE value="Adicionado opções ao GUI;" />
     <MESSAGE value="Adicionado gui de log no build project;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adicionado gui de log no build project;" />
+    <MESSAGE value="Código otimizado e limpo;" />
+    <MESSAGE value="Adicionado alguns comentários ao código;" />
+    <MESSAGE value="Adicionado analisador e modificador de bytecode;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adicionado analisador e modificador de bytecode;" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/SimpleEntry.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

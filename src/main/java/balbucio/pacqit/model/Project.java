@@ -14,8 +14,6 @@ import org.yaml.snakeyaml.representer.Representer;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,6 +31,7 @@ public class Project {
     private String compílePath = "target/classes";
     private String generatedPath = "target/generated";
     private String obfuscationPath = "target/obfuscation";
+    private String logsPath = "build-logs";
     private boolean executableJar = false;
     private String mainClass = "org.example.Main";
     private String jarName = "${project.name}-${project.version}";
