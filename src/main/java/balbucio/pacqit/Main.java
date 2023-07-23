@@ -79,6 +79,7 @@ public class Main {
             builder.addButton("Clean", () -> projectBuild.clean());
             builder.setID("menu");
         }
+        builder.setCloseListener(e -> System.exit(0));
         Form f = builder.show();
     }
 
