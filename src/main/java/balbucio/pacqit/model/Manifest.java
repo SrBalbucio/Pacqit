@@ -14,7 +14,7 @@ import java.util.jar.Attributes;
 public class Manifest {
 
     private String version = "1.0";
-    private String mainClass;
+    private String mainClass = "Main";
     private String jdkSpec = "20";
 
     public void save(File file) throws IOException {

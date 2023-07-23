@@ -4,6 +4,7 @@ import balbucio.pacqit.bytecode.event.JarLoadEvent;
 import balbucio.pacqit.bytecode.event.JarManipulationEvent;
 import balbucio.pacqit.logger.BuildLoggerFormat;
 import balbucio.pacqit.logger.LoaderLoggerFormat;
+import balbucio.pacqit.model.Manifest;
 import balbucio.pacqit.utils.SimpleEntry;
 import de.milchreis.uibooster.components.ProgressDialog;
 import org.apache.bcel.classfile.*;
@@ -14,8 +15,6 @@ import org.apache.bcel.util.ClassPathRepository;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Logger;
 
@@ -271,5 +270,14 @@ public class JarLoader {
 
     public List<Field> getFieldsInJavaClass(ClassGen clazz) {
         return List.of(clazz.getFields());
+    }
+
+    public Manifest createManifest(String mainClass){
+        Manifest manifest = new Manifest();
+        ClassGen classGen = getClassGenByName(mainClass);
+        if(classGen != null){
+            manifest.setMainClass(classGen.getClassName());
+        }
+        return manifest;
     }
 }

@@ -6,6 +6,7 @@ import balbucio.pacqit.bytecode.JarLoader;
 import balbucio.pacqit.bytecode.LoaderConfig;
 import balbucio.pacqit.compiler.ProjectBuild;
 import balbucio.pacqit.logger.ObfuscatorLoggerFormat;
+import balbucio.pacqit.model.Manifest;
 import balbucio.pacqit.model.Project;
 import balbucio.pacqit.obfuscation.impl.HandlerObfuscation;
 import balbucio.pacqit.utils.ClasseUtils;
@@ -76,7 +77,7 @@ public class ProjectObfuscator {
             loader.startLoad();
             loader.checkAndSaveAll();
             OBFUSCATOR_LOGGER.info("Classes have been modified and patched.");
-            createJarObfuscated();
+            createJarObfuscated(loader.createManifest(project.getProjectPackage() + "." + project.getMainClass()));
             long finishedTime = (System.currentTimeMillis() - init);
             app.getUiBooster().createNotification("The obfuscated JAR is ready in "+finishedTime+"ms.", "Pacqit: Obfuscator");
             loader = null;
@@ -85,9 +86,9 @@ public class ProjectObfuscator {
         }
     }
 
-    public void createJarObfuscated(){
+    public void createJarObfuscated(Manifest manifest){
         try{
-            JarUtils.directoryToJar(getJarObfuscated(), build.createManifest(), getObfuscationPath());
+            JarUtils.directoryToJar(getJarObfuscated(), manifest, getObfuscationPath());
         } catch (Exception e){
             e.printStackTrace();
         }
