@@ -13,7 +13,7 @@ public class HandlerObfuscation implements JarManipulationEvent {
 
     @Override
     public void modifyMethod(MethodGen gen) {
-        if(!gen.getName().equals("<init>")) {
+        if(!gen.getName().equals("<init>") && (!gen.getName().equals("main") && !gen.isStatic())) {
             gen.setName(NameUtils.generateJavaValidName());
         }
     }

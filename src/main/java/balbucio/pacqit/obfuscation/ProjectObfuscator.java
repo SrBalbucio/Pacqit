@@ -79,6 +79,7 @@ public class ProjectObfuscator {
             createJarObfuscated();
             long finishedTime = (System.currentTimeMillis() - init);
             app.getUiBooster().createNotification("The obfuscated JAR is ready in "+finishedTime+"ms.", "Pacqit: Obfuscator");
+            loader = null;
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -87,7 +88,7 @@ public class ProjectObfuscator {
     public void createJarObfuscated(){
         try{
             JarUtils.directoryToJar(getJarObfuscated(), build.createManifest(), getObfuscationPath());
-        }catch (Exception e){
+        } catch (Exception e){
             e.printStackTrace();
         }
     }
