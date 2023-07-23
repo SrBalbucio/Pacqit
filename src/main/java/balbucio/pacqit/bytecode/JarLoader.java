@@ -180,17 +180,28 @@ public class JarLoader {
                         String methodName = ivk.getMethodName(cp);
                         if (hasMethodGen(methodName)) {
                             SimpleEntry<Method, MethodGen, ClassGen> em = getMethodEntry(methodName);
+                            System.out.println("ivk.getSignature(cp)");
                             InvokeInstruction newivk =
                                     new INVOKEVIRTUAL(cp.addMethodref(em.getValue2().getClassName(),
                                             em.getValue().getName(),
                                             ivk.getSignature(cp)));
                             itls.redirectBranches(itl, itls.append(newivk));
-                            LOADER_LOGGER.info("The method "+method.getName()+" had called this other method "+em.getValue().getName()+", it has been changed and corrected by the new one;");
+                            LOADER_LOGGER.info("The method '"+method.getName()+"' had called this other method '"+em.getValue().getName()+"', it has been changed and corrected by the new one. Class: "+classgen.getClassName());
                         }
                     }
                 }
                 mm.setInstructionList(itls);
                 classgen.replaceMethod(method, mm.getMethod());
+            });
+
+            allClassGen.forEach(re -> {
+                ClassGen rgen = re.getValue();
+                ConstantUtf8 newImportConstant = new ConstantUtf8(rgen.getClassName());
+                int i = cp.lookupUtf8(re.getKey().getClassName());
+                if(i != -1){
+                    cp.setConstant(i, newImportConstant);
+                }
+                classgen.setConstantPool(cp);
             });
 
             try {
