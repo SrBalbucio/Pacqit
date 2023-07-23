@@ -12,7 +12,6 @@ public interface JarManipulationEvent {
 
     void readyClass(ClassGen classGen);
     default MethodGen createMethodGen(Method m, ClassGen clazz, ConstantPoolGen c, Type[] parameters, Type returnType, String[] names){
-
         return new MethodGen(m.getAccessFlags(), returnType, parameters, names, m.getName(), clazz.getClassName(), new InstructionList(m.getCode().getCode()), c);
     }
     default FieldGen createFieldGen(Field f, ClassGen clazz, ConstantPoolGen cp){

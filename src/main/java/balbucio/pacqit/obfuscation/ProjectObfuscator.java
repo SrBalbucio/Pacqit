@@ -5,11 +5,11 @@ import balbucio.pacqit.Main;
 import balbucio.pacqit.bytecode.JarLoader;
 import balbucio.pacqit.bytecode.LoaderConfig;
 import balbucio.pacqit.compiler.ProjectBuild;
-import balbucio.pacqit.logger.LoaderLoggerFormat;
 import balbucio.pacqit.logger.ObfuscatorLoggerFormat;
 import balbucio.pacqit.model.Project;
 import balbucio.pacqit.obfuscation.impl.HandlerObfuscation;
 import balbucio.pacqit.utils.ClasseUtils;
+import balbucio.pacqit.utils.JarUtils;
 import lombok.NoArgsConstructor;
 
 import java.io.File;
@@ -35,7 +35,7 @@ public class ProjectObfuscator {
     }
 
     private void configureLogger(){
-        OBFUSCATOR_LOGGER = Logger.getLogger("LOADER");
+        OBFUSCATOR_LOGGER = Logger.getLogger("OBFUSCATOR");
         OBFUSCATOR_LOGGER.setUseParentHandlers(false);
         ConsoleHandler handler = new ConsoleHandler();
         ObfuscatorLoggerFormat format = new ObfuscatorLoggerFormat();
@@ -45,6 +45,10 @@ public class ProjectObfuscator {
 
     public File getObfuscationPath(){
         return parse.getProjectDir() != null ? new File(parse.getProjectDir(), project.getObfuscationPath()) : new File(project.getObfuscationPath());
+    }
+
+    public File getJarObfuscated(){
+        return new File(build.getOutputPath(), project.replace(project.getJarName()) +"-obfuscated.jar");
     }
 
     public void build(boolean gui) {
@@ -57,6 +61,7 @@ public class ProjectObfuscator {
                 workJar.delete();
             }
             Files.copy(build.getShadedJAR().toPath(), workJar.toPath());
+            OBFUSCATOR_LOGGER.info("The shaded JAR has been cloned to be obfuscated.");
             JarLoader loader = new JarLoader(
                     workJar,
                     ClasseUtils.getClassesInDirectory(build.getSourcePath()),
@@ -70,9 +75,19 @@ public class ProjectObfuscator {
             loader.setManipulationEvent(new HandlerObfuscation());
             loader.startLoad();
             loader.checkAndSaveAll();
+            OBFUSCATOR_LOGGER.info("Classes have been modified and patched.");
+            createJarObfuscated();
             long finishedTime = (System.currentTimeMillis() - init);
-            app.getUiBooster().createNotification("The obfuscated JAR is ready.", "Pacqit: Obfuscator");
+            app.getUiBooster().createNotification("The obfuscated JAR is ready in "+finishedTime+"ms.", "Pacqit: Obfuscator");
         } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void createJarObfuscated(){
+        try{
+            JarUtils.directoryToJar(getJarObfuscated(), build.createManifest(), getObfuscationPath());
+        }catch (Exception e){
             e.printStackTrace();
         }
     }
