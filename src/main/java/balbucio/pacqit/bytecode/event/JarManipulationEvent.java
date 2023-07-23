@@ -11,11 +11,8 @@ import java.util.Arrays;
 public interface JarManipulationEvent {
 
     void readyClass(ClassGen classGen);
-    default MethodGen createMethodGen(Method m, ClassGen clazz, ConstantPoolGen c, Type[] parameters, Type returnType){
-        String[] names = new String[parameters.length];
-        for (int i = 0; i < names.length; i++) {
-            names[i] = NameUtils.generateJavaValidName();
-        }
+    default MethodGen createMethodGen(Method m, ClassGen clazz, ConstantPoolGen c, Type[] parameters, Type returnType, String[] names){
+
         return new MethodGen(m.getAccessFlags(), returnType, parameters, names, m.getName(), clazz.getClassName(), new InstructionList(m.getCode().getCode()), c);
     }
     default FieldGen createFieldGen(Field f, ClassGen clazz, ConstantPoolGen cp){

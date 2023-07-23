@@ -2,6 +2,8 @@ package balbucio.pacqit.bytecode;
 
 import balbucio.pacqit.bytecode.event.JarLoadEvent;
 import balbucio.pacqit.bytecode.event.JarManipulationEvent;
+import balbucio.pacqit.logger.BuildLoggerFormat;
+import balbucio.pacqit.logger.LoaderLoggerFormat;
 import balbucio.pacqit.utils.SimpleEntry;
 import de.milchreis.uibooster.components.ProgressDialog;
 import org.apache.bcel.classfile.*;
@@ -14,9 +16,12 @@ import java.io.IOException;
 import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Logger;
 
 public class JarLoader {
 
+    private Logger LOADER_LOGGER;
     private List<String> classes;
     private ClassPathRepository repository;
     private JarLoadEvent loadEvent;
@@ -29,8 +34,17 @@ public class JarLoader {
         createGUI();
         ClassPath classPath = new ClassPath(jarFile.getAbsolutePath());
         this.repository = new ClassPathRepository(classPath);
+        configureLogger();
     }
 
+    private void configureLogger(){
+        LOADER_LOGGER = Logger.getLogger("LOADER");
+        LOADER_LOGGER.setUseParentHandlers(false);
+        ConsoleHandler handler = new ConsoleHandler();
+        LoaderLoggerFormat format = new LoaderLoggerFormat();
+        handler.setFormatter(format);
+        LOADER_LOGGER.addHandler(handler);
+    }
     private ProgressDialog dialog;
 
     public void createGUI() {
@@ -67,7 +81,6 @@ public class JarLoader {
         progress(0);
         classes.forEach(cname -> {
             try {
-                System.out.println(cname);
                 classProducer(repository.loadClass(cname.replace(".java", "").replace("/", ".")));
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
@@ -90,34 +103,46 @@ public class JarLoader {
     public void classProducer(JavaClass clazz) {
         if (clazz != null) {
             ClassGen classGen = new ClassGen(clazz);
+            LOADER_LOGGER.info("Class "+clazz.getClassName()+" loaded successfully.");
             manipulationEvent.readyClass(classGen);
+            LOADER_LOGGER.info("Modifiers applied to the class "+clazz.getClassName());
             ConstantPoolGen cpGen = classGen.getConstantPool();
             allClassGen.add(new SimpleEntry<>(clazz, classGen, cpGen));
             BytecodeLogger.logClassInfo(classGen, config.LOG_PATH);
             int classNameIndex = classGen.getClassNameIndex();
             ConstantClass constant = (ConstantClass) cpGen.getConstant(classNameIndex);
-
             cpGen.setConstant(classNameIndex, new ConstantClass(constant));
             classGen.setConstantPool(cpGen);
+            LOADER_LOGGER.info("Stored "+clazz.getClassName()+" class. New class name: "+classGen.getClassName());
         }
     }
 
     public void methodProducer(Method m, ClassGen clazzGen, ConstantPoolGen cp) {
+        MethodGen tempMethod = new MethodGen(m, clazzGen.getClassName(), cp);
+        LocalVariableGen[] variables = tempMethod.getLocalVariables();
+        String[] names = new String[m.getArgumentTypes().length];
         Type[] p = m.getArgumentTypes();
         for (int i = 0; i < p.length; i++) {
             Type t = p[i];
             if (hasClassGen(t.getClassName())) {
                 p[i] = new ObjectType(getClassGenByName(t.getClassName()).getClassName());
             }
+            LocalVariableGen localVariableGen = getVariableByType(t, variables);
+            if(localVariableGen != null){
+                names[i] = localVariableGen.getName();
+            }
         }
+
         Type returnType = m.getReturnType();
         if (hasClassGen(returnType.getClassName())) {
             returnType = new ObjectType(getClassGenByName(returnType.getClassName()).getClassName());
         }
-        MethodGen mgen = manipulationEvent.createMethodGen(m, clazzGen, cp, p, returnType);
+        tempMethod = null;
+        MethodGen mgen = manipulationEvent.createMethodGen(m, clazzGen, cp, p, returnType, names);
         allMethodsGen.add(new SimpleEntry<>(m, mgen, clazzGen));
         BytecodeLogger.logMethodInfo(mgen, config.LOG_PATH);
         clazzGen.removeMethod(m);
+        LOADER_LOGGER.info("Original method "+m.getName()+" removed from its parent class. New parameters applied to the method.");
     }
 
 
@@ -129,12 +154,16 @@ public class JarLoader {
         allFieldGen.add(new SimpleEntry<>(f, fgen, clazzGen));
         BytecodeLogger.logFieldInfo(fgen, config.LOG_PATH);
         clazzGen.removeField(f);
+        LOADER_LOGGER.info("Field "+f.getName()+" removed from its parent class. Field type replaced by the correct one.");
     }
 
     public void checkAndSaveAll() {
         allMethodsGen.forEach(e -> {
+            MethodGen mgen = e.getValue();
             ClassGen gen = e.getValue2();
-            gen.addMethod(e.getValue().getMethod());
+            mgen.setMaxStack();
+            mgen.setMaxLocals();
+            gen.addMethod(mgen.getMethod());
         });
         allFieldGen.forEach(e -> {
             ClassGen gen = e.getValue2();
@@ -145,7 +174,8 @@ public class JarLoader {
             ClassGen classgen = e.getValue();
             ConstantPoolGen cp = e.getValue2();
             getMethodsInJavaClass(classgen).forEach(method -> {
-                InstructionList itls = new InstructionList(method.getCode().getCode());
+                MethodGen mm = new MethodGen(method, classgen.getClassName(), cp);
+                InstructionList itls = mm.getInstructionList();
                 for (InstructionHandle itl : itls) {
                     if (itl.getInstruction() instanceof InvokeInstruction ivk) {
                         String methodName = ivk.getMethodName(cp);
@@ -156,10 +186,14 @@ public class JarLoader {
                                             em.getValue().getName(),
                                             ivk.getSignature(cp)));
                             itls.redirectBranches(itl, itls.append(newivk));
+                            LOADER_LOGGER.info("The method "+method.getName()+" had called this other method "+em.getValue().getName()+", it has been changed and corrected by the new one;");
                         }
                     }
                 }
+                mm.setInstructionList(itls);
+                classgen.replaceMethod(method, mm.getMethod());
             });
+
             try {
                 File folder = new File(config.OUT_PATH, extractPackage(classgen).replace(".", "/"));
                 folder.mkdirs();
@@ -212,6 +246,15 @@ public class JarLoader {
 
     public String extractClassName(ClassGen classgen){
         return classgen.getClassName().replace(extractPackage(classgen), "");
+    }
+
+    public LocalVariableGen getVariableByType(Type type, LocalVariableGen[] variables){
+        for (LocalVariableGen variable : variables) {
+            if(variable.getType().getClassName().equals(type.getClassName())){
+                return variable;
+            }
+        }
+        return null;
     }
 
     public List<Method> getMethodsInJavaClass(JavaClass clazz) {

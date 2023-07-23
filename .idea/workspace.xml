@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Correção de bugs;">
+    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Corrigido bugs #2;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fakeproject/src/main/java/org/example/Form.java" beforeDir="false" afterPath="$PROJECT_DIR$/fakeproject/src/main/java/org/example/Form.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fakeproject/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/fakeproject/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/bytecode/JarLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/bytecode/JarLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/obfuscation/ProjectObfuscator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/obfuscation/ProjectObfuscator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +102,7 @@
       <workItem from="1689945104597" duration="1363000" />
       <workItem from="1689948400246" duration="19701000" />
       <workItem from="1689972981657" duration="3868000" />
-      <workItem from="1690038100519" duration="25362000" />
+      <workItem from="1690038100519" duration="25897000" />
     </task>
     <task id="LOCAL-00001" summary="Sistema para compilar;">
       <option name="closed" value="true" />
@@ -340,7 +336,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690064163176</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Corrigido bugs #2;">
+      <option name="closed" value="true" />
+      <created>1690065907228</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1690065907228</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -361,7 +365,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Atualização dos formatadores de log;" />
     <MESSAGE value="Corrigido erro de inicialização;" />
     <MESSAGE value="Corrigido erro do frame de configuração;" />
     <MESSAGE value="Divido config menu em vários;" />
@@ -386,7 +389,8 @@
     <MESSAGE value="Adicionado novas pastas ao menu;" />
     <MESSAGE value="Removido load no construtor do JarLoader;" />
     <MESSAGE value="Correção de bugs;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correção de bugs;" />
+    <MESSAGE value="Corrigido bugs #2;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrigido bugs #2;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

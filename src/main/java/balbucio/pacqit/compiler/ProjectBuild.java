@@ -305,7 +305,9 @@ public class ProjectBuild {
         if(gui){
             dialog.close();
         }
-        BUILD_LOGGER.info("Dependencies packaged successfully in "+(System.currentTimeMillis() - init)+"ms! The JARs were created.");
+        long finishTime = (System.currentTimeMillis() - init);
+        BUILD_LOGGER.info("Dependencies packaged successfully in "+finishTime+"ms! The JARs were created.");
+        app.getUiBooster().createNotification("Compilation and build finished in "+finishTime+" ms.", "Pacqit: Build");
         return true;
     }
 
