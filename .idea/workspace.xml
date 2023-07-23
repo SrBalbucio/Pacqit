@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Corrigido bugs #2;">
+    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Classes modificadas substituidas nos imports;">
+      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/ProjectModule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/page/MainPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/Project.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,26 +37,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/srbal/Documents/Pacqit/fakeproject",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/srbal/Documents/Pacqit/fakeproject&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\srbal\Documents\Pacqit\fakeproject" />
@@ -64,6 +69,7 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="balbucio.pacqit.Main" />
       <module name="Pacqit" />
+      <option name="PROGRAM_PARAMETERS" value="--projectdir=C:\Users\srbal\Documents\Pacqit\fakeproject" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="balbucio.pacqit.obfuscation.*" />
@@ -81,6 +87,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.ProcessTest" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
@@ -103,6 +113,8 @@
       <workItem from="1689948400246" duration="19701000" />
       <workItem from="1689972981657" duration="3868000" />
       <workItem from="1690038100519" duration="25897000" />
+      <workItem from="1690074715847" duration="6456000" />
+      <workItem from="1690142986783" duration="4260000" />
     </task>
     <task id="LOCAL-00001" summary="Sistema para compilar;">
       <option name="closed" value="true" />
@@ -344,13 +356,62 @@
       <option name="project" value="LOCAL" />
       <updated>1690065907228</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Corrigido obfuscação;">
+      <option name="closed" value="true" />
+      <created>1690077029698</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1690077029699</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Metodo para criar jar obfuscada criado;">
+      <option name="closed" value="true" />
+      <created>1690077954323</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1690077954323</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Ignorar metodo main;">
+      <option name="closed" value="true" />
+      <created>1690078608888</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1690078608888</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Manifest funcional no obfuscador;">
+      <option name="closed" value="true" />
+      <created>1690079048313</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1690079048313</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Ao clicar em OK o pacqit realmente fecha e sai;">
+      <option name="closed" value="true" />
+      <created>1690079215370</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1690079215370</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Classes modificadas substituidas nos imports;">
+      <option name="closed" value="true" />
+      <created>1690080724383</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1690080724383</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.log" />
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.bat" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -365,12 +426,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Corrigido erro de inicialização;" />
-    <MESSAGE value="Corrigido erro do frame de configuração;" />
-    <MESSAGE value="Divido config menu em vários;" />
-    <MESSAGE value="Corrigido erro de index do menu;" />
-    <MESSAGE value="Adicionado criação de manifest;&#10;Adicionado resources ao JAR;" />
-    <MESSAGE value="Corrigido erro de criação de processo;" />
     <MESSAGE value="Adicionado novos comandos básicos;" />
     <MESSAGE value="Código otimizado" />
     <MESSAGE value="Comando de clean adicionado;" />
@@ -390,7 +445,13 @@
     <MESSAGE value="Removido load no construtor do JarLoader;" />
     <MESSAGE value="Correção de bugs;" />
     <MESSAGE value="Corrigido bugs #2;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrigido bugs #2;" />
+    <MESSAGE value="Corrigido obfuscação;" />
+    <MESSAGE value="Metodo para criar jar obfuscada criado;" />
+    <MESSAGE value="Ignorar metodo main;" />
+    <MESSAGE value="Manifest funcional no obfuscador;" />
+    <MESSAGE value="Ao clicar em OK o pacqit realmente fecha e sai;" />
+    <MESSAGE value="Classes modificadas substituidas nos imports;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Classes modificadas substituidas nos imports;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -14,6 +14,8 @@ import org.yaml.snakeyaml.representer.Representer;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -37,6 +39,7 @@ public class Project {
     private String jarName = "${project.name}-${project.version}";
     private String JAVA_HOME = System.getProperty("java.home");
     private String javaVersion = "1.8";
+    private List<String> modules = new ArrayList<>();
 
     public String replace(String message){
         return message

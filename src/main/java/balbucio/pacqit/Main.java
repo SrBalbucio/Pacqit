@@ -5,6 +5,7 @@ import balbucio.pacqit.logger.LoggerFormat;
 import balbucio.pacqit.model.Project;
 import balbucio.pacqit.compiler.ProjectBuild;
 import balbucio.pacqit.obfuscation.ProjectObfuscator;
+import balbucio.pacqit.page.MainPage;
 import de.milchreis.uibooster.UiBooster;
 import de.milchreis.uibooster.model.Form;
 import de.milchreis.uibooster.model.FormBuilder;
@@ -53,11 +54,14 @@ public class Main {
     }
 
     public void openMenuForm(){
-        FormBuilder builder = uiBooster.createForm("Pacqit");
         if(project == null){
+            FormBuilder builder = uiBooster.createForm("Pacqit");
             builder.addLabel("There are no projects here!");
             builder.addButton("Create new Project", () -> createProjectForm());
+            builder.setCloseListener(e -> System.exit(0));
+            Form f = builder.show();
         } else{
+            /**
             builder.addLabel("Project Name: "+project.getName());
             builder.addButton("Open settings", () -> projectSettingsForm());
             builder.addButton("Open Dependencies Settings", () -> {});
@@ -68,7 +72,7 @@ public class Main {
                     projectBuild.run(true);
                 }
             });
-            builder.addButton("Build and obfuscate", () -> {
+            builder.addButton("Build and obfuscate (beta)", () -> {
                 boolean build = projectBuild.buildProject(true);
                 if(build){
                     ProjectObfuscator obsfucator = projectBuild.createObsfucator();
@@ -77,10 +81,9 @@ public class Main {
             });
             builder.addButton("Convert to nasm and build", () -> {});
             builder.addButton("Clean", () -> projectBuild.clean());
-            builder.setID("menu");
+            builder.setID("menu");**/
+            new MainPage(this);
         }
-        builder.setCloseListener(e -> System.exit(0));
-        Form f = builder.show();
     }
 
     public void confirmProjectCreate(){
