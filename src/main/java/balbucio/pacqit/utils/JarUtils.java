@@ -1,11 +1,14 @@
 package balbucio.pacqit.utils;
 
 import balbucio.pacqit.model.Manifest;
+import com.sun.source.doctree.SeeTree;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.jar.JarInputStream;
@@ -45,10 +48,14 @@ public class JarUtils {
             jarOutputStream = new JarOutputStream(new FileOutputStream(jarFile));
         }
 
+        Set<String> addedPath = new HashSet<>();
+
         for(File dir : directory) {
+            System.out.println(dir.getName());
             if(dir != null) {
                 for (File file : dir.listFiles()) {
-                    addFilesToJar(file, "", jarOutputStream);
+                    System.out.println(file.getName());
+                    addFilesToJar(file, "", jarOutputStream, addedPath);
                 }
             }
         }
@@ -56,7 +63,7 @@ public class JarUtils {
         jarOutputStream.close();
     }
 
-    private static void addFilesToJar(File source, String parentPath, JarOutputStream jarOutputStream) throws Exception {
+    private static void addFilesToJar(File source, String parentPath, JarOutputStream jarOutputStream, Set<String> files) throws Exception {
         byte[] buffer = new byte[1024];
         String entryName = parentPath + source.getName();
 
@@ -65,14 +72,27 @@ public class JarUtils {
                 if (!entryName.endsWith("/")) {
                     entryName += "/";
                 }
+
+                if(files.contains(entryName)){
+                    for (File file : source.listFiles()) {
+                        addFilesToJar(file, entryName, jarOutputStream, files);
+                    }
+                    return;
+                }
+
+                files.add(entryName);
                 JarEntry jarEntry = new JarEntry(entryName.replace("\\", "/"));
                 jarOutputStream.putNextEntry(jarEntry);
                 jarOutputStream.closeEntry();
             }
             for (File file : source.listFiles()) {
-                addFilesToJar(file, entryName, jarOutputStream);
+                addFilesToJar(file, entryName, jarOutputStream, files);
             }
         } else {
+            if(files.contains(entryName)){
+                return;
+            }
+            files.add(entryName);
             JarEntry jarEntry = new JarEntry(entryName.replace("\\", "/"));
             jarOutputStream.putNextEntry(jarEntry);
 
@@ -97,17 +117,19 @@ public class JarUtils {
             for (JarEntry entry : jarFile.stream().toArray(JarEntry[]::new)) {
                 if (!entry.isDirectory()) {
                     String entryName = entry.getName();
-                    File outFile = new File(destDir, entryName);
-                    File parent = outFile.getParentFile();
-                    if (!parent.exists()) {
-                        parent.mkdirs();
-                    }
-                    try (InputStream inputStream = jarFile.getInputStream(entry);
-                         FileOutputStream outputStream = new FileOutputStream(outFile)) {
-                        byte[] buffer = new byte[1024];
-                        int bytesRead;
-                        while ((bytesRead = inputStream.read(buffer)) != -1) {
-                            outputStream.write(buffer, 0, bytesRead);
+                    if(!entryName.contains("META-INF") || !entryName.contains("MANIFEST.MF")) {
+                        File outFile = new File(destDir, entryName);
+                        File parent = outFile.getParentFile();
+                        if (!parent.exists()) {
+                            parent.mkdirs();
+                        }
+                        try (InputStream inputStream = jarFile.getInputStream(entry);
+                             FileOutputStream outputStream = new FileOutputStream(outFile)) {
+                            byte[] buffer = new byte[1024];
+                            int bytesRead;
+                            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                outputStream.write(buffer, 0, bytesRead);
+                            }
                         }
                     }
                 }
