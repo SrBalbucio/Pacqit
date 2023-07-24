@@ -1,5 +1,7 @@
 package balbucio.pacqit.compiler;
 
+import java.io.File;
+
 public interface Compiler {
-    boolean compile();
+    boolean compile(File source, File localLibraries, File compilePath, File javaHome, String javaVersion);
 }

@@ -24,13 +24,13 @@ public class JavaCCompiler implements Compiler {
     }
 
     @Override
-    public boolean compile() {
+    public boolean compile(File source, File localLibraries, File compilePath, File javaHome, String javaVersion) {
         long init = System.currentTimeMillis();
         build.createPath();
         BUILD_LOGGER.info("Starting to compile the project.");
         // pega todos os packages e classes do seu projeto para criar o classpath
-        List<String> classes = ClasseUtils.getClassesInDirectory(build.getSourcePath());
-        List<String> packages = PackageUtils.getPackagesInDirectory(build.getSourcePath());
+        List<String> classes = ClasseUtils.getClassesInDirectory(source);
+        List<String> packages = PackageUtils.getPackagesInDirectory(source);
 
         // process java file
         BUILD_LOGGER.info("Formatting and checking java classes.");
@@ -40,8 +40,8 @@ public class JavaCCompiler implements Compiler {
         StringBuilder classpath = new StringBuilder();
         classpath.append("-cp \".");
         String separator = SystemUtils.IS_OS_LINUX || SystemUtils.IS_OS_MAC ? ":" : ";";
-        packages.forEach(p -> classpath.append(separator+build.getSourcePath().getAbsolutePath()+"/"+p));
-        JarUtils.getJars(build.getLocalLibrariesPath()).forEach(j -> classpath.append(separator+j));
+        packages.forEach(p -> classpath.append(separator+source.getAbsolutePath()+"/"+p));
+        JarUtils.getJars(localLibraries).forEach(j -> classpath.append(separator+j));
         classpath.append("\"");
 
         // cria o parametro de arquivos para compilação
@@ -60,19 +60,19 @@ public class JavaCCompiler implements Compiler {
         // cria o comando para o local do java
         StringBuilder cmdFile = new StringBuilder();
         cmdFile.append("\"");
-        cmdFile.append(build.getJavaHome().getAbsolutePath());
+        cmdFile.append(javaHome.getAbsolutePath());
         cmdFile.append("/bin/javac.exe");
         cmdFile.append("\"");
 
         // finalmente cria o comando final
         StringBuilder command = new StringBuilder();
         command.append(cmdFile.toString());
-        command.append(" -target "+build.getProject().getJavaVersion());
+        command.append(" -target "+javaVersion);
         if(build.getParse().isCompileDebug()) {
             command.append(" -verbose");
         }
-        command.append(" -d \""+build.getCompilePath().getAbsolutePath()+"\"");
-        command.append(" -sourcepath \""+build.getSourcePath().getAbsolutePath()+"\"");
+        command.append(" -d \""+compilePath.getAbsolutePath()+"\"");
+        command.append(" -sourcepath \""+source.getAbsolutePath()+"\"");
         command.append(" "+classpath.toString()+"");
         command.append(" "+classesToCompile.toString());
 
@@ -81,12 +81,12 @@ public class JavaCCompiler implements Compiler {
         try {
             ProcessBuilder builder = new ProcessBuilder(command.toString());
 
-            if(!build.getJavaHome().exists()){
+            if(!javaHome.exists()){
                 BUILD_LOGGER.severe("The specified JAVA_HOME could not be found! Check your Java installation.");
                 return false;
             }
 
-            if(!new File(build.getJavaHome(), "bin/javac.exe").exists()){
+            if(!new File(javaHome, "bin/javac.exe").exists()){
                 BUILD_LOGGER.severe("Could not find javac.exe within the specified JAVA_HOME, this is an installation problem, please reinstall Java and try again.");
                 return false;
             }
@@ -94,7 +94,7 @@ public class JavaCCompiler implements Compiler {
             // configura o processo
             builder.redirectOutput(build.getParse().isCompileDebug() ? ProcessBuilder.Redirect.INHERIT : ProcessBuilder.Redirect.DISCARD);
             builder.redirectErrorStream(true);
-            builder.directory(build.getSourcePath());
+            builder.directory(source);
             Process process = builder.start();
             int exitcode = process.waitFor();
             BUILD_LOGGER.info("Compilation finished in "+(System.currentTimeMillis() - init)+"ms! (exit code "+exitcode+")");
