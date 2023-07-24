@@ -25,6 +25,12 @@ public class ProjectModule {
     private List<String> modules;
     private List<String> dependencies;
 
+    public String replace(String message){
+        return message
+                .replace("${project.name}", moduleName)
+                .replace("${project.version}", moduleVersion);
+    }
+
     public static List<ProjectModule> getModulesInPath(File dir){
         List<ProjectModule> modules = new ArrayList<>();
         for (File file : dir.listFiles()) {

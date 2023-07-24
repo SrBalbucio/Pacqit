@@ -28,7 +28,13 @@ public class ProjectImplementer {
     private String implementerToolNativePackage;
     private List<String> nativePackages = new ArrayList<>();
     private List<String> dependencies = new ArrayList<>();
+    private List<String> modules = new ArrayList<>();
 
+    public String replace(String message){
+        return message
+                .replace("${project.name}", implementerName)
+                .replace("${project.version}", implementerVersion);
+    }
     public static List<ProjectImplementer> getImplementersInPath(File dir){
         List<ProjectImplementer> modules = new ArrayList<>();
         for (File file : dir.listFiles()) {

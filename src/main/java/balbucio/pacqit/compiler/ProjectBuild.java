@@ -145,6 +145,10 @@ public class ProjectBuild {
         return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getModulePath()+project.getOutputPath()+project.getJarName()) : new File(module.getModulePath()+project.getOutputPath()+module.getModuleJarName());
     }
 
+    public File getModuleGeneratedPath(ProjectModule module){
+        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getModulePath()+project.getCompílePath()) : new File(module.getModulePath()+project.getCompílePath());
+    }
+
     /**
      * IMPLEMENTERS
      */
@@ -171,7 +175,10 @@ public class ProjectBuild {
 
     public File getImplementerCompilePath(ProjectImplementer module){
         return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getImplementerPath()+project.getCompílePath()) : new File(module.getImplementerPath()+project.getCompílePath());
+    }
 
+    public File getImplementerJAR(ProjectImplementer module){
+        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getImplementerPath()+project.getOutputPath()+project.getJarName()) : new File(module.getImplementerPath()+project.getOutputPath()+module.getImplementerJarName());
     }
 
 
@@ -196,6 +203,10 @@ public class ProjectBuild {
         return app.getModules().stream().filter(m -> module.getModules().contains(m.getModuleName())).collect(Collectors.toList());
     }
 
+    public List<ProjectModule> getModulesFromImplementer(ProjectImplementer module){
+        return app.getModules().stream().filter(m -> module.getModules().contains(m.getModuleName())).collect(Collectors.toList());
+    }
+
 
     public List<String> getClassesFromModule(ProjectModule module){
         List<String> classes = new ArrayList<>();
@@ -216,14 +227,50 @@ public class ProjectBuild {
             if(getModuleJAR(smodule).exists()){
                 BUILD_LOGGER.info(smodule.getModuleName()+"Module JAR not found, was Pacqit able to compile the module?");
                 try {
-                    Files.copy(getModuleSourcePath(smodule).toPath(), new File(getModuleLocalLibrariesPath(module), getModuleJAR(smodule).getName()).toPath())
+                    Files.copy(getModuleJAR(smodule).toPath(), new File(getModuleLocalLibrariesPath(module), getModuleJAR(smodule).getName()).toPath());
                 }catch (Exception e){
                     e.printStackTrace();
                 }
             }
         }
         compiler.compile(getModuleSourcePath(module), getModuleLocalLibrariesPath(module), getModuleCompilePath(module), getJavaHome(), project.getJavaVersion());
+        JarUtils.getJarFiles(getModuleLocalLibrariesPath(module)).forEach(l -> {
+            try {
+                JarUtils.extractJar(l, getModuleGeneratedPath(module));
+                Manifest manifest = new Manifest(module.getModuleVersion(), project.getMainClass(), project.getJavaVersion());
+                JarUtils.directoryToJar(getModuleJAR(module), manifest, getModuleSourcePath(module), getModuleResourcePath(module), getModuleGeneratedPath(module));
+            } catch (Exception e){
+                e.printStackTrace();
+                BUILD_LOGGER.severe("Unable to package dependency: "+l.getName());
+                app.getUiBooster().showException("An error occurred while compiling the module!", ":C", e);
+            }
+        });
+    }
 
+    public void compileImplementer(Compiler compiler, ProjectImplementer module){
+        for(ProjectModule smodule : getModulesFromImplementer(module)){
+            compileModule(compiler, smodule);
+            if(getModuleJAR(smodule).exists()){
+                BUILD_LOGGER.info(smodule.getModuleName()+"Module JAR not found, was Pacqit able to compile the module?");
+                try {
+                    Files.copy(getModuleJAR(smodule).toPath(), new File(getImplementerLocalLibrariesPath(module), getModuleJAR(smodule).getName()).toPath());
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        compiler.compile(getImplementerSourcePath(module), getImplementerLocalLibrariesPath(module), getImplementerCompilePath(module), getJavaHome(), project.getJavaVersion());
+        JarUtils.getJarFiles(getImplementerLocalLibrariesPath(module)).forEach(l -> {
+            try {
+                JarUtils.extractJar(l, getImplementerGeneratedPath(module));
+                Manifest manifest = new Manifest(module.getImplementerVersion(), project.getMainClass(), project.getJavaVersion());
+                JarUtils.directoryToJar(getImplementerJAR(module), manifest, getImplementerSourcePath(module), getImplementerResourcePath(module), getImplementerGeneratedPath(module));
+            } catch (Exception e){
+                e.printStackTrace();
+                BUILD_LOGGER.severe("Unable to package dependency: "+l.getName());
+                app.getUiBooster().showException("An error occurred while compiling the module!", ":C", e);
+            }
+        });
     }
 
     /**
@@ -234,13 +281,34 @@ public class ProjectBuild {
     public boolean compileClasses(){
         Compiler projectCompiler = getCompiler(project.getCompilerType());
         for (String module : project.getModules()) {
-            List<String> classes = new ArrayList<>();
             ProjectModule m = app.getProjectModule(module);
-            if(m != null){
-
+            if(m != null) {
+                try {
+                    compileModule(projectCompiler, m);
+                    Files.copy(getModuleJAR(m).toPath(), new File(getLocalLibrariesPath(), getModuleJAR(m).getName()).toPath());
+                    for (ProjectImplementer i : app.getImplementers()) {
+                        Files.copy(getModuleJAR(m).toPath(), new File(getImplementerLocalLibrariesPath(i), getModuleJAR(m).getName()).toPath());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return false;
+                }
             }
         }
-        return false;
+
+        for (String implementer : project.getImplementers()) {
+            ProjectImplementer i = app.getProjectImplementer(implementer);
+            try{
+                compileImplementer(projectCompiler, i);
+                Files.copy(getImplementerJAR(i).toPath(), new File(getLocalLibrariesPath(), getImplementerJAR(i).getName()).toPath());
+                File outputJar = new File(getOutputPath(), i.replace(i.getImplementerJarName())+".jar");
+                Files.copy(getImplementerJAR(i).toPath(), outputJar.toPath());
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        return true;
     }
 
     /**
