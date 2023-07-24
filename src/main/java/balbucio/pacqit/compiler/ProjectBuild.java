@@ -171,31 +171,35 @@ public class ProjectBuild {
      */
 
     public File getImplementerGeneratedPath(ProjectImplementer module){
-        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getImplementerPath()+project.getCompílePath()) : new File(module.getImplementerPath()+project.getCompílePath());
+        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getImplementerName()+"/"+project.getCompílePath()) : new File(module.getImplementerName()+"/"+project.getCompílePath());
     }
 
     public File getImplementerSourcePath(ProjectImplementer module){
-        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getImplementerPath()+project.getSourcePath()) : new File(module.getImplementerPath()+project.getSourcePath());
+        return parse.getProjectDir() != null ? 
+                new File(parse.getProjectDir(), module.getImplementerName()+"/"+project.getSourcePath()) : 
+                new File(module.getImplementerName()+"/"+project.getSourcePath());
     }
 
     public File getImplementerResourcePath(ProjectImplementer module){
-        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getImplementerPath()+project.getResourcePath()) : new File(module.getImplementerPath()+project.getResourcePath());
+        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getImplementerName()+"/"+project.getResourcePath()) : new File(module.getImplementerName()+"/"+project.getResourcePath());
     }
 
     public File getImplementerLocalLibrariesPath(ProjectImplementer module){
-        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getImplementerPath()+project.getLocalLibrariesPath()) : new File(module.getImplementerPath()+project.getLocalLibrariesPath());
+        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getImplementerName()+"/"+project.getLocalLibrariesPath()) : new File(module.getImplementerName()+"/"+project.getLocalLibrariesPath());
     }
 
     public File getImplementerBuildPluginsPath(ProjectImplementer module){
-        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getImplementerPath()+project.getBuildPluginsPath()) : new File(module.getImplementerPath()+project.getBuildPluginsPath());
+        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getImplementerName()+"/"+project.getBuildPluginsPath()) : new File(module.getImplementerName()+"/"+project.getBuildPluginsPath());
     }
 
     public File getImplementerCompilePath(ProjectImplementer module){
-        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getImplementerPath()+project.getCompílePath()) : new File(module.getImplementerPath()+project.getCompílePath());
+        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getImplementerName()+"/"+project.getCompílePath()) : new File(module.getImplementerName()+"/"+project.getCompílePath());
     }
 
     public File getImplementerJAR(ProjectImplementer module){
-        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getImplementerPath()+project.getOutputPath()+project.getJarName()) : new File(module.getImplementerPath()+project.getOutputPath()+module.getImplementerJarName());
+        return parse.getProjectDir() != null ?
+                new File(parse.getProjectDir(), module.getImplementerName()+"/"+project.getOutputPath()+"/"+module.replace(module.getImplementerJarName())+".jar") :
+                new File(module.getImplementerName()+"/"+project.getOutputPath()+"/"+module.replace(module.getImplementerJarName())+".jar");
     }
 
 
@@ -276,7 +280,15 @@ public class ProjectBuild {
                 }
             }
         }
-        compiler.compile(getImplementerSourcePath(module), getImplementerLocalLibrariesPath(module), getImplementerCompilePath(module), getJavaHome(), project.getJavaVersion());
+
+        System.out.println(getImplementerSourcePath(module));
+        compiler.compile(
+                getImplementerSourcePath(module),
+                getImplementerLocalLibrariesPath(module),
+                getImplementerCompilePath(module),
+                getJavaHome(),
+                project.getJavaVersion());
+
         JarUtils.getJarFiles(getImplementerLocalLibrariesPath(module)).forEach(l -> {
             try {
                 JarUtils.extractJar(l, getImplementerGeneratedPath(module));
@@ -317,6 +329,14 @@ public class ProjectBuild {
             ProjectImplementer i = app.getProjectImplementer(implementer);
             try{
                 compileImplementer(projectCompiler, i);
+
+                if(!getImplementerJAR(i).exists()){
+                    getImplementerJAR(i).createNewFile();
+                } else{
+                    getImplementerJAR(i).delete();
+                    getImplementerJAR(i).createNewFile();
+                }
+
                 Files.copy(getImplementerJAR(i).toPath(), new File(getLocalLibrariesPath(), getImplementerJAR(i).getName()).toPath());
                 File outputJar = new File(getOutputPath(), i.replace(i.getImplementerJarName())+".jar");
                 Files.copy(getImplementerJAR(i).toPath(), outputJar.toPath());

@@ -21,21 +21,16 @@ import java.util.List;
 @NoArgsConstructor
 public class ProjectImplementer {
 
-    private String implementerPath = "";
-    private String implementerName;
-    private String implementerPackage;
-    private String implementerVersion;
-    private String implementerMainClass;
-    private String implementerJarName;
-    private boolean implementerGenerateNativePackage;
-    private String implementerToolNativePackage;
+    private String implementerName = "Unknown";
+    private String implementerPackage = "org.examplo";
+    private String implementerVersion = "1.0-SNAPSHOT";
+    private String implementerMainClass = "Main";
+    private String implementerJarName = "${project.name}-${project.version}";
+    private boolean implementerGenerateNativePackage = false;
+    private String implementerToolNativePackage = "jpackage";
     private List<String> nativePackages = new ArrayList<>();
     private List<String> dependencies = new ArrayList<>();
     private List<String> modules = new ArrayList<>();
-
-    public String getImplementerPath() {
-        return implementerPath.isEmpty() ? implementerName+"/" : implementerPath+"/"+implementerName+"/";
-    }
 
     public String replace(String message){
         return message
@@ -78,7 +73,7 @@ public class ProjectImplementer {
     }
 
     public void save(File dir){
-        File configFile = dir != null ? new File(dir, getImplementerPath()+"implementer-config.yml") : new File(getImplementerPath()+"implementer-config.yml");
+        File configFile = dir != null ? new File(dir, getImplementerName()+"/implementer-config.yml") : new File(getImplementerName()+"/implementer-config.yml");
         try {
             PrintWriter writer = new PrintWriter(configFile);
             DumperOptions options = new DumperOptions();
