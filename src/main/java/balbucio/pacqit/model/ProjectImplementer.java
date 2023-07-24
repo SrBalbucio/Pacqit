@@ -31,7 +31,7 @@ public class ProjectImplementer {
     private List<String> modules = new ArrayList<>();
 
     public String getImplementerPath() {
-        return implementerPath+"/"+implementerName;
+        return implementerPath+"/"+implementerName+"/";
     }
 
     public String replace(String message){
