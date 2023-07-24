@@ -1,8 +1,5 @@
 package balbucio.pacqit.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
@@ -13,28 +10,30 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
-public class ProjectModule {
+public class ProjectImplementer {
 
-    private String modulePath;
-    private String moduleName;
-    private String moduleVersion;
-    private List<String> dependencies;
-    
-    public static List<ProjectModule> getModulesInPath(File dir){
-        List<ProjectModule> modules = new ArrayList<>();
+    private String implementerName;
+    private String implementerPackage;
+    private String implementerVersion;
+    private String implementerMainClass;
+    private String implementerJarName;
+    private boolean implementerGenerateNativePackage;
+    private String implementerToolNativePackage;
+    private List<String> nativePackages = new ArrayList<>();
+    private List<String> dependencies = new ArrayList<>();
+
+    public static List<ProjectImplementer> getImplementersInPath(File dir){
+        List<ProjectImplementer> modules = new ArrayList<>();
         for (File file : dir.listFiles()) {
             if(file.isDirectory()){
-                if(hasProjectModuleInPath(file)){
+                if(hasProjectImplementerInPath(file)){
                     try {
-                        File configFile = new File(file, "module-config.yml");
+                        File configFile = new File(file, "implementer-config.yml");
                         var loaderoptions = new LoaderOptions();
                         TagInspector taginspector =
                                 tag -> tag.getClassName().equals(Project.class.getName());
                         loaderoptions.setTagInspector(taginspector);
-                        Yaml yml = new Yaml(new Constructor(ProjectModule.class, loaderoptions));
+                        Yaml yml = new Yaml(new Constructor(ProjectImplementer.class, loaderoptions));
                         modules.add(yml.load(new FileInputStream(configFile)));
                     } catch (Exception e){
                         e.printStackTrace();
@@ -44,17 +43,17 @@ public class ProjectModule {
         }
         return modules;
     }
-    
-    private static boolean hasProjectModuleInPath(File dir){
+
+    private static boolean hasProjectImplementerInPath(File dir){
         boolean has = false;
         if(dir.listFiles() != null) {
             for (File file : dir.listFiles()) {
-                if (file.getName().equalsIgnoreCase("module-config.yml")) {
+                if (file.getName().equalsIgnoreCase("implementer-config.yml")) {
                     has = true;
+                    break;
                 }
             }
         }
         return has;
     }
-    
 }

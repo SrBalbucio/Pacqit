@@ -26,7 +26,7 @@ import java.util.logging.ConsoleHandler;
 import java.util.logging.Logger;
 
 /**
- * É nesta classe onde todos as ações relacionadas a compilação e build são feitas
+ * É nesta classe onde todas as ações relacionadas a compilação e build são feitas
  */
 @Data
 public class ProjectBuild {

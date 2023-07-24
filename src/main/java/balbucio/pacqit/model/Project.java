@@ -42,8 +42,10 @@ public class Project {
     private String compilerType = "Orzo";
     private boolean generateNativePackage = false;
     private String toolToNativePackage = "jpackage";
-    private List<String> modules = new ArrayList<>();
     private List<String> nativePackages = new ArrayList<>();
+    private List<String> dependencies = new ArrayList<>();
+    private List<String> implementers = new ArrayList<>();
+    private List<String> modules = new ArrayList<>();
 
     public String replace(String message){
         return message
