@@ -51,10 +51,8 @@ public class JarUtils {
         Set<String> addedPath = new HashSet<>();
 
         for(File dir : directory) {
-            System.out.println(dir.getName());
             if(dir != null) {
                 for (File file : dir.listFiles()) {
-                    System.out.println(file.getName());
                     addFilesToJar(file, "", jarOutputStream, addedPath);
                 }
             }

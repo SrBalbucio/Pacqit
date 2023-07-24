@@ -255,7 +255,17 @@ public class ProjectBuild {
                 }
             }
         }
-        compiler.compile(getModuleSourcePath(module), getModuleLocalLibrariesPath(module), getModuleCompilePath(module), getJavaHome(), project.getJavaVersion());
+
+        BUILD_LOGGER.info("---------------------------------------------------------------------");
+        BUILD_LOGGER.info("### COMPILANDO IMPLEMENTER: "+module.getModuleName());
+        compiler.compile(
+                getModuleSourcePath(module),
+                getModuleLocalLibrariesPath(module),
+                getModuleCompilePath(module),
+                getJavaHome(),
+                project.getJavaVersion());
+        BUILD_LOGGER.info("---------------------------------------------------------------------");
+
         JarUtils.getJarFiles(getModuleLocalLibrariesPath(module)).forEach(l -> {
             try {
                 JarUtils.extractJar(l, getModuleGeneratedPath(module));
@@ -287,12 +297,15 @@ public class ProjectBuild {
             }
         }
 
+        BUILD_LOGGER.info("---------------------------------------------------------------------");
+        BUILD_LOGGER.info("### COMPILANDO IMPLEMENTER: "+module.getImplementerName());
         compiler.compile(
                 getImplementerSourcePath(module),
                 getImplementerLocalLibrariesPath(module),
                 getImplementerCompilePath(module),
                 getJavaHome(),
                 project.getJavaVersion());
+        BUILD_LOGGER.info("---------------------------------------------------------------------");
 
 
         JarUtils.getJarFiles(getImplementerLocalLibrariesPath(module)).forEach(l -> {
@@ -313,7 +326,7 @@ public class ProjectBuild {
                 getImplementerJAR(module).delete();
                 getImplementerJAR(module).createNewFile();
             }
-            Manifest manifest = new Manifest(module.getImplementerVersion(), module.getImplementerMainClass(), project.getJavaVersion());
+            Manifest manifest = new Manifest(module.getImplementerVersion(), project.getProjectPackage()+"."+module.getImplementerMainClass(), project.getJavaVersion());
             JarUtils.directoryToJar(getImplementerJAR(module), manifest,
                     getImplementerCompilePath(module), getImplementerResourcePath(module), getImplementerGeneratedPath(module));
         } catch (Exception e) {
@@ -360,7 +373,14 @@ public class ProjectBuild {
                 }
             }
         }
-        projectCompiler.compile(getSourcePath(), getLocalLibrariesPath(), getCompilePath(), getJavaHome(), project.getJavaVersion());
+        BUILD_LOGGER.info("---------------------------------------------------------------------");
+        BUILD_LOGGER.info("### COMPILANDO PROJETO: "+project.getName());
+        projectCompiler.compile(getSourcePath(),
+                getLocalLibrariesPath(),
+                getCompilePath(),
+                getJavaHome(),
+                project.getJavaVersion());
+        BUILD_LOGGER.info("---------------------------------------------------------------------");
         return true;
     }
 

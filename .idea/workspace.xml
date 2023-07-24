@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Atualizado gitignore;">
+    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Corrigido erro de compilação dos implementer;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fakeproject/Linux/src/main/java/org/examplo/linux/Main.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/fakeproject/Windows/src/main/java/org/example/windows/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/ArgParse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/ArgParse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/impl/JavaCCompiler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/impl/JavaCCompiler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/ProjectImplementer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/ProjectImplementer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/JarUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/JarUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -142,23 +138,7 @@
       <workItem from="1690214694570" duration="4393000" />
       <workItem from="1690219760395" duration="6257000" />
       <workItem from="1690231956413" duration="3554000" />
-      <workItem from="1690237445581" duration="3479000" />
-    </task>
-    <task id="LOCAL-00010" summary="Adicionado criação de manifest;&#10;Adicionado resources ao JAR;">
-      <option name="closed" value="true" />
-      <created>1689903246426</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1689903246426</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Corrigido erro de criação de processo;">
-      <option name="closed" value="true" />
-      <created>1689953713510</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1689953713510</updated>
+      <workItem from="1690237445581" duration="4192000" />
     </task>
     <task id="LOCAL-00012" summary="Adicionado novos comandos básicos;">
       <option name="closed" value="true" />
@@ -536,7 +516,23 @@
       <option name="project" value="LOCAL" />
       <updated>1690238261860</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="Corrigido erro de entry duplo;">
+      <option name="closed" value="true" />
+      <created>1690241044584</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1690241044584</updated>
+    </task>
+    <task id="LOCAL-00060" summary="Corrigido erro de compilação dos implementer;">
+      <option name="closed" value="true" />
+      <created>1690241075314</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1690241075315</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -558,8 +554,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Ignorar metodo main;" />
-    <MESSAGE value="Manifest funcional no obfuscador;" />
     <MESSAGE value="Ao clicar em OK o pacqit realmente fecha e sai;" />
     <MESSAGE value="Classes modificadas substituidas nos imports;" />
     <MESSAGE value="Removido menu principal antigo, agora é um menu em frame;" />
@@ -583,7 +577,9 @@
     <MESSAGE value="Corrigido bug do YAMl;" />
     <MESSAGE value="Removido Implementer Path;" />
     <MESSAGE value="Atualizado gitignore;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Atualizado gitignore;" />
+    <MESSAGE value="Corrigido erro de entry duplo;" />
+    <MESSAGE value="Corrigido erro de compilação dos implementer;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrigido erro de compilação dos implementer;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
