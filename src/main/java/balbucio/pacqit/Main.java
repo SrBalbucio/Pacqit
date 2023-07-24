@@ -5,6 +5,8 @@ import balbucio.pacqit.compiler.CompilerType;
 import balbucio.pacqit.logger.LoggerFormat;
 import balbucio.pacqit.model.Project;
 import balbucio.pacqit.compiler.ProjectBuild;
+import balbucio.pacqit.model.ProjectImplementer;
+import balbucio.pacqit.model.ProjectModule;
 import balbucio.pacqit.obfuscation.ProjectObfuscator;
 import balbucio.pacqit.page.MainPage;
 import de.milchreis.uibooster.UiBooster;
@@ -34,6 +36,8 @@ public class Main {
     public Logger LOGGER = Logger.getLogger("PACQIT");
     private ArgParse parse;
     private Project project;
+    private List<ProjectModule> modules;
+    private List<ProjectImplementer> implementers;
     private CommandManager commandManager;
     private ProjectBuild projectBuild;
     private UiBooster uiBooster;
@@ -49,9 +53,10 @@ public class Main {
         this.input = new Scanner(System.in);
         this.uiBooster = new UiBooster(UiBoosterOptions.Theme.DEFAULT, "/pacqit.png");
         this.commandManager = new CommandManager(this);
-
         this.project = Project.loadProject(parse.getProjectDir());
         if(project != null) {
+            this.modules = ProjectModule.getModulesInPath(parse.getProjectDir());
+            this.implementers = ProjectImplementer.getImplementersInPath(parse.getProjectDir());
             this.projectBuild = new ProjectBuild(project, parse, this);
             projectBuild.createPath();
         }
@@ -66,7 +71,6 @@ public class Main {
             builder.setCloseListener(e -> System.exit(0));
             Form f = builder.show();
         } else{
-
             new MainPage(this);
         }
     }
@@ -90,6 +94,18 @@ public class Main {
         project.setProjectPackage(form.getByIndex(1).asString());
         project.setMainClass(form.getByIndex(2).asString());
         projectBuild = new ProjectBuild(project, parse, this);
+        projectSettingsForm();
+    }
+
+    public void createImplementerForm(){
+        ProjectImplementer implementer = new ProjectImplementer();
+        Form form = uiBooster.createForm("Create Implementer")
+                .addText("What is the name of the Implementer?")
+                .addText("What will the name of the main class be? (Ex.: Main)")
+                .show();
+        implementer.setImplementerName(form.getByIndex(0).asString());
+        implementer.setImplementerMainClass(form.getByIndex(2).asString());
+
         projectSettingsForm();
     }
 
@@ -175,6 +191,14 @@ public class Main {
             JOptionPane.showMessageDialog(null, "Packit will generate a javac compiled JAR regardless of your choice of compiler " +
                     "if you decide to create a native installer and/or package.", "Warning!", JOptionPane.INFORMATION_MESSAGE);
         }
+    }
+
+    public ProjectModule getProjectModule(String name){
+        return modules.stream().filter(m -> m.getModuleName().equals(name)).findFirst().orElse(null);
+    }
+
+    public ProjectImplementer getProjectImplementer(String name){
+        return implementers.stream().filter(m -> m.getImplementerName().equals(name)).findFirst().orElse(null);
     }
 
     public static List<String> getCompilerNames(){
