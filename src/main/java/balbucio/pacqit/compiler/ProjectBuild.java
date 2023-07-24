@@ -11,6 +11,7 @@ import balbucio.pacqit.utils.JarUtils;
 import balbucio.pacqit.utils.PackageUtils;
 import de.milchreis.uibooster.components.WaitingDialog;
 import lombok.Data;
+import lombok.SneakyThrows;
 import org.apache.commons.lang3.SystemUtils;
 
 import java.io.BufferedReader;
@@ -119,6 +120,17 @@ public class ProjectBuild {
         }
     }
 
+    @SneakyThrows
+    public Compiler getCompiler(){
+        CompilerType type = CompilerType.JAVAC;
+        for (CompilerType value : CompilerType.values()) {
+            if(value.getName().equalsIgnoreCase(project.getCompilerType())){
+                type = value;
+            }
+        }
+        return (Compiler) type.getCompiler().getConstructor(ProjectBuild.class).newInstance(this);
+    }
+
     public ProjectObfuscator createObsfucator(){
         return new ProjectObfuscator(project, this, parse, app);
     }
@@ -129,85 +141,8 @@ public class ProjectBuild {
      * Este método utiliza o javac para compilar as classes
      */
     public boolean compileClasses(){
-        long init = System.currentTimeMillis();
-        createPath();
-        BUILD_LOGGER.info("Starting to compile the project.");
-        // pega todos os packages e classes do seu projeto para criar o classpath
-        List<String> classes = ClasseUtils.getClassesInDirectory(getSourcePath());
-        List<String> packages = PackageUtils.getPackagesInDirectory(getSourcePath());
-
-        // process java file
-        BUILD_LOGGER.info("Formatting and checking java classes.");
-
-        // gera o comando de classpath adicionando todas as dependencias e packages
-        BUILD_LOGGER.info("Preparing the javac.");
-        StringBuilder classpath = new StringBuilder();
-        classpath.append("-cp \".");
-        String separator = SystemUtils.IS_OS_LINUX || SystemUtils.IS_OS_MAC ? ":" : ";";
-        packages.forEach(p -> classpath.append(separator+getSourcePath().getAbsolutePath()+"/"+p));
-        JarUtils.getJars(getLocalLibrariesPath()).forEach(j -> classpath.append(separator+j));
-        classpath.append("\"");
-
-        // cria o parametro de arquivos para compilação
-        StringBuilder classesToCompile = new StringBuilder();
-        AtomicInteger va = new AtomicInteger(0);
-
-        classes.forEach(c -> {
-            if(va.get() > 0){
-                classesToCompile.append(" \""+c+"\"");
-            } else{
-                classesToCompile.append("\""+c+"\"");
-            }
-            va.incrementAndGet();
-        });
-
-        // cria o comando para o local do java
-        StringBuilder cmdFile = new StringBuilder();
-        cmdFile.append("\"");
-        cmdFile.append(getJavaHome().getAbsolutePath());
-        cmdFile.append("/bin/javac.exe");
-        cmdFile.append("\"");
-
-        // finalmente cria o comando final
-        StringBuilder command = new StringBuilder();
-        command.append(cmdFile.toString());
-        command.append(" -target "+project.getJavaVersion());
-        if(parse.isCompileDebug()) {
-            command.append(" -verbose");
-        }
-        command.append(" -d \""+getCompilePath().getAbsolutePath()+"\"");
-        command.append(" -sourcepath \""+getSourcePath().getAbsolutePath()+"\"");
-        command.append(" "+classpath.toString()+"");
-        command.append(" "+classesToCompile.toString());
-
-        // compile classes
-        BUILD_LOGGER.info("Compiling and writing classes with javac...");
-        try {
-            ProcessBuilder builder = new ProcessBuilder(command.toString());
-
-            if(!getJavaHome().exists()){
-                BUILD_LOGGER.severe("The specified JAVA_HOME could not be found! Check your Java installation.");
-                return false;
-            }
-
-            if(!new File(getJavaHome(), "bin/javac.exe").exists()){
-                BUILD_LOGGER.severe("Could not find javac.exe within the specified JAVA_HOME, this is an installation problem, please reinstall Java and try again.");
-                return false;
-            }
-
-            // configura o processo
-            builder.redirectOutput(parse.isCompileDebug() ? ProcessBuilder.Redirect.INHERIT : ProcessBuilder.Redirect.DISCARD);
-            builder.redirectErrorStream(true);
-            builder.directory(getSourcePath());
-            Process process = builder.start();
-            int exitcode = process.waitFor();
-            BUILD_LOGGER.info("Compilation finished in "+(System.currentTimeMillis() - init)+"ms! (exit code "+exitcode+")");
-            return true;
-        } catch (Exception e){
-            e.printStackTrace();
-            BUILD_LOGGER.severe("Could not run javac, check your Java installation!");
-            return false;
-        }
+        Compiler c = getCompiler();
+        return c.compile();
     }
 
     /**
