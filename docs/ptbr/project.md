@@ -83,3 +83,6 @@ eles tem total acesso a módulos parentes normais, isso significa que o Desktop 
 ao módulo Common mas não ao módulo Android e o mais importante, os módulos implementadores não só
 tem acesso a módulos parentes, como também os considera "irmãos" agregando seu código a si próprio.
 Ou seja, o Common tem total acesso aos módulos implementadores parente, pois ele considera seu próprio código.
+
+Para o projeto principal o módulo implementador é só mais um módulo filho, ou seja, ele segue as regras
+dele e ignora completamente as configurações personalizadas do implementador;
