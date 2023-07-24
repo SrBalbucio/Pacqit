@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Classes modificadas substituidas nos imports;">
-      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/ProjectModule.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/page/MainPage.java" afterDir="false" />
+    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Removido menu principal antigo, agora é um menu em frame;">
+      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/CompilerType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/Project.java" afterDir="false" />
     </list>
@@ -22,6 +20,7 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -114,7 +113,8 @@
       <workItem from="1689972981657" duration="3868000" />
       <workItem from="1690038100519" duration="25897000" />
       <workItem from="1690074715847" duration="6456000" />
-      <workItem from="1690142986783" duration="4260000" />
+      <workItem from="1690142986783" duration="4670000" />
+      <workItem from="1690156252908" duration="3874000" />
     </task>
     <task id="LOCAL-00001" summary="Sistema para compilar;">
       <option name="closed" value="true" />
@@ -404,7 +404,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690080724383</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Removido menu principal antigo, agora é um menu em frame;">
+      <option name="closed" value="true" />
+      <created>1690147543884</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1690147543884</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -426,7 +434,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Adicionado novos comandos básicos;" />
     <MESSAGE value="Código otimizado" />
     <MESSAGE value="Comando de clean adicionado;" />
     <MESSAGE value="Sistema de compilação corrigido e funcionando." />
@@ -451,7 +458,8 @@
     <MESSAGE value="Manifest funcional no obfuscador;" />
     <MESSAGE value="Ao clicar em OK o pacqit realmente fecha e sai;" />
     <MESSAGE value="Classes modificadas substituidas nos imports;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Classes modificadas substituidas nos imports;" />
+    <MESSAGE value="Removido menu principal antigo, agora é um menu em frame;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removido menu principal antigo, agora é um menu em frame;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

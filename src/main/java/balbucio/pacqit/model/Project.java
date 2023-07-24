@@ -39,7 +39,11 @@ public class Project {
     private String jarName = "${project.name}-${project.version}";
     private String JAVA_HOME = System.getProperty("java.home");
     private String javaVersion = "1.8";
+    private String compilerType = "Orzo";
+    private boolean generateNativePackage = false;
+    private String toolToNativePackage = "jpackage";
     private List<String> modules = new ArrayList<>();
+    private List<String> nativePackages = new ArrayList<>();
 
     public String replace(String message){
         return message

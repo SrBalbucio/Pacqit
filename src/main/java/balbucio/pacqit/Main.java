@@ -1,6 +1,7 @@
 package balbucio.pacqit;
 
 import balbucio.pacqit.command.CommandManager;
+import balbucio.pacqit.compiler.CompilerType;
 import balbucio.pacqit.logger.LoggerFormat;
 import balbucio.pacqit.model.Project;
 import balbucio.pacqit.compiler.ProjectBuild;
@@ -12,7 +13,11 @@ import de.milchreis.uibooster.model.FormBuilder;
 import de.milchreis.uibooster.model.UiBoosterOptions;
 import lombok.Data;
 
+import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Logger;
@@ -61,27 +66,7 @@ public class Main {
             builder.setCloseListener(e -> System.exit(0));
             Form f = builder.show();
         } else{
-            /**
-            builder.addLabel("Project Name: "+project.getName());
-            builder.addButton("Open settings", () -> projectSettingsForm());
-            builder.addButton("Open Dependencies Settings", () -> {});
-            builder.addButton("Build", () -> projectBuild.buildProject(true));
-            builder.addButton("Build and run", () -> {
-                boolean build = projectBuild.buildProject(true);
-                if(build) {
-                    projectBuild.run(true);
-                }
-            });
-            builder.addButton("Build and obfuscate (beta)", () -> {
-                boolean build = projectBuild.buildProject(true);
-                if(build){
-                    ProjectObfuscator obsfucator = projectBuild.createObsfucator();
-                    obsfucator.build(true);
-                }
-            });
-            builder.addButton("Convert to nasm and build", () -> {});
-            builder.addButton("Clean", () -> projectBuild.clean());
-            builder.setID("menu");**/
+
             new MainPage(this);
         }
     }
@@ -90,9 +75,7 @@ public class Main {
         uiBooster.showConfirmDialog(
                 "There is no project in this folder, do you want to create it now?",
                 "Project not exists",
-                () -> {
-                    createProjectForm();
-                },
+                this::createProjectForm,
                 () -> {});
     }
 
@@ -117,8 +100,8 @@ public class Main {
                 .addText("Project Package:", project.getProjectPackage())
                 .addText("Project Version:", project.getVersion())
                 .addText("Main Class:", project.getMainClass())
-                .addButton("Path Configuration", () -> projectPathSettingsForm())
-                .addButton("Build Configuration", () -> projectCompileSettingsForm());
+                .addButton("Path Configuration", this::projectPathSettingsForm)
+                .addButton("Build Configuration", this::projectCompileSettingsForm);
         f = form.show();
         project.setName(f.getByIndex(0).asString());
         project.setProjectPackage(f.getByIndex(1).asString());
@@ -157,6 +140,8 @@ public class Main {
     public void projectCompileSettingsForm(){
         Form f = uiBooster.createForm("Project Build Configuration")
                 .addCheckbox("Executable Jar?", project.isExecutableJar())
+                .addLabel("Selected Compiler: "+project.getCompilerType())
+                .addSelection("Available compilers:", getCompilerNames())
                 .addText("Jar Name:", project.getJarName())
                 .addText("Java Version", project.getJavaVersion())
                 .addText("Java Home:", project.getJAVA_HOME())
@@ -164,13 +149,47 @@ public class Main {
                     uiBooster.showInfoDialog("Select the folder where Java is installed. Do not select the bin folder.");
                     project.setJAVA_HOME(uiBooster.showDirectorySelection().getAbsolutePath());
                     project.save(parse.getProjectDir());
-                }).show();
-        f.getByIndex(3).setValue(project.getJAVA_HOME());
+                })
+                .addButton("Open Native Settings", this::nativeAppSettingsForm).show();
+        f.getByIndex(5).setValue(project.getJAVA_HOME());
         project.setExecutableJar((boolean) f.getByIndex(0).getValue());
-        project.setJarName(f.getByIndex(1).asString());
-        project.setJavaVersion(f.getByIndex(2).asString());
-        project.setJAVA_HOME(f.getByIndex(3).asString());
+        project.setCompilerType(f.getByIndex(2).asString());
+        project.setJarName(f.getByIndex(3).asString());
+        project.setJavaVersion(f.getByIndex(4).asString());
+        project.setJAVA_HOME(f.getByIndex(5).asString());
         project.save(parse.getProjectDir());
         projectBuild.createPath();
+    }
+
+    public void nativeAppSettingsForm(){
+        Form f = uiBooster.createForm("Native Installer and Package Settings")
+                .addCheckbox("Create installer and native packages for this project?", project.isGenerateNativePackage())
+                .addLabel("Selected tool: "+project.getToolToNativePackage())
+                .addSelection("Available tools:", getPackageTools())
+                .addSelectionWithCheckboxes("Installers available:", getPackageNames(), project.getNativePackages())
+                .show();
+        project.setGenerateNativePackage((boolean) f.getByIndex(0).getValue());
+        project.setToolToNativePackage(f.getByIndex(2).asString());
+        project.setNativePackages((List<String>) f.getByIndex(3).getValue());
+        if(project.isGenerateNativePackage()){
+            JOptionPane.showMessageDialog(null, "Packit will generate a javac compiled JAR regardless of your choice of compiler " +
+                    "if you decide to create a native installer and/or package.", "Warning!", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    public static List<String> getCompilerNames(){
+        List<String> names = new ArrayList<>();
+        for (CompilerType value : CompilerType.values()) {
+            names.add(value.getName());
+        }
+        return names;
+    }
+
+    public static List<String> getPackageNames(){
+        return Arrays.asList("EXE", "MSI", "DEB", "RPM", "PKG", "DMG", "APP-IMAGE");
+    }
+
+    public static List<String> getPackageTools(){
+        return Arrays.asList("GraalVM Native", "jpackage");
     }
 }
