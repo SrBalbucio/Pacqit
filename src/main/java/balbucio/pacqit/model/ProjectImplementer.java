@@ -1,5 +1,8 @@
 package balbucio.pacqit.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
@@ -10,8 +13,12 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProjectImplementer {
 
+    private String implementerPath;
     private String implementerName;
     private String implementerPackage;
     private String implementerVersion;

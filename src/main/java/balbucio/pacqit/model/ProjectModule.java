@@ -21,8 +21,10 @@ public class ProjectModule {
     private String modulePath;
     private String moduleName;
     private String moduleVersion;
+    private String moduleJarName;
+    private List<String> modules;
     private List<String> dependencies;
-    
+
     public static List<ProjectModule> getModulesInPath(File dir){
         List<ProjectModule> modules = new ArrayList<>();
         for (File file : dir.listFiles()) {
@@ -44,7 +46,7 @@ public class ProjectModule {
         }
         return modules;
     }
-    
+
     private static boolean hasProjectModuleInPath(File dir){
         boolean has = false;
         if(dir.listFiles() != null) {
@@ -56,5 +58,5 @@ public class ProjectModule {
         }
         return has;
     }
-    
+
 }

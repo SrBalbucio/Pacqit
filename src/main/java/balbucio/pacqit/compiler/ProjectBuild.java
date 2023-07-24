@@ -5,6 +5,8 @@ import balbucio.pacqit.Main;
 import balbucio.pacqit.logger.BuildLoggerFormat;
 import balbucio.pacqit.model.Manifest;
 import balbucio.pacqit.model.Project;
+import balbucio.pacqit.model.ProjectImplementer;
+import balbucio.pacqit.model.ProjectModule;
 import balbucio.pacqit.obfuscation.ProjectObfuscator;
 import balbucio.pacqit.utils.ClasseUtils;
 import balbucio.pacqit.utils.JarUtils;
@@ -12,18 +14,14 @@ import balbucio.pacqit.utils.PackageUtils;
 import de.milchreis.uibooster.components.WaitingDialog;
 import lombok.Data;
 import lombok.SneakyThrows;
-import org.apache.commons.lang3.SystemUtils;
-
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStreamReader;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.jar.JarFile;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  * É nesta classe onde todas as ações relacionadas a compilação e build são feitas
@@ -120,19 +118,112 @@ public class ProjectBuild {
         }
     }
 
+    /**
+     * MODULE PATHS
+     */
+    public File getModuleSourcePath(ProjectModule module){
+        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getModulePath()+project.getSourcePath()) : new File(module.getModulePath()+project.getSourcePath());
+    }
+
+    public File getModuleResourcePath(ProjectModule module){
+        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getModulePath()+project.getResourcePath()) : new File(module.getModulePath()+project.getResourcePath());
+    }
+
+    public File getModuleLocalLibrariesPath(ProjectModule module){
+        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getModulePath()+project.getLocalLibrariesPath()) : new File(module.getModulePath()+project.getLocalLibrariesPath());
+    }
+
+    public File getModuleBuildPluginsPath(ProjectModule module){
+        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getModulePath()+project.getBuildPluginsPath()) : new File(module.getModulePath()+project.getBuildPluginsPath());
+    }
+    
+    public File getModuleCompilePath(ProjectModule module){
+        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getModulePath()+project.getCompílePath()) : new File(module.getModulePath()+project.getCompílePath());
+    }
+
+    public File getModuleJAR(ProjectModule module){
+        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getModulePath()+project.getOutputPath()+project.getJarName()) : new File(module.getModulePath()+project.getOutputPath()+module.getModuleJarName());
+    }
+
+    /**
+     * IMPLEMENTERS
+     */
+
+    public File getImplementerGeneratedPath(ProjectImplementer module){
+        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getImplementerPath()+project.getCompílePath()) : new File(module.getImplementerPath()+project.getCompílePath());
+    }
+
+    public File getImplementerSourcePath(ProjectImplementer module){
+        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getImplementerPath()+project.getSourcePath()) : new File(module.getImplementerPath()+project.getSourcePath());
+    }
+
+    public File getImplementerResourcePath(ProjectImplementer module){
+        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getImplementerPath()+project.getResourcePath()) : new File(module.getImplementerPath()+project.getResourcePath());
+    }
+
+    public File getImplementerLocalLibrariesPath(ProjectImplementer module){
+        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getImplementerPath()+project.getLocalLibrariesPath()) : new File(module.getImplementerPath()+project.getLocalLibrariesPath());
+    }
+
+    public File getImplementerBuildPluginsPath(ProjectImplementer module){
+        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getImplementerPath()+project.getBuildPluginsPath()) : new File(module.getImplementerPath()+project.getBuildPluginsPath());
+    }
+
+    public File getImplementerCompilePath(ProjectImplementer module){
+        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getImplementerPath()+project.getCompílePath()) : new File(module.getImplementerPath()+project.getCompílePath());
+
+    }
+
+
     @SneakyThrows
-    public Compiler getCompiler(){
+    public Compiler getCompiler(String name){
         CompilerType type = CompilerType.JAVAC;
         for (CompilerType value : CompilerType.values()) {
-            if(value.getName().equalsIgnoreCase(project.getCompilerType())){
+            if(value.getName().equalsIgnoreCase(name)){
                 type = value;
             }
         }
-        return (Compiler) type.getCompiler().getConstructor(ProjectBuild.class).newInstance(this);
+        return (Compiler) type.getCompiler()
+                .getConstructor(ProjectBuild.class)
+                .newInstance(this);
     }
 
     public ProjectObfuscator createObsfucator(){
         return new ProjectObfuscator(project, this, parse, app);
+    }
+
+    public List<ProjectModule> getModulesFromModule(ProjectModule module){
+        return app.getModules().stream().filter(m -> module.getModules().contains(m.getModuleName())).collect(Collectors.toList());
+    }
+
+
+    public List<String> getClassesFromModule(ProjectModule module){
+        List<String> classes = new ArrayList<>();
+        getModulesFromModule(module).forEach(m -> {
+            for (String s : ClasseUtils.getClassesInDirectory(getModuleSourcePath(module))) {
+                // FakeProject/Common = ""
+                // FakeProject/Common/Utils = "Common"
+                // FakeProject/Common/Utils/Bytecode = "Common/Utils"
+                classes.add(module.getModulePath()+"/"+s);
+            }
+        });
+        return classes;
+    }
+
+    public void compileModule(Compiler compiler, ProjectModule module){
+        for(ProjectModule smodule : getModulesFromModule(module)){
+            compileModule(compiler, smodule);
+            if(getModuleJAR(smodule).exists()){
+                BUILD_LOGGER.info(smodule.getModuleName()+"Module JAR not found, was Pacqit able to compile the module?");
+                try {
+                    Files.copy(getModuleSourcePath(smodule).toPath(), new File(getModuleLocalLibrariesPath(module), getModuleJAR(smodule).getName()).toPath())
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        compiler.compile(getModuleSourcePath(module), getModuleLocalLibrariesPath(module), getModuleCompilePath(module), getJavaHome(), project.getJavaVersion());
+
     }
 
     /**
@@ -141,8 +232,15 @@ public class ProjectBuild {
      * Este método utiliza o javac para compilar as classes
      */
     public boolean compileClasses(){
-        Compiler c = getCompiler();
-        return c.compile();
+        Compiler projectCompiler = getCompiler(project.getCompilerType());
+        for (String module : project.getModules()) {
+            List<String> classes = new ArrayList<>();
+            ProjectModule m = app.getProjectModule(module);
+            if(m != null){
+
+            }
+        }
+        return false;
     }
 
     /**
