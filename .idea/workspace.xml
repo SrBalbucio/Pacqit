@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Removido menu principal antigo, agora é um menu em frame;">
-      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/CompilerType.java" afterDir="false" />
+    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Removido buildJAR do Compiler;">
+      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/PacqitApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/command/CommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/command/CommandManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,9 +18,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Interface" />
         <option value="Class" />
-        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -29,6 +29,9 @@
   </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="lpunr5r2" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2SoXB42A8jv5kCqeZ4KPetA7XHW" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -52,7 +55,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -64,7 +67,21 @@
       <recent name="C:\Users\srbal\Documents\Pacqit\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.Main No Gui">
+    <configuration name="Main No Gui" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="balbucio.pacqit.Main" />
+      <module name="Pacqit" />
+      <option name="PROGRAM_PARAMETERS" value="--projectdir=C:\Users\srbal\Documents\Pacqit\fakeproject --console-only" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="balbucio.pacqit.obfuscation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="balbucio.pacqit.Main" />
       <module name="Pacqit" />
@@ -87,6 +104,7 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.Main No Gui" />
       <item itemvalue="Application.Main" />
       <item itemvalue="Application.ProcessTest" />
     </list>
@@ -114,15 +132,10 @@
       <workItem from="1690038100519" duration="25897000" />
       <workItem from="1690074715847" duration="6456000" />
       <workItem from="1690142986783" duration="4670000" />
-      <workItem from="1690156252908" duration="3874000" />
-    </task>
-    <task id="LOCAL-00001" summary="Sistema para compilar;">
-      <option name="closed" value="true" />
-      <created>1689876736643</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1689876736643</updated>
+      <workItem from="1690156252908" duration="5102000" />
+      <workItem from="1690203260289" duration="8086000" />
+      <workItem from="1690214694570" duration="4393000" />
+      <workItem from="1690219760395" duration="6011000" />
     </task>
     <task id="LOCAL-00002" summary="Adicionado sistema de compilação;&#10;Adicionado settings frame;&#10;Adicionado create project frame;">
       <option name="closed" value="true" />
@@ -412,7 +425,111 @@
       <option name="project" value="LOCAL" />
       <updated>1690147543884</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Adicionado opção de selecionar um outro tipo de compilador;&#10;Adicionado opção de criar um native package ou installer;">
+      <option name="closed" value="true" />
+      <created>1690160855403</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1690160855403</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Adicionado implementação JavaC;">
+      <option name="closed" value="true" />
+      <created>1690161240982</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1690161240982</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Adicionado implementação do Orzo;&#10;Removido lógica de compilação do ProjectBuild e atribuido para o compilador escolhido;">
+      <option name="closed" value="true" />
+      <created>1690161596661</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1690161596661</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Adicionado docs dos projetos;">
+      <option name="closed" value="true" />
+      <created>1690215450043</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1690215450043</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Adicionado ProjectModule e ProjectImplementer;">
+      <option name="closed" value="true" />
+      <created>1690215467425</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1690215467425</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Modificações no sistema de build;">
+      <option name="closed" value="true" />
+      <created>1690222397870</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1690222397870</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Comando de criação de modulo;">
+      <option name="closed" value="true" />
+      <created>1690222416274</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1690222416274</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Atualização no compilador;">
+      <option name="closed" value="true" />
+      <created>1690222434272</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1690222434272</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Adição do docs;">
+      <option name="closed" value="true" />
+      <created>1690222448428</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1690222448428</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Adição do comando para criar modulo implementador;">
+      <option name="closed" value="true" />
+      <created>1690225114631</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1690225114631</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Modificações no sistema de compilação para se adaptar aos modulos e implementadores;">
+      <option name="closed" value="true" />
+      <created>1690225145350</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1690225145350</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Adição do menu de criação do implementador;">
+      <option name="closed" value="true" />
+      <created>1690225174581</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1690225174581</updated>
+    </task>
+    <task id="LOCAL-00050" summary="Removido buildJAR do Compiler;">
+      <option name="closed" value="true" />
+      <created>1690225223903</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1690225223904</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -434,19 +551,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Código otimizado" />
-    <MESSAGE value="Comando de clean adicionado;" />
-    <MESSAGE value="Sistema de compilação corrigido e funcionando." />
-    <MESSAGE value="Adicionado comando para executar o app;" />
-    <MESSAGE value="Corrigido erro do manifest;" />
-    <MESSAGE value="Agora o run espera o processo ser finalizado;" />
-    <MESSAGE value="Adicionado build run, para buildar e executar;" />
-    <MESSAGE value="Correção do sistema de comandos;" />
-    <MESSAGE value="Adicionado opções ao GUI;" />
-    <MESSAGE value="Adicionado gui de log no build project;" />
-    <MESSAGE value="Código otimizado e limpo;" />
-    <MESSAGE value="Adicionado alguns comentários ao código;" />
-    <MESSAGE value="Adicionado analisador e modificador de bytecode;" />
     <MESSAGE value="Corrigido bugs do JarLoader;" />
     <MESSAGE value="Adicionado novas pastas ao menu;" />
     <MESSAGE value="Removido load no construtor do JarLoader;" />
@@ -459,7 +563,20 @@
     <MESSAGE value="Ao clicar em OK o pacqit realmente fecha e sai;" />
     <MESSAGE value="Classes modificadas substituidas nos imports;" />
     <MESSAGE value="Removido menu principal antigo, agora é um menu em frame;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removido menu principal antigo, agora é um menu em frame;" />
+    <MESSAGE value="Adicionado opção de selecionar um outro tipo de compilador;&#10;Adicionado opção de criar um native package ou installer;" />
+    <MESSAGE value="Adicionado implementação JavaC;" />
+    <MESSAGE value="Adicionado implementação do Orzo;&#10;Removido lógica de compilação do ProjectBuild e atribuido para o compilador escolhido;" />
+    <MESSAGE value="Adicionado docs dos projetos;" />
+    <MESSAGE value="Adicionado ProjectModule e ProjectImplementer;" />
+    <MESSAGE value="Modificações no sistema de build;" />
+    <MESSAGE value="Comando de criação de modulo;" />
+    <MESSAGE value="Atualização no compilador;" />
+    <MESSAGE value="Adição do docs;" />
+    <MESSAGE value="Adição do comando para criar modulo implementador;" />
+    <MESSAGE value="Modificações no sistema de compilação para se adaptar aos modulos e implementadores;" />
+    <MESSAGE value="Adição do menu de criação do implementador;" />
+    <MESSAGE value="Removido buildJAR do Compiler;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removido buildJAR do Compiler;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

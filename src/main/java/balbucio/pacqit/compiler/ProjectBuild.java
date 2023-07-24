@@ -116,6 +116,23 @@ public class ProjectBuild {
         if(!getLogsPath().exists()){
             getLogsPath().mkdirs();
         }
+        app.getImplementers().forEach(i -> {
+            getImplementerSourcePath(i).mkdirs();
+            getImplementerResourcePath(i).mkdirs();
+            getImplementerGeneratedPath(i).mkdirs();
+            getImplementerCompilePath(i).mkdirs();
+            getImplementerBuildPluginsPath(i).mkdirs();
+            getImplementerLocalLibrariesPath(i).mkdirs();
+        });
+
+        app.getModules().forEach(m -> {
+            getModuleSourcePath(m).mkdirs();
+            getModuleResourcePath(m).mkdirs();
+            getModuleCompilePath(m).mkdirs();
+            getModuleGeneratedPath(m).mkdirs();
+            getModuleLocalLibrariesPath(m).mkdirs();
+            getModuleBuildPluginsPath(m).mkdirs();
+        });
     }
 
     /**

@@ -104,9 +104,8 @@ public class Main {
                 .addText("What will the name of the main class be? (Ex.: Main)")
                 .show();
         implementer.setImplementerName(form.getByIndex(0).asString());
-        implementer.setImplementerMainClass(form.getByIndex(2).asString());
-
-        projectSettingsForm();
+        implementer.setImplementerMainClass(form.getByIndex(1).asString());
+        implementers.add(implementer);
     }
 
     public void projectSettingsForm(){

@@ -12,5 +12,6 @@ public class CreateImplementerCommand implements Command {
     @Override
     public void run(String[] args, Main app) {
         app.createImplementerForm();
+        app.getProjectBuild().createPath();
     }
 }

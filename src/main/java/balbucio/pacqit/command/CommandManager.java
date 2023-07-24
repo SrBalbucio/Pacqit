@@ -19,6 +19,8 @@ public class CommandManager {
         commandList.add(new ExitCommand());
         commandList.add(new CleanCommand());
         commandList.add(new RunCommand());
+        commandList.add(new CreateModuleCommand());
+        commandList.add(new CreateImplementerCommand());
     }
 
     public void resolve(String message){
