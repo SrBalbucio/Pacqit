@@ -43,7 +43,7 @@ public class ProjectModule {
                         File configFile = new File(file, "module-config.yml");
                         var loaderoptions = new LoaderOptions();
                         TagInspector taginspector =
-                                tag -> tag.getClassName().equals(Project.class.getName());
+                                tag -> tag.getClassName().equals(ProjectModule.class.getName());
                         loaderoptions.setTagInspector(taginspector);
                         Yaml yml = new Yaml(new Constructor(ProjectModule.class, loaderoptions));
                         modules.add(yml.load(new FileInputStream(configFile)));

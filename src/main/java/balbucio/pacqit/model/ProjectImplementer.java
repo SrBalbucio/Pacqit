@@ -51,7 +51,7 @@ public class ProjectImplementer {
                         File configFile = new File(file, "implementer-config.yml");
                         var loaderoptions = new LoaderOptions();
                         TagInspector taginspector =
-                                tag -> tag.getClassName().equals(Project.class.getName());
+                                tag -> tag.getClassName().equals(ProjectImplementer.class.getName());
                         loaderoptions.setTagInspector(taginspector);
                         Yaml yml = new Yaml(new Constructor(ProjectImplementer.class, loaderoptions));
                         modules.add(yml.load(new FileInputStream(configFile)));
