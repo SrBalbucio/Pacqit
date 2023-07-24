@@ -22,7 +22,6 @@ import java.util.List;
 public class ProjectImplementer {
 
     private String implementerName = "Unknown";
-    private String implementerPackage = "org.examplo";
     private String implementerVersion = "1.0-SNAPSHOT";
     private String implementerMainClass = "Main";
     private String implementerJarName = "${project.name}-${project.version}";

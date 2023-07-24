@@ -4,13 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Corrigido bug do YAMl;">
+    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Atualizado gitignore;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fakeproject/Linux/src/main/java/org/examplo/linux/Main.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/fakeproject/Windows/src/main/java/org/example/windows/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/ArgParse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/ArgParse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/impl/JavaCCompiler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/impl/JavaCCompiler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/ProjectImplementer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/ProjectImplementer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/JarUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/JarUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,23 +142,7 @@
       <workItem from="1690214694570" duration="4393000" />
       <workItem from="1690219760395" duration="6257000" />
       <workItem from="1690231956413" duration="3554000" />
-      <workItem from="1690237445581" duration="488000" />
-    </task>
-    <task id="LOCAL-00008" summary="Divido config menu em vários;">
-      <option name="closed" value="true" />
-      <created>1689889299390</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1689889299390</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Corrigido erro de index do menu;">
-      <option name="closed" value="true" />
-      <created>1689889513560</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1689889513560</updated>
+      <workItem from="1690237445581" duration="3479000" />
     </task>
     <task id="LOCAL-00010" summary="Adicionado criação de manifest;&#10;Adicionado resources ao JAR;">
       <option name="closed" value="true" />
@@ -533,7 +520,23 @@
       <option name="project" value="LOCAL" />
       <updated>1690234213405</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="Removido Implementer Path;">
+      <option name="closed" value="true" />
+      <created>1690238216414</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1690238216415</updated>
+    </task>
+    <task id="LOCAL-00058" summary="Atualizado gitignore;">
+      <option name="closed" value="true" />
+      <created>1690238261860</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1690238261860</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -555,8 +558,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Corrigido obfuscação;" />
-    <MESSAGE value="Metodo para criar jar obfuscada criado;" />
     <MESSAGE value="Ignorar metodo main;" />
     <MESSAGE value="Manifest funcional no obfuscador;" />
     <MESSAGE value="Ao clicar em OK o pacqit realmente fecha e sai;" />
@@ -580,7 +581,9 @@
     <MESSAGE value="Corrigido o getPath do Implementer;" />
     <MESSAGE value="Corrigido bug do implementer não compilar;" />
     <MESSAGE value="Corrigido bug do YAMl;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrigido bug do YAMl;" />
+    <MESSAGE value="Removido Implementer Path;" />
+    <MESSAGE value="Atualizado gitignore;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Atualizado gitignore;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

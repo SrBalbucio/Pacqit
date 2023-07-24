@@ -32,6 +32,10 @@ public class JavaCCompiler implements Compiler {
         List<String> classes = ClasseUtils.getClassesInDirectory(source);
         List<String> packages = PackageUtils.getPackagesInDirectory(source);
 
+        if(classes.isEmpty()){
+            return true;
+        }
+
         // process java file
         BUILD_LOGGER.info("Formatting and checking java classes.");
 

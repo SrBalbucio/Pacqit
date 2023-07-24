@@ -108,7 +108,7 @@ public class ArgParse {
                     while (app.getInput().hasNextLine()) {
                         app.getCommandManager().resolve(app.getInput().nextLine());
                         app.LOGGER.info("Pacqit is waiting for commands:");
-                        System.out.print(">");
+                        System.out.print("> ");
                     }
                 }
             }

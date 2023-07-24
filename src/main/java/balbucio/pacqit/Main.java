@@ -103,13 +103,15 @@ public class Main {
                 .addText("What is the name of the Implementer?")
                 .addText("What will the name of the main class be? (Ex.: Main)")
                 .show();
-        implementer.setImplementerName(form.getByIndex(0).asString());
-        implementer.setImplementerMainClass(form.getByIndex(1).asString());
-        implementers.add(implementer);
-        projectBuild.createPath();
-        implementer.save(parse.getProjectDir());
-        project.getImplementers().add(implementer.getImplementerName());
-        project.save(parse.getProjectDir());
+        if(form.getByIndex(0).asString() != null && !form.getByIndex(0).asString().isEmpty()) {
+            implementer.setImplementerName(form.getByIndex(0).asString());
+            implementer.setImplementerMainClass(form.getByIndex(1).asString());
+            implementers.add(implementer);
+            projectBuild.createPath();
+            implementer.save(parse.getProjectDir());
+            project.getImplementers().add(implementer.getImplementerName());
+            project.save(parse.getProjectDir());
+        }
     }
 
     public void projectSettingsForm(){
