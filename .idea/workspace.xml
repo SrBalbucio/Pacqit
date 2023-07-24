@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Removido buildJAR do Compiler;">
-      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/PacqitApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/command/CommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/command/CommandManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" afterDir="false" />
-    </list>
+    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Implementado Implementers e Modules;" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -135,15 +130,7 @@
       <workItem from="1690156252908" duration="5102000" />
       <workItem from="1690203260289" duration="8086000" />
       <workItem from="1690214694570" duration="4393000" />
-      <workItem from="1690219760395" duration="6011000" />
-    </task>
-    <task id="LOCAL-00002" summary="Adicionado sistema de compilação;&#10;Adicionado settings frame;&#10;Adicionado create project frame;">
-      <option name="closed" value="true" />
-      <created>1689885422426</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1689885422426</updated>
+      <workItem from="1690219760395" duration="6257000" />
     </task>
     <task id="LOCAL-00003" summary="Adicionado sistema de commands;">
       <option name="closed" value="true" />
@@ -529,7 +516,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690225223904</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Implementado Implementers e Modules;">
+      <option name="closed" value="true" />
+      <created>1690225961696</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1690225961696</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -551,7 +546,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Corrigido bugs do JarLoader;" />
     <MESSAGE value="Adicionado novas pastas ao menu;" />
     <MESSAGE value="Removido load no construtor do JarLoader;" />
     <MESSAGE value="Correção de bugs;" />
@@ -576,7 +570,8 @@
     <MESSAGE value="Modificações no sistema de compilação para se adaptar aos modulos e implementadores;" />
     <MESSAGE value="Adição do menu de criação do implementador;" />
     <MESSAGE value="Removido buildJAR do Compiler;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removido buildJAR do Compiler;" />
+    <MESSAGE value="Implementado Implementers e Modules;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementado Implementers e Modules;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
