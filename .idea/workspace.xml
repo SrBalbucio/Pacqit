@@ -4,8 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Quando o createImplementer for finalizado ele gera as pastas;">
+    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Corrigido o getPath do Implementer;">
+      <change afterPath="$PROJECT_DIR$/fakeproject/Linux/src/main/java/org/examplo/linux/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fakeproject/Windows/src/main/java/org/example/windows/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/ProjectImplementer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/ProjectImplementer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/ProjectModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/ProjectModule.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,23 +139,7 @@
       <workItem from="1690203260289" duration="8086000" />
       <workItem from="1690214694570" duration="4393000" />
       <workItem from="1690219760395" duration="6257000" />
-      <workItem from="1690231956413" duration="800000" />
-    </task>
-    <task id="LOCAL-00004" summary="Atualização dos formatadores de log;">
-      <option name="closed" value="true" />
-      <created>1689888337271</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1689888337271</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Corrigido erro de inicialização;">
-      <option name="closed" value="true" />
-      <created>1689888962201</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1689888962201</updated>
+      <workItem from="1690231956413" duration="2179000" />
     </task>
     <task id="LOCAL-00006" summary="Corrigido erro do frame de configuração;">
       <option name="closed" value="true" />
@@ -527,7 +517,23 @@
       <option name="project" value="LOCAL" />
       <updated>1690232020577</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="Corrigido o getPath do Implementer;">
+      <option name="closed" value="true" />
+      <created>1690232915487</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1690232915487</updated>
+    </task>
+    <task id="LOCAL-00054" summary="Corrigido o getPath do Implementer;">
+      <option name="closed" value="true" />
+      <created>1690232941705</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1690232941705</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -549,7 +555,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Removido load no construtor do JarLoader;" />
     <MESSAGE value="Correção de bugs;" />
     <MESSAGE value="Corrigido bugs #2;" />
     <MESSAGE value="Corrigido obfuscação;" />
@@ -574,7 +579,8 @@
     <MESSAGE value="Removido buildJAR do Compiler;" />
     <MESSAGE value="Implementado Implementers e Modules;" />
     <MESSAGE value="Quando o createImplementer for finalizado ele gera as pastas;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Quando o createImplementer for finalizado ele gera as pastas;" />
+    <MESSAGE value="Corrigido o getPath do Implementer;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrigido o getPath do Implementer;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

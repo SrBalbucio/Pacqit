@@ -3,13 +3,16 @@ package balbucio.pacqit.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.inspector.TagInspector;
+import org.yaml.snakeyaml.representer.Representer;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +34,7 @@ public class ProjectImplementer {
     private List<String> modules = new ArrayList<>();
 
     public String getImplementerPath() {
-        return implementerPath+"/"+implementerName+"/";
+        return implementerPath.isEmpty() ? implementerName+"/" : implementerPath+"/"+implementerName+"/";
     }
 
     public String replace(String message){
@@ -72,5 +75,20 @@ public class ProjectImplementer {
             }
         }
         return has;
+    }
+
+    public void save(File dir){
+        File configFile = dir != null ? new File(dir, getImplementerPath()+"implementer-config.yml") : new File(getImplementerPath()+"implementer-config.yml");
+        try {
+            PrintWriter writer = new PrintWriter(configFile);
+            DumperOptions options = new DumperOptions();
+            options.setIndent(2);
+            options.setPrettyFlow(true);
+            options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
+            Yaml yml = new Yaml(new Constructor(ProjectImplementer.class, new LoaderOptions()), new Representer(options));
+            yml.dump(this, writer);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

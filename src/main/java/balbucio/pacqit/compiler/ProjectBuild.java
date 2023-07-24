@@ -324,7 +324,7 @@ public class ProjectBuild {
                 e.printStackTrace();
             }
         }
-
+        projectCompiler.compile(getSourcePath(), getLocalLibrariesPath(), getCompilePath(), getJavaHome(), project.getJavaVersion());
         return true;
     }
 

@@ -106,6 +106,7 @@ public class Main {
         implementer.setImplementerName(form.getByIndex(0).asString());
         implementer.setImplementerMainClass(form.getByIndex(1).asString());
         implementers.add(implementer);
+        implementer.save(parse.getProjectDir());
         projectBuild.createPath();
     }
 
