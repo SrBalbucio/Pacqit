@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Implementado Implementers e Modules;" />
+    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Quando o createImplementer for finalizado ele gera as pastas;">
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/ProjectImplementer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/ProjectImplementer.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -131,14 +133,7 @@
       <workItem from="1690203260289" duration="8086000" />
       <workItem from="1690214694570" duration="4393000" />
       <workItem from="1690219760395" duration="6257000" />
-    </task>
-    <task id="LOCAL-00003" summary="Adicionado sistema de commands;">
-      <option name="closed" value="true" />
-      <created>1689886305288</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1689886305288</updated>
+      <workItem from="1690231956413" duration="800000" />
     </task>
     <task id="LOCAL-00004" summary="Atualização dos formatadores de log;">
       <option name="closed" value="true" />
@@ -524,7 +519,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690225961696</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="Quando o createImplementer for finalizado ele gera as pastas;">
+      <option name="closed" value="true" />
+      <created>1690232020577</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1690232020577</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -546,7 +549,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Adicionado novas pastas ao menu;" />
     <MESSAGE value="Removido load no construtor do JarLoader;" />
     <MESSAGE value="Correção de bugs;" />
     <MESSAGE value="Corrigido bugs #2;" />
@@ -571,7 +573,8 @@
     <MESSAGE value="Adição do menu de criação do implementador;" />
     <MESSAGE value="Removido buildJAR do Compiler;" />
     <MESSAGE value="Implementado Implementers e Modules;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementado Implementers e Modules;" />
+    <MESSAGE value="Quando o createImplementer for finalizado ele gera as pastas;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Quando o createImplementer for finalizado ele gera as pastas;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

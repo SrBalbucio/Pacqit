@@ -18,7 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ProjectImplementer {
 
-    private String implementerPath;
+    private String implementerPath = "";
     private String implementerName;
     private String implementerPackage;
     private String implementerVersion;
@@ -29,6 +29,10 @@ public class ProjectImplementer {
     private List<String> nativePackages = new ArrayList<>();
     private List<String> dependencies = new ArrayList<>();
     private List<String> modules = new ArrayList<>();
+
+    public String getImplementerPath() {
+        return implementerPath+"/"+implementerName;
+    }
 
     public String replace(String message){
         return message
