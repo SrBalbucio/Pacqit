@@ -117,16 +117,96 @@ public class Main {
 
     public void createModuleForm(){
         ProjectModule module = new ProjectModule();
+        List<String> selection = List.of("None");
+        selection.addAll(project.getModules());
+
         Form form = uiBooster.createForm("Create Module")
+                .addSelection("In wich Module?", selection)
                 .addText("What is the name of the Module?")
                 .show();
-        if(form.getByIndex(0).asString() != null && !form.getByIndex(0).asString().isEmpty()) {
+        if(form.getByIndex(1).asString() != null && !form.getByIndex(1).asString().isEmpty()) {
+            if(!form.getByIndex(0).asString().equals("None")){
+                ProjectModule m = getProjectModule(form.getByIndex(0).asString());
+                if(m == null){
+                    return;
+                }
+
+                module.setModulePath(m.getModulePath()+"/"+m.getModuleName());
+            }
             module.setModuleName(form.getByIndex(0).asString());
             modules.add(module);
             projectBuild.createPath();
             module.save(parse.getProjectDir());
             project.getModules().add(module.getModuleName());
             project.save(parse.getProjectDir());
+        }
+    }
+
+    public void moduleManagerForm(){
+        Form form = uiBooster.createForm("Module Manager")
+                .addLabel("Number of Modules: "+getModules().size())
+                .addButton("Create New Module", this::createModuleForm)
+                .addButton("Configure Module", this::listModulesForm)
+                .addButton("Delete Module", this::deleteModulesForm)
+                .show();
+    }
+
+    public void implementerManagerForm(){
+        Form form = uiBooster.createForm("Implementer Manager")
+                .addLabel("Number of Implementers: "+getImplementers().size())
+                .addButton("Create New Implementer", this::createImplementerForm)
+                .addButton("Configure Implementer", this::listImplementerForm)
+                .addButton("Delete Implementer", this::deleteImplementerForm)
+                .show();
+    }
+
+    public void deleteModulesForm(){
+        String selection = new UiBooster().showSelectionDialog(
+                "Which module do you want to delete?",
+                "Modules",
+                project.getModules());
+        ProjectModule module = getProjectModule(selection);
+        if(module != null){
+            uiBooster.showConfirmDialog("Are you sure you want to delete this module? (his files will not be deleted)",
+                    "Delete Module",
+                    () -> project.getModules().remove(module.getModuleName()),
+                    () -> {});
+        }
+    }
+
+    public void deleteImplementerForm(){
+        String selection = new UiBooster().showSelectionDialog(
+                "Which implementer do you want to delete?",
+                "Implementers",
+                project.getModules());
+        ProjectImplementer module = getProjectImplementer(selection);
+        if(module != null){
+            uiBooster.showConfirmDialog("Are you sure you want to delete this implementer? (his files will not be deleted)",
+                    "Delete Module",
+                    () -> project.getImplementers().remove(module.getImplementerName()),
+                    () -> {});
+        }
+    }
+
+    public void listModulesForm(){
+        String selection = new UiBooster().showSelectionDialog(
+                "Which module do you want to configure?",
+                "Modules",
+                project.getModules());
+        ProjectModule module = getProjectModule(selection);
+        if(module != null){
+            moduleSettingsForm(module);
+        }
+    }
+
+    public void listImplementerForm(){
+        String selection = new UiBooster().showSelectionDialog(
+                "Which implementer do you want to configure?",
+                "Implementers",
+                project.getImplementers());
+        ProjectImplementer module = getProjectImplementer(selection);
+        if(module != null){
+            implementerSettingsForm(module);
         }
     }
     public void moduleSettingsForm(ProjectModule module){
@@ -266,7 +346,8 @@ public class Main {
     }
 
     public boolean hasModuleInPath(String path){
-        return modules.stream().anyMatch(m -> (m.getModulePath()+m.getModuleName()).equals(path));
+        String finalPath = path.replace("\\", "/");
+        return modules.stream().anyMatch(m -> (m.getModulePath()+"/"+m.getModuleName()).equals(finalPath));
     }
 
     public static List<String> getCompilerNames(){

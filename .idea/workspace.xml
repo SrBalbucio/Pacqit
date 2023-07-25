@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Removido teste da pasta do projeto;" />
+    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Correções na criação de modulos;&#10;Adição dos menus de manager, delete e list;">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/page/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/page/MainPage.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -134,23 +139,7 @@
       <workItem from="1690231956413" duration="3554000" />
       <workItem from="1690237445581" duration="6731000" />
       <workItem from="1690246932308" duration="1275000" />
-      <workItem from="1690294446343" duration="923000" />
-    </task>
-    <task id="LOCAL-00016" summary="Adicionado comando para executar o app;">
-      <option name="closed" value="true" />
-      <created>1689958316714</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1689958316714</updated>
-    </task>
-    <task id="LOCAL-00017" summary="Corrigido erro do manifest;">
-      <option name="closed" value="true" />
-      <created>1689963412419</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1689963412419</updated>
+      <workItem from="1690294446343" duration="3588000" />
     </task>
     <task id="LOCAL-00018" summary="Agora o run espera o processo ser finalizado;">
       <option name="closed" value="true" />
@@ -528,7 +517,23 @@
       <option name="project" value="LOCAL" />
       <updated>1690295039360</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="Adicionado valores padrão ao project module;">
+      <option name="closed" value="true" />
+      <created>1690295750383</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1690295750383</updated>
+    </task>
+    <task id="LOCAL-00066" summary="Adicionado novos menus de ação;">
+      <option name="closed" value="true" />
+      <created>1690296687225</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1690296687225</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -550,9 +555,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Adicionado opção de selecionar um outro tipo de compilador;&#10;Adicionado opção de criar um native package ou installer;" />
-    <MESSAGE value="Adicionado implementação JavaC;" />
-    <MESSAGE value="Adicionado implementação do Orzo;&#10;Removido lógica de compilação do ProjectBuild e atribuido para o compilador escolhido;" />
     <MESSAGE value="Adicionado docs dos projetos;" />
     <MESSAGE value="Adicionado ProjectModule e ProjectImplementer;" />
     <MESSAGE value="Modificações no sistema de build;" />
@@ -575,7 +577,10 @@
     <MESSAGE value="Removido logs de teste;" />
     <MESSAGE value="Corrigido comandos de criação de módulo." />
     <MESSAGE value="Removido teste da pasta do projeto;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removido teste da pasta do projeto;" />
+    <MESSAGE value="Adicionado valores padrão ao project module;" />
+    <MESSAGE value="Adicionado novos menus de ação;" />
+    <MESSAGE value="Correções na criação de modulos;&#10;Adição dos menus de manager, delete e list;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correções na criação de modulos;&#10;Adição dos menus de manager, delete e list;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

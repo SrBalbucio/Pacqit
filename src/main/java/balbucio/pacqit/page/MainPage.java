@@ -91,7 +91,9 @@ public class MainPage extends JFrame {
         openSettings.addActionListener(e -> app.projectSettingsForm());
         JButton dependencies = new JButton("Open dependency manager");
         JButton module = new JButton("Open module manager");
+        module.addActionListener(e -> app.moduleManagerForm());
         JButton implementer = new JButton("Open implementer manager");
+        implementer.addActionListener(e -> app.implementerManagerForm());
         JButton openInAurora = new JButton("Open in Aurora");
         panel.add(build);
         panel.add(buildAndRun);

@@ -171,8 +171,8 @@ public class ProjectBuild {
 
     public File getModuleJAR(ProjectModule module){
         return parse.getProjectDir() != null ?
-                new File(parse.getProjectDir(), module.getModulePath()+module.getModuleName()+project.getOutputPath()+project.getJarName()) :
-                new File(module.getModulePath()+project.getOutputPath()+module.getModuleJarName());
+                new File(parse.getProjectDir(), module.getModulePath()+module.getModuleName()+project.getOutputPath()+project.getJarName()+".jar") :
+                new File(module.getModulePath()+project.getOutputPath()+module.replace(project.getJarName())+".jar");
     }
 
     public File getModuleGeneratedPath(ProjectModule module){
