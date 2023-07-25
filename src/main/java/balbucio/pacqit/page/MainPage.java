@@ -8,8 +8,6 @@ import balbucio.pacqit.model.Project;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class MainPage extends JFrame {
 
@@ -121,6 +119,7 @@ public class MainPage extends JFrame {
         JButton theme = new JButton("Change theme");
         JButton github = new JButton("Open in GitHub");
         JButton close = new JButton("Close");
+        close.addActionListener(e -> System.exit(0));
         pacqit.add(repo);
         pacqit.add(settings);
         pacqit.add(folder);

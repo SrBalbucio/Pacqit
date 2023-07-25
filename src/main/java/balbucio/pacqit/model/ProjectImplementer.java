@@ -71,6 +71,15 @@ public class ProjectImplementer {
         return has;
     }
 
+    public void delete(File dir){
+        File configFile = dir != null ? new File(dir, getImplementerName()+"/implementer-config.yml") : new File(getImplementerName()+"/implementer-config.yml");
+        try {
+            configFile.delete();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public void save(File dir){
         File configFile = dir != null ? new File(dir, getImplementerName()+"/implementer-config.yml") : new File(getImplementerName()+"/implementer-config.yml");
         try {

@@ -5,9 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Correções na criação de modulos;&#10;Adição dos menus de manager, delete e list;">
+      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/settings/PacqitSettings.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/ThemeUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/ProjectImplementer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/ProjectImplementer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/ProjectModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/ProjectModule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/page/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/page/MainPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -139,15 +143,7 @@
       <workItem from="1690231956413" duration="3554000" />
       <workItem from="1690237445581" duration="6731000" />
       <workItem from="1690246932308" duration="1275000" />
-      <workItem from="1690294446343" duration="3588000" />
-    </task>
-    <task id="LOCAL-00018" summary="Agora o run espera o processo ser finalizado;">
-      <option name="closed" value="true" />
-      <created>1689963511514</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1689963511514</updated>
+      <workItem from="1690294446343" duration="8026000" />
     </task>
     <task id="LOCAL-00019" summary="Adicionado build run, para buildar e executar;">
       <option name="closed" value="true" />
@@ -533,7 +529,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690296687225</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="Correções na criação de modulos;&#10;Adição dos menus de manager, delete e list;">
+      <option name="closed" value="true" />
+      <created>1690298080937</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1690298080938</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

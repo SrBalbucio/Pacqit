@@ -59,7 +59,7 @@ public class ProjectModule {
         boolean has = false;
         if(dir.listFiles() != null) {
             for (File file : dir.listFiles()) {
-                if (file.getName().equalsIgnoreCase("module-config.yml")) {
+                if (file.getName().contains("module-config")) {
                     has = true;
                 }
             }
@@ -67,8 +67,17 @@ public class ProjectModule {
         return has;
     }
 
+    public void delete(File dir){
+        File configFile = dir != null ? new File(dir, getModulePath()+"/"+getModuleName()+"/module-config.yml") : new File(getModulePath()+"/"+getModuleName()+"/module-config.yml");
+        try {
+            configFile.delete();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public void save(File dir){
-        File configFile = dir != null ? new File(dir, "module-config.yml") : new File("implementer-config.yml");
+        File configFile = dir != null ? new File(dir, getModulePath()+"/"+getModuleName()+"/module-config.yml") : new File(getModulePath()+"/"+getModuleName()+"/module-config.yml");
         try {
             PrintWriter writer = new PrintWriter(configFile);
             DumperOptions options = new DumperOptions();

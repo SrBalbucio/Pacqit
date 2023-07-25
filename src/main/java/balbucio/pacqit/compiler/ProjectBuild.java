@@ -141,44 +141,44 @@ public class ProjectBuild {
      */
     public File getModuleSourcePath(ProjectModule module){
         return parse.getProjectDir() != null ?
-                new File(parse.getProjectDir(), module.getModulePath()+module.getModuleName()+project.getSourcePath()) :
-                new File(module.getModulePath()+project.getSourcePath());
+                new File(parse.getProjectDir(), module.getModulePath()+"/"+module.getModuleName()+"/"+project.getSourcePath()) :
+                new File(module.getModulePath()+module.getModuleName()+project.getSourcePath());
     }
 
     public File getModuleResourcePath(ProjectModule module){
         return parse.getProjectDir() != null ?
-                new File(parse.getProjectDir(), module.getModulePath()+module.getModuleName()+project.getResourcePath()) :
-                new File(module.getModulePath()+project.getResourcePath());
+                new File(parse.getProjectDir(), module.getModulePath()+"/"+module.getModuleName()+"/"+project.getResourcePath()) :
+                new File(module.getModulePath()+module.getModuleName()+project.getResourcePath());
     }
 
     public File getModuleLocalLibrariesPath(ProjectModule module){
         return parse.getProjectDir() != null ?
-                new File(parse.getProjectDir(), module.getModulePath()+module.getModuleName()+project.getLocalLibrariesPath()) :
-                new File(module.getModulePath()+project.getLocalLibrariesPath());
+                new File(parse.getProjectDir(), module.getModulePath()+"/"+module.getModuleName()+"/"+project.getLocalLibrariesPath()) :
+                new File(module.getModulePath()+"/"+module.getModuleName()+"/"+project.getLocalLibrariesPath());
     }
 
     public File getModuleBuildPluginsPath(ProjectModule module){
         return parse.getProjectDir() != null ?
-                new File(parse.getProjectDir(), module.getModulePath()+module.getModuleName()+project.getBuildPluginsPath()) :
-                new File(module.getModulePath()+project.getBuildPluginsPath());
+                new File(parse.getProjectDir(), module.getModulePath()+"/"+module.getModuleName()+"/"+project.getBuildPluginsPath()) :
+                new File(module.getModulePath()+"/"+module.getModuleName()+"/"+project.getBuildPluginsPath());
     }
     
     public File getModuleCompilePath(ProjectModule module){
         return parse.getProjectDir() != null ?
-                new File(parse.getProjectDir(), module.getModulePath()+module.getModuleName()+project.getCompílePath()) :
-                new File(module.getModulePath()+project.getCompílePath());
+                new File(parse.getProjectDir(), module.getModulePath()+"/"+module.getModuleName()+"/"+project.getCompílePath()) :
+                new File(module.getModulePath()+"/"+module.getModuleName()+"/"+project.getCompílePath());
     }
 
     public File getModuleJAR(ProjectModule module){
         return parse.getProjectDir() != null ?
-                new File(parse.getProjectDir(), module.getModulePath()+module.getModuleName()+project.getOutputPath()+project.getJarName()+".jar") :
-                new File(module.getModulePath()+project.getOutputPath()+module.replace(project.getJarName())+".jar");
+                new File(parse.getProjectDir(), module.getModulePath()+"/"+module.getModuleName()+"/"+project.getOutputPath()+"/"+project.getJarName()+".jar") :
+                new File(module.getModulePath()+"/"+module.getModuleName()+"/"+project.getOutputPath()+"/"+module.replace(project.getJarName())+".jar");
     }
 
     public File getModuleGeneratedPath(ProjectModule module){
         return parse.getProjectDir() != null ?
-                new File(parse.getProjectDir(), module.getModulePath()+module.getModuleName()+project.getCompílePath()) :
-                new File(module.getModulePath()+project.getCompílePath());
+                new File(parse.getProjectDir(), module.getModulePath()+"/"+module.getModuleName()+"/"+project.getCompílePath()) :
+                new File(module.getModulePath()+"/"+project.getCompílePath());
     }
 
     /**

@@ -9,6 +9,12 @@ import balbucio.pacqit.model.ProjectImplementer;
 import balbucio.pacqit.model.ProjectModule;
 import balbucio.pacqit.obfuscation.ProjectObfuscator;
 import balbucio.pacqit.page.MainPage;
+import balbucio.pacqit.settings.PacqitSettings;
+import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.intellijthemes.FlatMonokaiProIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
 import de.milchreis.uibooster.UiBooster;
 import de.milchreis.uibooster.model.Form;
 import de.milchreis.uibooster.model.FormBuilder;
@@ -35,6 +41,7 @@ public class Main {
     }
 
     public Logger LOGGER = Logger.getLogger("PACQIT");
+    private PacqitSettings settings;
     private ArgParse parse;
     private Project project;
     private List<ProjectModule> modules = new ArrayList<>();
@@ -50,6 +57,7 @@ public class Main {
         handler.setFormatter(new LoggerFormat());
         LOGGER.addHandler(handler);
         LOGGER.info("Pacqit initialized successfully!");
+        this.settings = PacqitSettings.getPacqitSettings();
         this.parse = parse;
         this.input = new Scanner(System.in);
         this.uiBooster = new UiBooster(UiBoosterOptions.Theme.DEFAULT, "/pacqit.png");
@@ -62,13 +70,14 @@ public class Main {
             projectBuild.createPath();
         }
         parse.runAction(this);
+        settings.setThemeInApp();
     }
 
     public void openMenuForm(){
         if(project == null){
             FormBuilder builder = uiBooster.createForm("Pacqit");
             builder.addLabel("There are no projects here!");
-            builder.addButton("Create new Project", () -> createProjectForm());
+            builder.addButton("Create new Project", this::createProjectForm);
             builder.setCloseListener(e -> System.exit(0));
             Form f = builder.show();
         } else{
@@ -117,8 +126,9 @@ public class Main {
 
     public void createModuleForm(){
         ProjectModule module = new ProjectModule();
-        List<String> selection = List.of("None");
-        selection.addAll(project.getModules());
+        List<String> selection = new ArrayList<>();
+        selection.add("None");
+        project.getModules().forEach(s -> selection.add(s));
 
         Form form = uiBooster.createForm("Create Module")
                 .addSelection("In wich Module?", selection)
@@ -133,7 +143,7 @@ public class Main {
 
                 module.setModulePath(m.getModulePath()+"/"+m.getModuleName());
             }
-            module.setModuleName(form.getByIndex(0).asString());
+            module.setModuleName(form.getByIndex(1).asString());
             modules.add(module);
             projectBuild.createPath();
             module.save(parse.getProjectDir());
@@ -169,8 +179,13 @@ public class Main {
         if(module != null){
             uiBooster.showConfirmDialog("Are you sure you want to delete this module? (his files will not be deleted)",
                     "Delete Module",
-                    () -> project.getModules().remove(module.getModuleName()),
+                    () -> {
+                        this.modules.remove(module);
+                        project.getModules().remove(module.getModuleName());
+                        module.delete(parse.getProjectDir());
+                    },
                     () -> {});
+            project.save(parse.getProjectDir());
         }
     }
 
@@ -183,8 +198,13 @@ public class Main {
         if(module != null){
             uiBooster.showConfirmDialog("Are you sure you want to delete this implementer? (his files will not be deleted)",
                     "Delete Module",
-                    () -> project.getImplementers().remove(module.getImplementerName()),
+                    () -> {
+                        this.implementers.remove(module);
+                        project.getImplementers().remove(module.getImplementerName());
+                        module.delete(parse.getProjectDir());
+                    },
                     () -> {});
+            project.save(parse.getProjectDir());
         }
     }
 
