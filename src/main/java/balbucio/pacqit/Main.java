@@ -10,6 +10,7 @@ import balbucio.pacqit.model.ProjectModule;
 import balbucio.pacqit.obfuscation.ProjectObfuscator;
 import balbucio.pacqit.page.MainPage;
 import balbucio.pacqit.settings.PacqitSettings;
+import balbucio.pacqit.utils.ThemeUtils;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLaf;
@@ -58,19 +59,27 @@ public class Main {
         LOGGER.addHandler(handler);
         LOGGER.info("Pacqit initialized successfully!");
         this.settings = PacqitSettings.getPacqitSettings();
+        settings.save();
         this.parse = parse;
         this.input = new Scanner(System.in);
         this.uiBooster = new UiBooster(UiBoosterOptions.Theme.DEFAULT, "/pacqit.png");
         this.commandManager = new CommandManager(this);
         this.project = Project.loadProject(parse.getProjectDir());
         if(project != null) {
-            this.modules = ProjectModule.getModulesInPath(parse.getProjectDir() != null ? parse.getProjectDir() : new File("project-config.yml").getParentFile());
-            this.implementers = ProjectImplementer.getImplementersInPath(parse.getProjectDir() != null ? parse.getProjectDir() : new File("project-config.yml").getParentFile());
+            this.modules = ProjectModule.getModulesInPath(parse.getProjectDir() != null ? parse.getProjectDir() : new File(System.getProperty("user.dir")));
+            this.implementers = ProjectImplementer.getImplementersInPath(parse.getProjectDir() != null ? parse.getProjectDir() : new File(System.getProperty("user.dir")));
             this.projectBuild = new ProjectBuild(project, parse, this);
             projectBuild.createPath();
         }
         parse.runAction(this);
-        settings.setThemeInApp();
+        settings.setThemeInApp(false);
+    }
+
+    public void openThemeForm(){
+        String selected = uiBooster.showSelectionDialog("Choose the theme you like best: (most are IntelliJ based or themes)", "Change Theme", ThemeUtils.getThemeNames());
+        settings.setThemeName(selected);
+        settings.save();
+        settings.setThemeInApp(true);
     }
 
     public void openMenuForm(){

@@ -4,6 +4,7 @@ import balbucio.pacqit.model.ProjectImplementer;
 import balbucio.pacqit.model.ProjectModule;
 import balbucio.pacqit.utils.ThemeUtils;
 import com.formdev.flatlaf.IntelliJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatArcDarkOrangeIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatMonokaiProIJTheme;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -42,12 +43,14 @@ public class PacqitSettings {
         return settings;
     }
 
-    private String themeName = "Monokai Pro";
+    private String themeName = "Arc Dark - Orange";
 
 
     public void save(){
         File config = new File(System.getenv("APPDATA")+"/Pacqit", "settings.yml");
         try {
+            config.getParentFile().mkdirs();
+            config.createNewFile();
             PrintWriter writer = new PrintWriter(config);
             DumperOptions options = new DumperOptions();
             options.setIndent(2);
@@ -60,13 +63,19 @@ public class PacqitSettings {
         }
     }
 
-    public void setThemeInApp() {
+    public void setThemeInApp(boolean warn) {
         try{
-            Class<? extends IntelliJTheme.ThemeLaf> themeClazz = ThemeUtils.getWithName(themeName);
-            UIManager.setLookAndFeel(themeClazz.newInstance());
+            UIManager.setLookAndFeel(ThemeUtils.getWithName(themeName));
+            if(warn) {
+                JOptionPane.showMessageDialog(null, "Some previously opened screens should not switch themes for now. Restart Pacqit to see the changes.");
+            }
+            save();
         }catch (Exception e){
             e.printStackTrace();
-            try {UIManager.setLookAndFeel(new FlatMonokaiProIJTheme());} catch (UnsupportedLookAndFeelException ignored) {}
+            JOptionPane.showMessageDialog(null, "There was an unexpected error loading the Pacqit theme, so the default theme will be used.\n" +
+                    "\n" +
+                    "Try changing the theme from the project menu (using the pacqit command in the console) or using the pacqitapp command)");
+            try {UIManager.setLookAndFeel(new FlatArcDarkOrangeIJTheme());} catch (UnsupportedLookAndFeelException ignored) { ignored.printStackTrace();}
         }
     }
 }

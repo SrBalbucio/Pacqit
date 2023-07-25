@@ -16,6 +16,7 @@ public class MainPage extends JFrame {
     public MainPage(Main app){
         super("Pacqit");
         this.app = app;
+        app.getSettings().setThemeInApp(false);
         this.project = app.getProject();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setIconImage(ImageUtils.getImage(this.getClass().getResourceAsStream("/pacqit.png")));
@@ -53,7 +54,7 @@ public class MainPage extends JFrame {
 
     public JScrollPane optionPanel() {
         JPanel mainPanel = new JPanel();
-        mainPanel.setBorder(new EmptyBorder(0, 0,0 ,5));
+        mainPanel.setBorder(new EmptyBorder(15, 15,15 ,5));
         BoxLayout layout = new BoxLayout(mainPanel, BoxLayout.Y_AXIS);
         mainPanel.setLayout(layout);
         JPanel label = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -117,6 +118,11 @@ public class MainPage extends JFrame {
         JButton folder = new JButton("Open Pacqit folder");
         JButton resolve = new JButton("Resolve crashes and dependencies");
         JButton theme = new JButton("Change theme");
+        theme.addActionListener(e -> {
+            app.openThemeForm();
+            this.revalidate();
+            this.repaint();
+        });
         JButton github = new JButton("Open in GitHub");
         JButton close = new JButton("Close");
         close.addActionListener(e -> System.exit(0));
@@ -129,7 +135,7 @@ public class MainPage extends JFrame {
         pacqit.add(close);
         mainPanel.add(pacqit);
         JScrollPane pane = new JScrollPane(mainPanel);
-        pane.setBorder(new EmptyBorder(15, 15, 15, 0));
+        pane.setBorder(new EmptyBorder(0,0,0,0));
         return pane;
     }
 }

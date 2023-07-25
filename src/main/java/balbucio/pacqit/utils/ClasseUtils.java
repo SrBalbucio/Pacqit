@@ -1,11 +1,14 @@
 package balbucio.pacqit.utils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import org.reflections.Reflections;
+import org.reflections.scanners.SubTypesScanner;
+
+import java.io.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ClasseUtils {
 
@@ -67,5 +70,20 @@ public class ClasseUtils {
                 classes.add(className);
             }
         }
+    }
+
+    public static Set<Class> findAllClassesUsingClassLoader(String packageName) {
+        Reflections reflections = new Reflections(packageName, new SubTypesScanner(false));
+        return new HashSet<>(reflections.getSubTypesOf(Object.class));
+    }
+
+    private static Class getClass(String className, String packageName) {
+        try {
+            return Class.forName(packageName + "."
+                    + className.substring(0, className.lastIndexOf('.')));
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

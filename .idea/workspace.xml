@@ -4,15 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Correções na criação de modulos;&#10;Adição dos menus de manager, delete e list;">
-      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/settings/PacqitSettings.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/ThemeUtils.java" afterDir="false" />
+    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Adicionado settings ao Pacqit;&#10;Adicionado ThemeUtils;&#10;Corrigido alguns bugs;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/ProjectImplementer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/ProjectImplementer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/ProjectModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/ProjectModule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/page/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/page/MainPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/settings/PacqitSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/settings/PacqitSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/ClasseUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/ClasseUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/JarUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/JarUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/ThemeUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/ThemeUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,15 +144,7 @@
       <workItem from="1690231956413" duration="3554000" />
       <workItem from="1690237445581" duration="6731000" />
       <workItem from="1690246932308" duration="1275000" />
-      <workItem from="1690294446343" duration="8026000" />
-    </task>
-    <task id="LOCAL-00019" summary="Adicionado build run, para buildar e executar;">
-      <option name="closed" value="true" />
-      <created>1689963619016</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1689963619016</updated>
+      <workItem from="1690294446343" duration="15814000" />
     </task>
     <task id="LOCAL-00020" summary="Correção do sistema de comandos;">
       <option name="closed" value="true" />
@@ -537,7 +530,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690298080938</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="Adicionado settings ao Pacqit;&#10;Adicionado ThemeUtils;&#10;Corrigido alguns bugs;">
+      <option name="closed" value="true" />
+      <created>1690302827239</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1690302827239</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -559,7 +560,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Adicionado docs dos projetos;" />
     <MESSAGE value="Adicionado ProjectModule e ProjectImplementer;" />
     <MESSAGE value="Modificações no sistema de build;" />
     <MESSAGE value="Comando de criação de modulo;" />
@@ -584,7 +584,8 @@
     <MESSAGE value="Adicionado valores padrão ao project module;" />
     <MESSAGE value="Adicionado novos menus de ação;" />
     <MESSAGE value="Correções na criação de modulos;&#10;Adição dos menus de manager, delete e list;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correções na criação de modulos;&#10;Adição dos menus de manager, delete e list;" />
+    <MESSAGE value="Adicionado settings ao Pacqit;&#10;Adicionado ThemeUtils;&#10;Corrigido alguns bugs;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adicionado settings ao Pacqit;&#10;Adicionado ThemeUtils;&#10;Corrigido alguns bugs;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

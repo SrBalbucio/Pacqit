@@ -171,7 +171,7 @@ public class ProjectBuild {
 
     public File getModuleJAR(ProjectModule module){
         return parse.getProjectDir() != null ?
-                new File(parse.getProjectDir(), module.getModulePath()+"/"+module.getModuleName()+"/"+project.getOutputPath()+"/"+project.getJarName()+".jar") :
+                new File(parse.getProjectDir(), module.getModulePath()+"/"+module.getModuleName()+"/"+project.getOutputPath()+"/"+module.replace(project.getJarName())+".jar") :
                 new File(module.getModulePath()+"/"+module.getModuleName()+"/"+project.getOutputPath()+"/"+module.replace(project.getJarName())+".jar");
     }
 
@@ -292,6 +292,9 @@ public class ProjectBuild {
 
         try {
             Manifest manifest = new Manifest(module.getModuleVersion(), project.getMainClass(), project.getJavaVersion());
+            getModuleJAR(module).getParentFile().mkdirs();
+            getModuleJAR(module).delete();
+            getModuleJAR(module).createNewFile();
             JarUtils.directoryToJar(getModuleJAR(module), manifest, getModuleCompilePath(module), getModuleResourcePath(module), getModuleGeneratedPath(module));
         } catch (Exception e){
             e.printStackTrace();

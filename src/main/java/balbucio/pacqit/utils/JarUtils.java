@@ -52,8 +52,12 @@ public class JarUtils {
 
         for(File dir : directory) {
             if(dir != null) {
-                for (File file : dir.listFiles()) {
-                    addFilesToJar(file, "", jarOutputStream, addedPath);
+                if(dir.listFiles() != null && dir.listFiles().length != 0) {
+                    for (File file : dir.listFiles()) {
+                        if (file != null) {
+                            addFilesToJar(file, "", jarOutputStream, addedPath);
+                        }
+                    }
                 }
             }
         }

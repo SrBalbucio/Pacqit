@@ -1,72 +1,36 @@
 package balbucio.pacqit.utils;
 
 import com.formdev.flatlaf.IntelliJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatAllIJThemes;
+import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatArcDarkOrangeIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatMonocaiIJTheme;
 
-import java.io.File;
+import javax.swing.*;
 import java.io.IOException;
-import java.net.URL;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Enumeration;
+import java.util.Arrays;
 import java.util.List;
 
 public class ThemeUtils {
 
+    private static String FLAT_PACKAGE = "com.formdev.flatlaf.intellijthemes";
+
     public static List<String> getThemeNames(){
         List<String> themeNames = new ArrayList<>();
-            findIntelliJThemeLafs().forEach(c -> {
-                try {
-                    themeNames.add(((String)c.getDeclaredField("NAME").get(null)));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            });
+        for (FlatAllIJThemes.FlatIJLookAndFeelInfo info : FlatAllIJThemes.INFOS) {
+            themeNames.add(info.getName());
+        }
         return themeNames;
     }
 
-    public static Class<? extends IntelliJTheme.ThemeLaf> getWithName(String name){
-        return (Class<? extends IntelliJTheme.ThemeLaf>) findIntelliJThemeLafs().stream().filter(c -> {
-            try {
-                return ((String)c.getDeclaredField("NAME").get(null)).equalsIgnoreCase(name);
-            } catch (Exception e){
-                e.printStackTrace();
-                return false;
-            }
-        }).findFirst().orElse(FlatMonocaiIJTheme.class);
+    public static LookAndFeel getWithName(String name) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+        String classname = Arrays.stream(FlatAllIJThemes.INFOS)
+                .filter(f -> f.getName().equalsIgnoreCase(name)).findFirst()
+                .orElse(new FlatAllIJThemes.FlatIJLookAndFeelInfo("Arc Dark - Orange", "com.formdev.flatlaf.intellijthemes.FlatArcDarkOrangeIJTheme", true))
+                .getClassName();
+        return (LookAndFeel) Class.forName(classname).newInstance();
     }
 
-    public static List<Class<? extends IntelliJTheme.ThemeLaf>> findIntelliJThemeLafs() {
-        List<Class<? extends IntelliJTheme.ThemeLaf>> intelliJThemeLafs = new ArrayList<>();
-        String packageName = "com.formdev.flatlaf.intellijthemes";
-        String packagePath = packageName.replace('.', '/');
-
-        try {
-            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-            Enumeration<URL> resources = classLoader.getResources(packagePath);
-
-            while (resources.hasMoreElements()) {
-                URL resource = resources.nextElement();
-                File directory = new File(resource.getFile());
-
-                if (directory.exists()) {
-                    String[] files = directory.list();
-
-                    if (files != null) {
-                        for (String file : files) {
-                            if (file.endsWith(".class")) {
-                                String className = packageName + "." + file.substring(0, file.length() - 6);
-                                Class<?> clazz = Class.forName(className);
-
-                                if (IntelliJTheme.ThemeLaf.class.isAssignableFrom(clazz)) {
-                                    intelliJThemeLafs.add((Class<? extends IntelliJTheme.ThemeLaf>) clazz);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        } catch (IOException | ClassNotFoundException ignored) {}
-
-        return intelliJThemeLafs;
-    }
 }
