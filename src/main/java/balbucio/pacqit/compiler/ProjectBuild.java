@@ -140,31 +140,45 @@ public class ProjectBuild {
      * MODULE PATHS
      */
     public File getModuleSourcePath(ProjectModule module){
-        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getModulePath()+project.getSourcePath()) : new File(module.getModulePath()+project.getSourcePath());
+        return parse.getProjectDir() != null ?
+                new File(parse.getProjectDir(), module.getModulePath()+module.getModuleName()+project.getSourcePath()) :
+                new File(module.getModulePath()+project.getSourcePath());
     }
 
     public File getModuleResourcePath(ProjectModule module){
-        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getModulePath()+project.getResourcePath()) : new File(module.getModulePath()+project.getResourcePath());
+        return parse.getProjectDir() != null ?
+                new File(parse.getProjectDir(), module.getModulePath()+module.getModuleName()+project.getResourcePath()) :
+                new File(module.getModulePath()+project.getResourcePath());
     }
 
     public File getModuleLocalLibrariesPath(ProjectModule module){
-        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getModulePath()+project.getLocalLibrariesPath()) : new File(module.getModulePath()+project.getLocalLibrariesPath());
+        return parse.getProjectDir() != null ?
+                new File(parse.getProjectDir(), module.getModulePath()+module.getModuleName()+project.getLocalLibrariesPath()) :
+                new File(module.getModulePath()+project.getLocalLibrariesPath());
     }
 
     public File getModuleBuildPluginsPath(ProjectModule module){
-        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getModulePath()+project.getBuildPluginsPath()) : new File(module.getModulePath()+project.getBuildPluginsPath());
+        return parse.getProjectDir() != null ?
+                new File(parse.getProjectDir(), module.getModulePath()+module.getModuleName()+project.getBuildPluginsPath()) :
+                new File(module.getModulePath()+project.getBuildPluginsPath());
     }
     
     public File getModuleCompilePath(ProjectModule module){
-        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getModulePath()+project.getCompílePath()) : new File(module.getModulePath()+project.getCompílePath());
+        return parse.getProjectDir() != null ?
+                new File(parse.getProjectDir(), module.getModulePath()+module.getModuleName()+project.getCompílePath()) :
+                new File(module.getModulePath()+project.getCompílePath());
     }
 
     public File getModuleJAR(ProjectModule module){
-        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getModulePath()+project.getOutputPath()+project.getJarName()) : new File(module.getModulePath()+project.getOutputPath()+module.getModuleJarName());
+        return parse.getProjectDir() != null ?
+                new File(parse.getProjectDir(), module.getModulePath()+module.getModuleName()+project.getOutputPath()+project.getJarName()) :
+                new File(module.getModulePath()+project.getOutputPath()+module.getModuleJarName());
     }
 
     public File getModuleGeneratedPath(ProjectModule module){
-        return parse.getProjectDir() != null ? new File(parse.getProjectDir(), module.getModulePath()+project.getCompílePath()) : new File(module.getModulePath()+project.getCompílePath());
+        return parse.getProjectDir() != null ?
+                new File(parse.getProjectDir(), module.getModulePath()+module.getModuleName()+project.getCompílePath()) :
+                new File(module.getModulePath()+project.getCompílePath());
     }
 
     /**
@@ -257,7 +271,7 @@ public class ProjectBuild {
         }
 
         BUILD_LOGGER.info("---------------------------------------------------------------------");
-        BUILD_LOGGER.info("### COMPILANDO IMPLEMENTER: "+module.getModuleName());
+        BUILD_LOGGER.info("### COMPILANDO MODULO: "+module.getModuleName());
         compiler.compile(
                 getModuleSourcePath(module),
                 getModuleLocalLibrariesPath(module),

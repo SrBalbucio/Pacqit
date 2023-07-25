@@ -17,6 +17,7 @@ import lombok.Data;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,8 +37,8 @@ public class Main {
     public Logger LOGGER = Logger.getLogger("PACQIT");
     private ArgParse parse;
     private Project project;
-    private List<ProjectModule> modules;
-    private List<ProjectImplementer> implementers;
+    private List<ProjectModule> modules = new ArrayList<>();
+    private List<ProjectImplementer> implementers = new ArrayList<>();
     private CommandManager commandManager;
     private ProjectBuild projectBuild;
     private UiBooster uiBooster;
@@ -55,8 +56,8 @@ public class Main {
         this.commandManager = new CommandManager(this);
         this.project = Project.loadProject(parse.getProjectDir());
         if(project != null) {
-            this.modules = ProjectModule.getModulesInPath(parse.getProjectDir());
-            this.implementers = ProjectImplementer.getImplementersInPath(parse.getProjectDir());
+            this.modules = ProjectModule.getModulesInPath(parse.getProjectDir() != null ? parse.getProjectDir() : new File("project-config.yml").getParentFile());
+            this.implementers = ProjectImplementer.getImplementersInPath(parse.getProjectDir() != null ? parse.getProjectDir() : new File("project-config.yml").getParentFile());
             this.projectBuild = new ProjectBuild(project, parse, this);
             projectBuild.createPath();
         }
@@ -110,6 +111,21 @@ public class Main {
             projectBuild.createPath();
             implementer.save(parse.getProjectDir());
             project.getImplementers().add(implementer.getImplementerName());
+            project.save(parse.getProjectDir());
+        }
+    }
+
+    public void createModuleForm(){
+        ProjectModule module = new ProjectModule();
+        Form form = uiBooster.createForm("Create Module")
+                .addText("What is the name of the Module?")
+                .show();
+        if(form.getByIndex(0).asString() != null && !form.getByIndex(0).asString().isEmpty()) {
+            module.setModuleName(form.getByIndex(0).asString());
+            modules.add(module);
+            projectBuild.createPath();
+            module.save(parse.getProjectDir());
+            project.getModules().add(module.getModuleName());
             project.save(parse.getProjectDir());
         }
     }
@@ -204,6 +220,10 @@ public class Main {
 
     public ProjectImplementer getProjectImplementer(String name){
         return implementers.stream().filter(m -> m.getImplementerName().equals(name)).findFirst().orElse(null);
+    }
+
+    public boolean hasModuleInPath(String path){
+        return modules.stream().anyMatch(m -> (m.getModulePath()+m.getModuleName()).equals(path));
     }
 
     public static List<String> getCompilerNames(){
