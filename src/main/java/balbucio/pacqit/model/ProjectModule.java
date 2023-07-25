@@ -24,8 +24,8 @@ public class ProjectModule {
     private String modulePath = "";
     private String moduleName = "Unknown";
     private String moduleVersion = "1.0-SNAPSHOT";
-    private List<String> modules;
-    private List<String> dependencies;
+    private List<String> modules = new ArrayList<>();
+    private List<String> dependencies = new ArrayList<>();
 
     public String replace(String message){
         return message

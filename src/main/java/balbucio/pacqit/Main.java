@@ -129,24 +129,31 @@ public class Main {
             project.save(parse.getProjectDir());
         }
     }
-
     public void moduleSettingsForm(ProjectModule module){
         FormBuilder form = uiBooster.createForm("Module Settings");
         Form f = null;
-        form.addText("Module Name:", project.getName())
-                .addText("Project Package:", project.getProjectPackage())
-                .addText("Project Version:", project.getVersion())
-                .addText("Main Class:", project.getMainClass())
-                .addButton("Path Configuration", this::projectPathSettingsForm)
-                .addButton("Build Configuration", this::projectCompileSettingsForm);
+        form.addText("Module Name:", module.getModuleName())
+                .addText("Module Version:", module.getModuleVersion())
+                .addText("Module Path:", module.getModulePath());
         f = form.show();
-        project.setName(f.getByIndex(0).asString());
-        project.setProjectPackage(f.getByIndex(1).asString());
-        project.setVersion(f.getByIndex(2).asString());
-        project.setMainClass(f.getByIndex(3).asString());
-        projectBuild.setProject(project);
-        projectBuild.createPath();
-        project.save(parse.getProjectDir());
+        module.setModuleName(f.getByIndex(0).asString());
+        module.setModuleVersion(f.getByIndex(1).asString());
+        module.setModulePath(f.getByIndex(2).asString());
+        module.save(parse.getProjectDir());
+    }
+
+    public void implementerSettingsForm(ProjectImplementer module){
+        FormBuilder form = uiBooster.createForm("Implementer Settings");
+        Form f = null;
+        form.addText("Implementer Name:", module.getImplementerName())
+                .addText("Implementer Version:", module.getImplementerVersion())
+                .addText("Implementer Main Class:", module.getImplementerMainClass())
+                .addButton("Open native settings", () -> nativeAppImplementerSettingsForm(module));
+        f = form.show();
+        module.setImplementerName(f.getByIndex(0).asString());
+        module.setImplementerVersion(f.getByIndex(1).asString());
+        module.setImplementerMainClass(f.getByIndex(2).asString());
+        module.save(parse.getProjectDir());
     }
 
     public void projectSettingsForm(){
@@ -232,6 +239,23 @@ public class Main {
                     "if you decide to create a native installer and/or package.", "Warning!", JOptionPane.INFORMATION_MESSAGE);
         }
     }
+
+    public void nativeAppImplementerSettingsForm(ProjectImplementer implementer){
+        Form f = uiBooster.createForm("Native Installer and Package Settings")
+                .addCheckbox("Create installer and native packages for this implementer?", project.isGenerateNativePackage())
+                .addLabel("Selected tool: "+project.getToolToNativePackage())
+                .addSelection("Available tools:", getPackageTools())
+                .addSelectionWithCheckboxes("Installers available:", getPackageNames(), project.getNativePackages())
+                .show();
+        implementer.setImplementerGenerateNativePackage((boolean) f.getByIndex(0).getValue());
+        implementer.setImplementerToolNativePackage(f.getByIndex(2).asString());
+        implementer.setNativePackages((List<String>) f.getByIndex(3).getValue());
+        if(project.isGenerateNativePackage()){
+            JOptionPane.showMessageDialog(null, "Packit will generate a javac compiled JAR regardless of your choice of compiler " +
+                    "if you decide to create a native installer and/or package.", "Warning!", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
 
     public ProjectModule getProjectModule(String name){
         return modules.stream().filter(m -> m.getModuleName().equals(name)).findFirst().orElse(null);

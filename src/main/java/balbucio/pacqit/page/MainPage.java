@@ -91,6 +91,7 @@ public class MainPage extends JFrame {
         openSettings.addActionListener(e -> app.projectSettingsForm());
         JButton dependencies = new JButton("Open dependency manager");
         JButton module = new JButton("Open module manager");
+        JButton implementer = new JButton("Open implementer manager");
         JButton openInAurora = new JButton("Open in Aurora");
         panel.add(build);
         panel.add(buildAndRun);
@@ -102,6 +103,7 @@ public class MainPage extends JFrame {
         panel.add(openSettings);
         panel.add(dependencies);
         panel.add(module);
+        panel.add(implementer);
         panel.add(openInAurora);
         mainPanel.add(panel);
         JPanel label2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
