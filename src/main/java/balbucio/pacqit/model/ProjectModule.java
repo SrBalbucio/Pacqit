@@ -21,10 +21,9 @@ import java.util.List;
 @Data
 public class ProjectModule {
 
-    private String modulePath;
-    private String moduleName;
-    private String moduleVersion;
-    private String moduleJarName;
+    private String modulePath = "";
+    private String moduleName = "Unknown";
+    private String moduleVersion = "1.0-SNAPSHOT";
     private List<String> modules;
     private List<String> dependencies;
 

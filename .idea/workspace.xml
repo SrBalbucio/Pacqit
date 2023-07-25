@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Corrigido comandos de criação de módulo.">
-      <change beforePath="$PROJECT_DIR$/fakeproject/Linux/src/main/java/org/examplo/linux/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fakeproject/Windows/src/main/java/org/example/windows/Main.java" beforeDir="false" />
-    </list>
+    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Removido teste da pasta do projeto;" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -65,11 +62,11 @@
       <recent name="C:\Users\srbal\Documents\Pacqit\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main No Gui">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main No Gui" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="balbucio.pacqit.Main" />
       <module name="Pacqit" />
-      <option name="PROGRAM_PARAMETERS" value="--projectdir=C:\Users\srbal\Documents\Pacqit\fakeproject --console-only" />
+      <option name="PROGRAM_PARAMETERS" value="--projectdir=C:\Users\srbal\Documents\PacqitFakeProject --console-only --debug" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="balbucio.pacqit.obfuscation.*" />
@@ -83,7 +80,7 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="balbucio.pacqit.Main" />
       <module name="Pacqit" />
-      <option name="PROGRAM_PARAMETERS" value="--projectdir=C:\Users\srbal\Documents\Pacqit\fakeproject" />
+      <option name="PROGRAM_PARAMETERS" value="--projectdir=C:\Users\srbal\Documents\PacqitFakeProject --debug" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="balbucio.pacqit.obfuscation.*" />
@@ -137,14 +134,7 @@
       <workItem from="1690231956413" duration="3554000" />
       <workItem from="1690237445581" duration="6731000" />
       <workItem from="1690246932308" duration="1275000" />
-    </task>
-    <task id="LOCAL-00015" summary="Sistema de compilação corrigido e funcionando.">
-      <option name="closed" value="true" />
-      <created>1689957830321</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1689957830322</updated>
+      <workItem from="1690294446343" duration="923000" />
     </task>
     <task id="LOCAL-00016" summary="Adicionado comando para executar o app;">
       <option name="closed" value="true" />
@@ -530,7 +520,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690248177124</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="Removido teste da pasta do projeto;">
+      <option name="closed" value="true" />
+      <created>1690295039359</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1690295039360</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -552,7 +550,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Removido menu principal antigo, agora é um menu em frame;" />
     <MESSAGE value="Adicionado opção de selecionar um outro tipo de compilador;&#10;Adicionado opção de criar um native package ou installer;" />
     <MESSAGE value="Adicionado implementação JavaC;" />
     <MESSAGE value="Adicionado implementação do Orzo;&#10;Removido lógica de compilação do ProjectBuild e atribuido para o compilador escolhido;" />
@@ -577,7 +574,8 @@
     <MESSAGE value="Corrigido erro de compilação dos implementer;" />
     <MESSAGE value="Removido logs de teste;" />
     <MESSAGE value="Corrigido comandos de criação de módulo." />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrigido comandos de criação de módulo." />
+    <MESSAGE value="Removido teste da pasta do projeto;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removido teste da pasta do projeto;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

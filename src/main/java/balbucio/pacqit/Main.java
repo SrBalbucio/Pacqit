@@ -130,6 +130,25 @@ public class Main {
         }
     }
 
+    public void moduleSettingsForm(ProjectModule module){
+        FormBuilder form = uiBooster.createForm("Module Settings");
+        Form f = null;
+        form.addText("Module Name:", project.getName())
+                .addText("Project Package:", project.getProjectPackage())
+                .addText("Project Version:", project.getVersion())
+                .addText("Main Class:", project.getMainClass())
+                .addButton("Path Configuration", this::projectPathSettingsForm)
+                .addButton("Build Configuration", this::projectCompileSettingsForm);
+        f = form.show();
+        project.setName(f.getByIndex(0).asString());
+        project.setProjectPackage(f.getByIndex(1).asString());
+        project.setVersion(f.getByIndex(2).asString());
+        project.setMainClass(f.getByIndex(3).asString());
+        projectBuild.setProject(project);
+        projectBuild.createPath();
+        project.save(parse.getProjectDir());
+    }
+
     public void projectSettingsForm(){
         FormBuilder form = uiBooster.createForm("Project Settings");
         Form f = null;
