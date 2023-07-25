@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Corrigido erro de compilação dos implementer;">
+    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Removido logs de teste;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fakeproject/Linux/src/main/java/org/examplo/linux/Main.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/fakeproject/Windows/src/main/java/org/example/windows/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/command/impl/CreateImplementerCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/command/impl/CreateImplementerCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/command/impl/CreateModuleCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/command/impl/CreateModuleCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/compiler/ProjectBuild.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/JarUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/JarUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,15 +140,7 @@
       <workItem from="1690214694570" duration="4393000" />
       <workItem from="1690219760395" duration="6257000" />
       <workItem from="1690231956413" duration="3554000" />
-      <workItem from="1690237445581" duration="4192000" />
-    </task>
-    <task id="LOCAL-00012" summary="Adicionado novos comandos básicos;">
-      <option name="closed" value="true" />
-      <created>1689954141704</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1689954141704</updated>
+      <workItem from="1690237445581" duration="6731000" />
     </task>
     <task id="LOCAL-00013" summary="Código otimizado">
       <option name="closed" value="true" />
@@ -532,7 +526,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690241075315</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="Removido logs de teste;">
+      <option name="closed" value="true" />
+      <created>1690241679569</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1690241679569</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -554,7 +556,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Ao clicar em OK o pacqit realmente fecha e sai;" />
     <MESSAGE value="Classes modificadas substituidas nos imports;" />
     <MESSAGE value="Removido menu principal antigo, agora é um menu em frame;" />
     <MESSAGE value="Adicionado opção de selecionar um outro tipo de compilador;&#10;Adicionado opção de criar um native package ou installer;" />
@@ -579,7 +580,8 @@
     <MESSAGE value="Atualizado gitignore;" />
     <MESSAGE value="Corrigido erro de entry duplo;" />
     <MESSAGE value="Corrigido erro de compilação dos implementer;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrigido erro de compilação dos implementer;" />
+    <MESSAGE value="Removido logs de teste;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removido logs de teste;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
