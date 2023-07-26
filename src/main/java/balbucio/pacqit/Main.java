@@ -133,6 +133,16 @@ public class Main {
         }
     }
 
+    public void openDependenciesForm(){
+        Form f = uiBooster.createForm("Dependency Manager")
+                .addButton("View project dependencies", () -> {})
+                .addButton("View module dependencies", () -> {})
+                .addButton("View implementer dependencies", () -> {})
+                .addButton("Add dependency for Project", () -> {})
+                .addButton("Add dependency for Module", () -> {})
+                .addButton("Add dependency for Implementer", () -> {}).show();
+    }
+
     public void createModuleForm(){
         ProjectModule module = new ProjectModule();
         List<String> selection = new ArrayList<>();
@@ -165,7 +175,7 @@ public class Main {
         Form form = uiBooster.createForm("Module Manager")
                 .addLabel("Number of Modules: "+getModules().size())
                 .addButton("Create New Module", this::createModuleForm)
-                .addButton("Configure Module", this::listModulesForm)
+                .addButton("Configure Module", this::moduleSettingsForm)
                 .addButton("Delete Module", this::deleteModulesForm)
                 .show();
     }
@@ -174,17 +184,29 @@ public class Main {
         Form form = uiBooster.createForm("Implementer Manager")
                 .addLabel("Number of Implementers: "+getImplementers().size())
                 .addButton("Create New Implementer", this::createImplementerForm)
-                .addButton("Configure Implementer", this::listImplementerForm)
+                .addButton("Configure Implementer", this::implementerSettingsForm)
                 .addButton("Delete Implementer", this::deleteImplementerForm)
                 .show();
     }
 
-    public void deleteModulesForm(){
+    public ProjectModule selectModuleForm(String action){
         String selection = new UiBooster().showSelectionDialog(
-                "Which module do you want to delete?",
+                "Which module do you want to "+action+"?",
                 "Modules",
                 project.getModules());
-        ProjectModule module = getProjectModule(selection);
+        return getProjectModule(selection);
+    }
+
+    public ProjectImplementer selectImplementerForm(String action){
+        String selection = new UiBooster().showSelectionDialog(
+                "Which implementer do you want to "+action+"?",
+                "Implementers",
+                project.getModules());
+        return getProjectImplementer(selection);
+    }
+
+    public void deleteModulesForm(){
+        ProjectModule module = selectModuleForm("delete");
         if(module != null){
             uiBooster.showConfirmDialog("Are you sure you want to delete this module? (his files will not be deleted)",
                     "Delete Module",
@@ -199,11 +221,7 @@ public class Main {
     }
 
     public void deleteImplementerForm(){
-        String selection = new UiBooster().showSelectionDialog(
-                "Which implementer do you want to delete?",
-                "Implementers",
-                project.getModules());
-        ProjectImplementer module = getProjectImplementer(selection);
+        ProjectImplementer module = selectImplementerForm("delete");
         if(module != null){
             uiBooster.showConfirmDialog("Are you sure you want to delete this implementer? (his files will not be deleted)",
                     "Delete Module",
@@ -217,28 +235,8 @@ public class Main {
         }
     }
 
-    public void listModulesForm(){
-        String selection = new UiBooster().showSelectionDialog(
-                "Which module do you want to configure?",
-                "Modules",
-                project.getModules());
-        ProjectModule module = getProjectModule(selection);
-        if(module != null){
-            moduleSettingsForm(module);
-        }
-    }
-
-    public void listImplementerForm(){
-        String selection = new UiBooster().showSelectionDialog(
-                "Which implementer do you want to configure?",
-                "Implementers",
-                project.getImplementers());
-        ProjectImplementer module = getProjectImplementer(selection);
-        if(module != null){
-            implementerSettingsForm(module);
-        }
-    }
-    public void moduleSettingsForm(ProjectModule module){
+    public void moduleSettingsForm() {
+        ProjectModule module = selectModuleForm("configure");
         FormBuilder form = uiBooster.createForm("Module Settings");
         Form f = null;
         form.addText("Module Name:", module.getModuleName())
@@ -251,7 +249,8 @@ public class Main {
         module.save(parse.getProjectDir());
     }
 
-    public void implementerSettingsForm(ProjectImplementer module){
+    public void implementerSettingsForm(){
+        ProjectImplementer module = selectImplementerForm("configure");
         FormBuilder form = uiBooster.createForm("Implementer Settings");
         Form f = null;
         form.addText("Implementer Name:", module.getImplementerName())
