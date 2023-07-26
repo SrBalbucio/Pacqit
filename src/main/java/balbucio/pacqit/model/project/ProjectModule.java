@@ -1,5 +1,6 @@
-package balbucio.pacqit.model;
+package balbucio.pacqit.model.project;
 
+import balbucio.pacqit.model.dependency.DependencyReceiver;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class ProjectModule {
+public class ProjectModule implements DependencyReceiver {
 
     private String modulePath = "";
     private String moduleName = "Unknown";
@@ -89,5 +90,10 @@ public class ProjectModule {
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void addDependency(String dependecyParam) {
+
     }
 }

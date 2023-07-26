@@ -7,7 +7,7 @@ import balbucio.pacqit.bytecode.LoaderConfig;
 import balbucio.pacqit.compiler.ProjectBuild;
 import balbucio.pacqit.logger.ObfuscatorLoggerFormat;
 import balbucio.pacqit.model.Manifest;
-import balbucio.pacqit.model.Project;
+import balbucio.pacqit.model.project.Project;
 import balbucio.pacqit.obfuscation.impl.HandlerObfuscation;
 import balbucio.pacqit.utils.ClasseUtils;
 import balbucio.pacqit.utils.JarUtils;

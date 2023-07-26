@@ -3,7 +3,7 @@ package balbucio.pacqit.page;
 import balbucio.org.ejsl.component.JImage;
 import balbucio.org.ejsl.utils.ImageUtils;
 import balbucio.pacqit.Main;
-import balbucio.pacqit.model.Project;
+import balbucio.pacqit.model.project.Project;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

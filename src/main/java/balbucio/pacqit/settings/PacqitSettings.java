@@ -1,15 +1,11 @@
 package balbucio.pacqit.settings;
 
-import balbucio.pacqit.model.ProjectImplementer;
-import balbucio.pacqit.model.ProjectModule;
+import balbucio.pacqit.model.project.ProjectImplementer;
 import balbucio.pacqit.utils.ThemeUtils;
-import com.formdev.flatlaf.IntelliJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatArcDarkOrangeIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatMonokaiProIJTheme;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.commons.io.FileSystem;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;

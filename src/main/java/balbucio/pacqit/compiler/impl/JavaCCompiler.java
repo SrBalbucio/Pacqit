@@ -2,7 +2,6 @@ package balbucio.pacqit.compiler.impl;
 
 import balbucio.pacqit.compiler.Compiler;
 import balbucio.pacqit.compiler.ProjectBuild;
-import balbucio.pacqit.model.Project;
 import balbucio.pacqit.utils.ClasseUtils;
 import balbucio.pacqit.utils.JarUtils;
 import balbucio.pacqit.utils.PackageUtils;

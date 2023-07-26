@@ -2,7 +2,7 @@ package balbucio.pacqit.command.impl;
 
 import balbucio.pacqit.Main;
 import balbucio.pacqit.command.Command;
-import balbucio.pacqit.model.ProjectImplementer;
+import balbucio.pacqit.model.project.ProjectImplementer;
 
 import java.awt.*;
 import java.util.Scanner;

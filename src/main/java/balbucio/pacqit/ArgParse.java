@@ -1,6 +1,6 @@
 package balbucio.pacqit;
 
-import balbucio.pacqit.model.Project;
+import balbucio.pacqit.model.project.Project;
 import balbucio.pacqit.model.ProjectAction;
 import lombok.Data;
 
