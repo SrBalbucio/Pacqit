@@ -2,28 +2,24 @@ package balbucio.pacqit;
 
 import balbucio.pacqit.command.CommandManager;
 import balbucio.pacqit.compiler.CompilerType;
+import balbucio.pacqit.dependencies.DependencyManager;
 import balbucio.pacqit.logger.LoggerFormat;
-import balbucio.pacqit.model.Project;
+import balbucio.pacqit.model.dependency.DependencyReceiver;
+import balbucio.pacqit.model.project.Project;
 import balbucio.pacqit.compiler.ProjectBuild;
-import balbucio.pacqit.model.ProjectImplementer;
-import balbucio.pacqit.model.ProjectModule;
-import balbucio.pacqit.obfuscation.ProjectObfuscator;
+import balbucio.pacqit.model.project.ProjectImplementer;
+import balbucio.pacqit.model.project.ProjectModule;
 import balbucio.pacqit.page.MainPage;
 import balbucio.pacqit.settings.PacqitSettings;
 import balbucio.pacqit.utils.ThemeUtils;
-import com.formdev.flatlaf.FlatClientProperties;
-import com.formdev.flatlaf.FlatIntelliJLaf;
-import com.formdev.flatlaf.FlatLaf;
-import com.formdev.flatlaf.intellijthemes.FlatMonokaiProIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
 import de.milchreis.uibooster.UiBooster;
 import de.milchreis.uibooster.model.Form;
 import de.milchreis.uibooster.model.FormBuilder;
+import de.milchreis.uibooster.model.ListElement;
 import de.milchreis.uibooster.model.UiBoosterOptions;
 import lombok.Data;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,6 +44,7 @@ public class Main {
     private List<ProjectModule> modules = new ArrayList<>();
     private List<ProjectImplementer> implementers = new ArrayList<>();
     private CommandManager commandManager;
+    private DependencyManager dependencyManager;
     private ProjectBuild projectBuild;
     private UiBooster uiBooster;
     private Scanner input;
@@ -64,6 +61,7 @@ public class Main {
         this.input = new Scanner(System.in);
         this.uiBooster = new UiBooster(UiBoosterOptions.Theme.DEFAULT, "/pacqit.png");
         this.commandManager = new CommandManager(this);
+        this.dependencyManager = new DependencyManager(this);
         this.project = Project.loadProject(parse.getProjectDir());
         if(project != null) {
             this.modules = ProjectModule.getModulesInPath(parse.getProjectDir() != null ? parse.getProjectDir() : new File(System.getProperty("user.dir")));
@@ -133,16 +131,6 @@ public class Main {
         }
     }
 
-    public void openDependenciesForm(){
-        Form f = uiBooster.createForm("Dependency Manager")
-                .addButton("View project dependencies", () -> {})
-                .addButton("View module dependencies", () -> {})
-                .addButton("View implementer dependencies", () -> {})
-                .addButton("Add dependency for Project", () -> {})
-                .addButton("Add dependency for Module", () -> {})
-                .addButton("Add dependency for Implementer", () -> {}).show();
-    }
-
     public void createModuleForm(){
         ProjectModule module = new ProjectModule();
         List<String> selection = new ArrayList<>();
@@ -169,6 +157,16 @@ public class Main {
             project.getModules().add(module.getModuleName());
             project.save(parse.getProjectDir());
         }
+    }
+
+    public void openDependenciesForm(){
+        Form f = uiBooster.createForm("Dependency Manager")
+                .addButton("View project dependencies", () -> dependencyManager.searchAndAddDependecy(project))
+                .addButton("View module dependencies", () -> dependencyManager.searchAndAddDependecy(selectModuleForm("add dependency")))
+                .addButton("View implementer dependencies", () -> dependencyManager.searchAndAddDependecy(selectImplementerForm("add dependency")))
+                .addButton("Add dependency for Project", () -> {})
+                .addButton("Add dependency for Module", () -> {})
+                .addButton("Add dependency for Implementer", () -> {}).show();
     }
 
     public void moduleManagerForm(){

@@ -89,6 +89,7 @@ public class MainPage extends JFrame {
         JButton openSettings = new JButton("Open project settings");
         openSettings.addActionListener(e -> app.projectSettingsForm());
         JButton dependencies = new JButton("Open dependency manager");
+        dependencies.addActionListener(e -> app.openDependenciesForm());
         JButton module = new JButton("Open module manager");
         module.addActionListener(e -> app.moduleManagerForm());
         JButton implementer = new JButton("Open implementer manager");
