@@ -39,4 +39,9 @@ public class MavenDependency implements Dependency{
     public String getToolName() {
         return "Maven";
     }
+
+    @Override
+    public String getLanguage() {
+        return "Java";
+    }
 }

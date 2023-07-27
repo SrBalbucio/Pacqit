@@ -33,4 +33,9 @@ public class GradleDependency implements Dependency{
     public String getToolName() {
         return "Gradle";
     }
+
+    @Override
+    public String getLanguage() {
+        return "Java";
+    }
 }

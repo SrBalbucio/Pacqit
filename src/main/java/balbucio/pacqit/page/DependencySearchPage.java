@@ -58,6 +58,7 @@ public class DependencySearchPage extends JFrame {
         mostUsedDependencies.forEach( dependency -> {
             StringBuilder description = new StringBuilder();
             description.append("Indexed or created in: "+dependency.getToolName()+"\n");
+            description.append("Language: "+dependency.getLanguage());
             description.append("Package: "+dependency.getPackage()+"\n");
             description.append("Version: "+dependency.getVersion()+"\n");
             description.append("Number of uses: "+dependency.getUses());

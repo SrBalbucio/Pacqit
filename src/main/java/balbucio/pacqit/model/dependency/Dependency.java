@@ -8,4 +8,5 @@ public interface Dependency {
     long getUses();
     String getLogo();
     String getToolName();
+    String getLanguage();
 }
