@@ -7,7 +7,7 @@ import balbucio.responsivescheduler.ResponsiveScheduler;
 public class PacqitApp {
 
     public static void main(String[] args) {
-
+        new PacqitApp();
     }
 
     private ResponsiveScheduler scheduler;
@@ -15,6 +15,7 @@ public class PacqitApp {
 
     public PacqitApp(){
         this.dependencyManager = new DependencyManager();
+        this.scheduler = new ResponsiveScheduler();
         scheduler.repeatTask(new DependencyIndexTask(dependencyManager), 1000, 1000*60*60);
     }
 }

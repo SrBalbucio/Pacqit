@@ -1,5 +1,6 @@
 package balbucio.pacqitapp.dependencies;
 
+import balbucio.pacqitapp.dependencies.logger.LoggerFormat;
 import balbucio.pacqitapp.dependencies.utils.MavenUtils;
 import balbucio.pacqitapp.dependencies.xmlhandler.RepositoryPomHandler;
 import balbucio.pacqitapp.model.dependency.Dependency;
@@ -19,12 +20,16 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Logger;
 
 public class DependencyManager {
     private File dbFile = new File(System.getenv("APPDATA") + "/Pacqit", "dependencies.db");
     private HikariSQLiteInstance database;
+    private Logger LOGGER;
 
     public DependencyManager(){
+        configureLogger();
         SqliteConfig config = new SqliteConfig(dbFile);
         config.createFile();
         database = new HikariSQLiteInstance(config);
@@ -32,6 +37,14 @@ public class DependencyManager {
         database.createTable("registeredDependencies", "type VARCHAR(255), name VARCHAR(255), package VARCHAR(255), version VARCHAR(255), uses BIGINT");
     }
 
+    private void configureLogger(){
+        LOGGER = Logger.getLogger("DEPENDENCIES");
+        LOGGER.setUseParentHandlers(false);
+        ConsoleHandler handler = new ConsoleHandler();
+        LoggerFormat format = new LoggerFormat();
+        handler.setFormatter(format);
+        LOGGER.addHandler(handler);
+    }
 
     public void loadMavenDependencies(){
         String userHome = System.getProperty("user.home");
@@ -43,6 +56,10 @@ public class DependencyManager {
                 SAXParser saxParser = factory.newSAXParser();
                 RepositoryPomHandler handler = new RepositoryPomHandler();
                 saxParser.parse(pom, handler);
+                MavenDependency dependency = handler.getDependency();
+                if(dependency != null) {
+                    LOGGER.info("Nova dependência carregada: "+dependency.getName()+":"+dependency.getPackage()+":"+dependency.getVersion());
+                }
             } catch (Exception e){
                 e.printStackTrace();
             }
