@@ -2,9 +2,8 @@ package balbucio.pacqit;
 
 import balbucio.pacqit.command.CommandManager;
 import balbucio.pacqit.compiler.CompilerType;
-import balbucio.pacqit.dependencies.DependencyManager;
+import balbucio.pacqitapp.dependencies.DependencyManager;
 import balbucio.pacqit.logger.LoggerFormat;
-import balbucio.pacqit.model.dependency.DependencyReceiver;
 import balbucio.pacqit.model.project.Project;
 import balbucio.pacqit.compiler.ProjectBuild;
 import balbucio.pacqit.model.project.ProjectImplementer;
@@ -15,7 +14,6 @@ import balbucio.pacqit.utils.ThemeUtils;
 import de.milchreis.uibooster.UiBooster;
 import de.milchreis.uibooster.model.Form;
 import de.milchreis.uibooster.model.FormBuilder;
-import de.milchreis.uibooster.model.ListElement;
 import de.milchreis.uibooster.model.UiBoosterOptions;
 import lombok.Data;
 
@@ -61,7 +59,7 @@ public class Main {
         this.input = new Scanner(System.in);
         this.uiBooster = new UiBooster(UiBoosterOptions.Theme.DEFAULT, "/pacqit.png");
         this.commandManager = new CommandManager(this);
-        this.dependencyManager = new DependencyManager(this);
+        this.dependencyManager = new DependencyManager();
         this.project = Project.loadProject(parse.getProjectDir());
         if(project != null) {
             this.modules = ProjectModule.getModulesInPath(parse.getProjectDir() != null ? parse.getProjectDir() : new File(System.getProperty("user.dir")));

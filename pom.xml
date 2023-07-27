@@ -7,12 +7,18 @@
     <groupId>balbucio.pacqit</groupId>
     <artifactId>Pacqit</artifactId>
     <version>1.0</version>
+    <packaging>pom</packaging>
 
     <properties>
         <maven.compiler.source>20</maven.compiler.source>
         <maven.compiler.target>20</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+
+    <modules>
+        <module>PacqitApp</module>
+    </modules>
 
     <build>
         <plugins>
@@ -143,9 +149,10 @@
             <version>f88ea34cc9</version>
         </dependency>
         <dependency>
-            <groupId>com.github.SrBalbucio</groupId>
-            <artifactId>ResponsiveScheduler</artifactId>
-            <version>v1.0.2</version>
+            <groupId>balbucio.pacqit</groupId>
+            <artifactId>PacqitApp</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

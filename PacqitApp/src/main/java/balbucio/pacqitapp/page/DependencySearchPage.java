@@ -1,10 +1,9 @@
-package balbucio.pacqit.page;
+package balbucio.pacqitapp.page;
 
 import balbucio.org.ejsl.utils.ImageUtils;
-import balbucio.pacqit.Main;
-import balbucio.pacqit.model.dependency.Dependency;
-import balbucio.pacqit.model.dependency.DependencyReceiver;
-import balbucio.pacqit.utils.swing.ListDialog;
+import balbucio.pacqitapp.dependencies.DependencyManager;
+import balbucio.pacqitapp.model.dependency.DependencyReceiver;
+import balbucio.pacqitapp.swing.ListDialog;
 import balbucio.paginatedlist.PaginatedList;
 import de.milchreis.uibooster.model.ListElement;
 import javax.swing.*;
@@ -19,13 +18,12 @@ import java.util.Vector;
 
 public class DependencySearchPage extends JFrame implements ActionListener, DocumentListener {
 
-    private Main app;
     private DependencyReceiver receiver;
+    private DependencyManager manager;
 
-    public DependencySearchPage(Main app, DependencyReceiver receiver){
-        this.app = app;
+    public DependencySearchPage(DependencyManager manager, DependencyReceiver receiver){
+        this.manager = manager;
         this.receiver = receiver;
-        app.getSettings().setThemeInApp(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setIconImage(ImageUtils.getImage(this.getClass().getResourceAsStream("/pacqit.png")));
         this.setSize(380, 640);
@@ -60,7 +58,7 @@ public class DependencySearchPage extends JFrame implements ActionListener, Docu
         searchBar.add(search);
         main.add(searchBar);
         List<ListElement> element = new ArrayList<>();
-        app.getDependencyManager().mostUsedDependencies().forEach(dependency -> {
+       manager.mostUsedDependencies().forEach(dependency -> {
             StringBuilder description = new StringBuilder();
             description.append("Indexed or created in: " + dependency.getToolName() + "\n");
             description.append("Language: " + dependency.getLanguage());
@@ -111,7 +109,7 @@ public class DependencySearchPage extends JFrame implements ActionListener, Docu
     @Override
     public void actionPerformed(ActionEvent e) {
         List<ListElement> element = new ArrayList<>();
-        app.getDependencyManager().getDependencies(bar.getText()).forEach( dependency -> {
+        manager.getDependencies(bar.getText()).forEach( dependency -> {
             StringBuilder description = new StringBuilder();
             description.append("Indexed or created in: "+dependency.getToolName()+"\n");
             description.append("Language: "+dependency.getLanguage());

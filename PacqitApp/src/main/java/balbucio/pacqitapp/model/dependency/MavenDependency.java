@@ -1,23 +1,25 @@
-package balbucio.pacqit.model.dependency;
+package balbucio.pacqitapp.model.dependency;
+
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class GradleDependency implements Dependency{
+public class MavenDependency implements Dependency{
 
-    private String name;
     private String pckg;
+    private String artifact;
     private String version;
     private long uses;
-    private List<String> dependencies;
+    private List<String> dependencies = new ArrayList<>();
 
-    public GradleDependency(String name, String pckg, String version, long uses) {
-        this.name = name;
+    public MavenDependency(String pckg, String artifact, String version, long uses) {
         this.pckg = pckg;
+        this.artifact = artifact;
         this.version = version;
         this.uses = uses;
     }
@@ -28,18 +30,22 @@ public class GradleDependency implements Dependency{
     }
 
     @Override
+    public String getName() {
+        return artifact;
+    }
+
+    @Override
     public String getLogo() {
-        return "gradle.png";
+        return "maven.png";
     }
 
     @Override
     public String getToolName() {
-        return "Gradle";
+        return "Maven";
     }
 
     @Override
     public String getLanguage() {
         return "Java";
     }
-
 }

@@ -1,13 +1,12 @@
-package balbucio.pacqit.dependencies;
+package balbucio.pacqitapp.dependencies;
 
-import balbucio.pacqit.Main;
-import balbucio.pacqit.dependencies.utils.MavenUtils;
-import balbucio.pacqit.dependencies.xmlhandler.RepositoryPomHandler;
-import balbucio.pacqit.model.dependency.Dependency;
-import balbucio.pacqit.model.dependency.DependencyReceiver;
-import balbucio.pacqit.model.dependency.GradleDependency;
-import balbucio.pacqit.model.dependency.MavenDependency;
-import balbucio.pacqit.page.DependencySearchPage;
+import balbucio.pacqitapp.dependencies.utils.MavenUtils;
+import balbucio.pacqitapp.dependencies.xmlhandler.RepositoryPomHandler;
+import balbucio.pacqitapp.model.dependency.Dependency;
+import balbucio.pacqitapp.model.dependency.DependencyReceiver;
+import balbucio.pacqitapp.model.dependency.GradleDependency;
+import balbucio.pacqitapp.model.dependency.MavenDependency;
+import balbucio.pacqitapp.page.DependencySearchPage;
 import balbucio.sqlapi.model.ConditionModifier;
 import balbucio.sqlapi.model.ConditionValue;
 import balbucio.sqlapi.model.ResultValue;
@@ -24,7 +23,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class DependencyManager {
     private File dbFile = new File(System.getenv("APPDATA") + "/Pacqit", "dependencies.db");
     private HikariSQLiteInstance database;
-    private Main app;
 
     public DependencyManager(){
         SqliteConfig config = new SqliteConfig(dbFile);
@@ -34,10 +32,6 @@ public class DependencyManager {
         database.createTable("registeredDependencies", "type VARCHAR(255), name VARCHAR(255), package VARCHAR(255), version VARCHAR(255), uses BIGINT");
     }
 
-    public DependencyManager(Main app) {
-        this();
-        this.app = app;
-    }
 
     public void loadMavenDependencies(){
         String userHome = System.getProperty("user.home");
@@ -103,6 +97,6 @@ public class DependencyManager {
             searchPage.requestFocus();
             return;
         }
-        this.searchPage = new DependencySearchPage(app, receiver);
+        this.searchPage = new DependencySearchPage(this, receiver);
     }
 }

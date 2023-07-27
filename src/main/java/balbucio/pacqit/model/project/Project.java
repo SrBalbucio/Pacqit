@@ -1,6 +1,6 @@
 package balbucio.pacqit.model.project;
 
-import balbucio.pacqit.model.dependency.DependencyReceiver;
+import balbucio.pacqitapp.model.dependency.DependencyReceiver;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

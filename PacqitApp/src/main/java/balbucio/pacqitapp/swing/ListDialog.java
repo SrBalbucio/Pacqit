@@ -1,6 +1,5 @@
-package balbucio.pacqit.utils.swing;
+package balbucio.pacqitapp.swing;
 
-import balbucio.pacqit.page.DependencySearchPage;
 import de.milchreis.uibooster.model.ListElement;
 import de.milchreis.uibooster.model.SelectElementListener;
 

@@ -4,17 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Adicionado sistema de dependências;">
-      <change afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/dependency/GradleDependency.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ant.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/gradle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ivy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/maven.png" afterDir="false" />
+    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Sistema de indexação de dependências pelo PacqitApp.">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/dependencies/DependencyManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/dependencies/DependencyManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/dependency/Dependency.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/dependency/Dependency.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/dependency/MavenDependency.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/model/dependency/MavenDependency.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/page/DependencySearchPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/page/DependencySearchPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/task/DependencyIndexTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/task/DependencyIndexTask.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +32,10 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 5
+}]]></component>
   <component name="ProjectId" id="2SoXB42A8jv5kCqeZ4KPetA7XHW" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -52,6 +49,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
+    "jdk.selected.JAVA_MODULE": "20",
     "last_opened_file_path": "C:/Users/srbal/Documents/Pacqit/src/main/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -146,47 +144,8 @@
       <workItem from="1690237445581" duration="6731000" />
       <workItem from="1690246932308" duration="1275000" />
       <workItem from="1690294446343" duration="18885000" />
-      <workItem from="1690329824682" duration="6721000" />
-    </task>
-    <task id="LOCAL-00026" summary="Corrigido bugs do JarLoader;">
-      <option name="closed" value="true" />
-      <created>1690059195484</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1690059195484</updated>
-    </task>
-    <task id="LOCAL-00027" summary="Adicionado novas pastas ao menu;">
-      <option name="closed" value="true" />
-      <created>1690059652746</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1690059652746</updated>
-    </task>
-    <task id="LOCAL-00028" summary="Removido load no construtor do JarLoader;">
-      <option name="closed" value="true" />
-      <created>1690059714592</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1690059714592</updated>
-    </task>
-    <task id="LOCAL-00029" summary="Correção de bugs;">
-      <option name="closed" value="true" />
-      <created>1690064163176</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1690064163176</updated>
-    </task>
-    <task id="LOCAL-00030" summary="Corrigido bugs #2;">
-      <option name="closed" value="true" />
-      <created>1690065907228</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1690065907228</updated>
+      <workItem from="1690329824682" duration="7597000" />
+      <workItem from="1690469646937" duration="6842000" />
     </task>
     <task id="LOCAL-00031" summary="Corrigido obfuscação;">
       <option name="closed" value="true" />
@@ -540,7 +499,47 @@
       <option name="project" value="LOCAL" />
       <updated>1690334861132</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="Adicionado sistema de dependências;">
+      <option name="closed" value="true" />
+      <created>1690338244596</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1690338244596</updated>
+    </task>
+    <task id="LOCAL-00076" summary="Adicionado fun para retornar language da dependência;">
+      <option name="closed" value="true" />
+      <created>1690469922353</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1690469922354</updated>
+    </task>
+    <task id="LOCAL-00077" summary="Transferido os Utils do ListElement dialog para uma classe própria">
+      <option name="closed" value="true" />
+      <created>1690470302678</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1690470302678</updated>
+    </task>
+    <task id="LOCAL-00078" summary="Adicionado utils do maven;">
+      <option name="closed" value="true" />
+      <created>1690473697575</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1690473697576</updated>
+    </task>
+    <task id="LOCAL-00079" summary="Sistema de indexação de dependências pelo PacqitApp.">
+      <option name="closed" value="true" />
+      <created>1690476500839</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1690476500840</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -562,10 +561,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Adição do comando para criar modulo implementador;" />
-    <MESSAGE value="Modificações no sistema de compilação para se adaptar aos modulos e implementadores;" />
-    <MESSAGE value="Adição do menu de criação do implementador;" />
-    <MESSAGE value="Removido buildJAR do Compiler;" />
     <MESSAGE value="Implementado Implementers e Modules;" />
     <MESSAGE value="Quando o createImplementer for finalizado ele gera as pastas;" />
     <MESSAGE value="Corrigido o getPath do Implementer;" />
@@ -587,7 +582,11 @@
     <MESSAGE value="Reduzido código para gettar um modulo ou implementer;" />
     <MESSAGE value="Reorganização das classes de projeto e dependencia;" />
     <MESSAGE value="Adicionado sistema de dependências;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adicionado sistema de dependências;" />
+    <MESSAGE value="Adicionado fun para retornar language da dependência;" />
+    <MESSAGE value="Transferido os Utils do ListElement dialog para uma classe própria" />
+    <MESSAGE value="Adicionado utils do maven;" />
+    <MESSAGE value="Sistema de indexação de dependências pelo PacqitApp." />
+    <option name="LAST_COMMIT_MESSAGE" value="Sistema de indexação de dependências pelo PacqitApp." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

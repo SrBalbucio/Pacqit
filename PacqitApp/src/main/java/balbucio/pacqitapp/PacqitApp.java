@@ -1,6 +1,7 @@
-package balbucio.pacqit;
+package balbucio.pacqitapp;
 
-import balbucio.pacqit.dependencies.DependencyManager;
+import balbucio.pacqitapp.dependencies.DependencyManager;
+import balbucio.pacqitapp.task.DependencyIndexTask;
 import balbucio.responsivescheduler.ResponsiveScheduler;
 
 public class PacqitApp {
@@ -14,7 +15,6 @@ public class PacqitApp {
 
     public PacqitApp(){
         this.dependencyManager = new DependencyManager();
-
-        dependencyManager.loadMavenDependencies();
+        scheduler.repeatTask(new DependencyIndexTask(dependencyManager), 1000, 1000*60*60);
     }
 }

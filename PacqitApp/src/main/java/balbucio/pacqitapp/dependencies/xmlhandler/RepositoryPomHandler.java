@@ -1,6 +1,6 @@
-package balbucio.pacqit.dependencies.xmlhandler;
+package balbucio.pacqitapp.dependencies.xmlhandler;
 
-import balbucio.pacqit.model.dependency.MavenDependency;
+import balbucio.pacqitapp.model.dependency.MavenDependency;
 import lombok.Getter;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;

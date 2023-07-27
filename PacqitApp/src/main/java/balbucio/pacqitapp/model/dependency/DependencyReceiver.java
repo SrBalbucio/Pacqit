@@ -1,4 +1,4 @@
-package balbucio.pacqit.model.dependency;
+package balbucio.pacqitapp.model.dependency;
 
 import java.util.List;
 
