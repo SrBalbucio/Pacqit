@@ -1,5 +1,7 @@
 package balbucio.pacqit.model.dependency;
 
+import java.util.List;
+
 public interface Dependency {
 
     String getPackage();
@@ -9,4 +11,5 @@ public interface Dependency {
     String getLogo();
     String getToolName();
     String getLanguage();
+    List<String> getDependencies();
 }

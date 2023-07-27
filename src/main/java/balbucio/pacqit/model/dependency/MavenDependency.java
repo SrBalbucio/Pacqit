@@ -4,6 +4,9 @@ package balbucio.pacqit.model.dependency;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 public class MavenDependency implements Dependency{
@@ -12,6 +15,7 @@ public class MavenDependency implements Dependency{
     private String artifact;
     private String version;
     private long uses;
+    private List<String> dependencies = new ArrayList<>();
 
     public MavenDependency(String pckg, String artifact, String version, long uses) {
         this.pckg = pckg;

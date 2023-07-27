@@ -1,57 +1,103 @@
 package balbucio.pacqit.dependencies;
 
 import balbucio.pacqit.Main;
+import balbucio.pacqit.dependencies.utils.MavenUtils;
+import balbucio.pacqit.dependencies.xmlhandler.RepositoryPomHandler;
 import balbucio.pacqit.model.dependency.Dependency;
 import balbucio.pacqit.model.dependency.DependencyReceiver;
 import balbucio.pacqit.model.dependency.GradleDependency;
 import balbucio.pacqit.model.dependency.MavenDependency;
 import balbucio.pacqit.page.DependencySearchPage;
+import balbucio.sqlapi.model.ConditionModifier;
+import balbucio.sqlapi.model.ConditionValue;
 import balbucio.sqlapi.model.ResultValue;
 import balbucio.sqlapi.sqlite.HikariSQLiteInstance;
 import balbucio.sqlapi.sqlite.SqliteConfig;
 
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class DependencyManager {
-    private File dbFile = new File(System.getenv("APPDATA")+"/Pacqit", "dependencies.db");
+    private File dbFile = new File(System.getenv("APPDATA") + "/Pacqit", "dependencies.db");
     private HikariSQLiteInstance database;
     private Main app;
 
-    public DependencyManager(Main app) {
-        this.app = app;
+    public DependencyManager(){
         SqliteConfig config = new SqliteConfig(dbFile);
         config.createFile();
         database = new HikariSQLiteInstance(config);
         config.setMaxRows(150);
-        database.createTable("registeredDependencies", "type VARCHAR(255), name VARCHAR(255), package VARCHAR(255), version VARCHAR(255), uses BIGINT(MAX)");
+        database.createTable("registeredDependencies", "type VARCHAR(255), name VARCHAR(255), package VARCHAR(255), version VARCHAR(255), uses BIGINT");
     }
 
-    public List<Dependency> mostUsedDependencies(){
+    public DependencyManager(Main app) {
+        this();
+        this.app = app;
+    }
+
+    public void loadMavenDependencies(){
+        String userHome = System.getProperty("user.home");
+        String m2Repository = userHome + File.separator + ".m2" + File.separator + "repository";
+        List<File> pomFiles = MavenUtils.findPomFiles(m2Repository);
+        pomFiles.forEach(pom -> {
+            try {
+                SAXParserFactory factory = SAXParserFactory.newInstance();
+                SAXParser saxParser = factory.newSAXParser();
+                RepositoryPomHandler handler = new RepositoryPomHandler();
+                saxParser.parse(pom, handler);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public List<Dependency> mostUsedDependencies() {
         List<Dependency> dep = new ArrayList<>();
         List<ResultValue> values = database.getAllValuesOrderedBy("uses", "registeredDependencies");
         AtomicInteger i = new AtomicInteger(50);
         values.forEach(r -> {
-            if(i.get() == 0){
+            if (i.get() == 0) {
                 return;
             }
-            String type = r.asString("type");
-            if(type.equals("MAVEN")){
-                dep.add(new MavenDependency(r.asString("package"), r.asString("name"), r.asString("version"), r.asLong("uses")));
-            } else if(type.equals("GRADLE")){
-                dep.add(new GradleDependency(r.asString("package"), r.asString("name"), r.asString("version"), r.asLong("uses")));
-            } else if(type.equals("LOCAL")){
-
-            }
+            dep.add(getDependencyFromResultValue(r));
             i.getAndDecrement();
         });
         return dep;
     }
 
-    private DependencySearchPage searchPage;
+    private ConditionValue[] searchdependency = new ConditionValue[]{
+            new ConditionValue("name", ConditionValue.Conditional.EQUALS, "", ConditionValue.Operator.NULL),
+            new ConditionValue("package", ConditionValue.Conditional.EQUALS, "", ConditionValue.Operator.OR),
+            new ConditionValue("version", ConditionValue.Conditional.EQUALS, "", ConditionValue.Operator.OR)
+    };
 
+    public List<Dependency> getDependencies(String query) {
+        List<Dependency> dep = new ArrayList<>();
+        List<ResultValue> values = database.getAllValuesFromColumns("registeredDependencies", new ConditionModifier(searchdependency, new String(query), new String(query), new String(query)).done());
+        values.forEach(r -> {
+            dep.add(getDependencyFromResultValue(r));
+        });
+        return dep;
+    }
+
+    public Dependency getDependencyFromResultValue(ResultValue r) {
+        String type = r.asString("type");
+        if(type.equals("MAVEN")){
+            return new MavenDependency(r.asString("package"), r.asString("name"), r.asString("version"), r.asLong("uses"));
+        } else if(type.equals("GRADLE")){
+            return new GradleDependency(r.asString("package"), r.asString("name"), r.asString("version"), r.asLong("uses"));
+        } else if(type.equals("LOCAL")){
+            return null;
+        } else{
+            return null;
+        }
+    }
+
+    private DependencySearchPage searchPage;
     public void searchAndAddDependecy(DependencyReceiver receiver){
         if(searchPage != null){
             searchPage.requestFocus();

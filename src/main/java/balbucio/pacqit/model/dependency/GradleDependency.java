@@ -3,6 +3,8 @@ package balbucio.pacqit.model.dependency;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 public class GradleDependency implements Dependency{
@@ -11,6 +13,7 @@ public class GradleDependency implements Dependency{
     private String pckg;
     private String version;
     private long uses;
+    private List<String> dependencies;
 
     public GradleDependency(String name, String pckg, String version, long uses) {
         this.name = name;
@@ -38,4 +41,5 @@ public class GradleDependency implements Dependency{
     public String getLanguage() {
         return "Java";
     }
+
 }

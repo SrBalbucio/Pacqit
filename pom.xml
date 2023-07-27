@@ -135,12 +135,17 @@
         <dependency>
             <groupId>com.github.SrBalbucio</groupId>
             <artifactId>SQLAPI</artifactId>
-            <version>v2.0</version>
+            <version>v2.2</version>
         </dependency>
         <dependency>
             <groupId>com.github.SrBalbucio</groupId>
             <artifactId>PaginatedList</artifactId>
             <version>f88ea34cc9</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.SrBalbucio</groupId>
+            <artifactId>ResponsiveScheduler</artifactId>
+            <version>v1.0.2</version>
         </dependency>
     </dependencies>
 </project>
