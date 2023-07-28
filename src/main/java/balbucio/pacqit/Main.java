@@ -162,7 +162,7 @@ public class Main {
                 .addButton("View project dependencies", () -> dependencyManager.searchAndAddDependecy(project))
                 .addButton("View module dependencies", () -> dependencyManager.searchAndAddDependecy(selectModuleForm("add dependency")))
                 .addButton("View implementer dependencies", () -> dependencyManager.searchAndAddDependecy(selectImplementerForm("add dependency")))
-                .addButton("Add dependency for Project", () -> {})
+                .addButton("Add dependency for Project", () -> dependencyManager.searchAndAddDependecy(project))
                 .addButton("Add dependency for Module", () -> {})
                 .addButton("Add dependency for Implementer", () -> {}).show();
     }

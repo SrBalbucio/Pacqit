@@ -21,12 +21,22 @@ public class RepositoryPomHandler extends DefaultHandler {
         }
     }
 
+    private String step = "";
+
     @Override
     public void startElement(String uri, String lName, String qName, Attributes attr) throws SAXException {
+        step = qName;
         if(qName.equalsIgnoreCase("project")){
             this.dependency = new MavenDependency();
+            elementValue = new StringBuilder();
         } else if(qName.equalsIgnoreCase("dependency")){
             this.otherDependecy = new MavenDependency();
+        } else {
+            switch (qName) {
+                case "groupId" -> dependency.setPckg(elementValue.toString());
+                case "artifactId" -> dependency.setArtifact(elementValue.toString());
+                case "version" -> dependency.setVersion(elementValue.toString());
+            }
         }
     }
 
@@ -34,14 +44,7 @@ public class RepositoryPomHandler extends DefaultHandler {
 
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
-        System.out.println(localName);
-        if(localName.equalsIgnoreCase("project")) {
-            switch (qName) {
-                case "groupId" -> dependency.setPckg(elementValue.toString());
-                case "artifactId" -> dependency.setArtifact(elementValue.toString());
-                case "version" -> dependency.setVersion(elementValue.toString());
-            }
-        } else if(localName.equalsIgnoreCase("dependency")){
+        if(step.equalsIgnoreCase("dependency")){
             switch (qName) {
                 case "groupId" -> otherDependecy.setPckg(elementValue.toString());
                 case "artifactId" -> otherDependecy.setArtifact(elementValue.toString());

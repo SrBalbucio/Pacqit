@@ -5,14 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Sistema de indexação de dependências pelo PacqitApp.">
-      <change afterPath="$PROJECT_DIR$/PacqitApp/src/main/java/balbucio/pacqitapp/dependencies/logger/LoggerFormat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PacqitApp/src/main/resources/pacqit.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PacqitApp/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PacqitApp/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PacqitApp/src/main/java/balbucio/pacqitapp/PacqitApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/PacqitApp/src/main/java/balbucio/pacqitapp/PacqitApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PacqitApp/src/main/java/balbucio/pacqitapp/dependencies/DependencyManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/PacqitApp/src/main/java/balbucio/pacqitapp/dependencies/DependencyManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PacqitApp/src/main/java/balbucio/pacqitapp/dependencies/xmlhandler/RepositoryPomHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/PacqitApp/src/main/java/balbucio/pacqitapp/dependencies/xmlhandler/RepositoryPomHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,39 +34,40 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2SoXB42A8jv5kCqeZ4KPetA7XHW" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "jdk.selected.JAVA_MODULE": "20",
-    "last_opened_file_path": "C:/Users/srbal/Documents/Pacqit/src/main/resources",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;20&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/srbal/Documents/Pacqit/PacqitApp/src/main/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\srbal\Documents\Pacqit\PacqitApp\src\main\resources" />
       <recent name="C:\Users\srbal\Documents\Pacqit\src\main\resources" />
       <recent name="C:\Users\srbal\Documents\Pacqit\fakeproject" />
       <recent name="C:\Users\srbal\Documents\Pacqit" />
@@ -166,14 +164,10 @@
       <workItem from="1690294446343" duration="18885000" />
       <workItem from="1690329824682" duration="7597000" />
       <workItem from="1690469646937" duration="9635000" />
-    </task>
-    <task id="LOCAL-00032" summary="Metodo para criar jar obfuscada criado;">
-      <option name="closed" value="true" />
-      <created>1690077954323</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1690077954323</updated>
+      <workItem from="1690498801629" duration="1953000" />
+      <workItem from="1690500781476" duration="1791000" />
+      <workItem from="1690559796325" duration="1036000" />
+      <workItem from="1690563207625" duration="617000" />
     </task>
     <task id="LOCAL-00033" summary="Ignorar metodo main;">
       <option name="closed" value="true" />
@@ -559,7 +553,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690477423641</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="Sistema de indexação de dependências pelo PacqitApp.">
+      <option name="closed" value="true" />
+      <created>1690499094642</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1690499094643</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
