@@ -47,6 +47,8 @@ public class DependencyManager {
     }
 
     public void loadMavenDependencies(){
+        LOGGER.info("---------------------------------------------");
+        LOGGER.info("### INDEXANDO DEPENDÊNCIAS");
         String userHome = System.getProperty("user.home");
         String m2Repository = userHome + File.separator + ".m2" + File.separator + "repository";
         List<File> pomFiles = MavenUtils.findPomFiles(m2Repository);
@@ -58,12 +60,13 @@ public class DependencyManager {
                 saxParser.parse(pom, handler);
                 MavenDependency dependency = handler.getDependency();
                 if(dependency != null) {
-                    LOGGER.info("Nova dependência carregada: "+dependency.getName()+":"+dependency.getPackage()+":"+dependency.getVersion());
+                    LOGGER.info("Nova dependência indexada: "+dependency.getName()+":"+dependency.getPackage()+":"+dependency.getVersion());
                 }
             } catch (Exception e){
                 e.printStackTrace();
             }
         });
+        LOGGER.info("---------------------------------------------");
     }
 
     public List<Dependency> mostUsedDependencies() {

@@ -24,7 +24,7 @@ public class DependencySearchPage extends JFrame implements ActionListener, Docu
     public DependencySearchPage(DependencyManager manager, DependencyReceiver receiver){
         this.manager = manager;
         this.receiver = receiver;
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setIconImage(ImageUtils.getImage(this.getClass().getResourceAsStream("/pacqit.png")));
         this.setSize(380, 640);
         this.setLayout(new BorderLayout());

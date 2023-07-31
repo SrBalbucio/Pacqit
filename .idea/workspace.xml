@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Sistema de indexação de dependências pelo PacqitApp.">
-      <change afterPath="$PROJECT_DIR$/PacqitApp/src/main/resources/pacqit.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PacqitApp/src/main/java/balbucio/pacqitapp/dependencies/DependencyManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/PacqitApp/src/main/java/balbucio/pacqitapp/dependencies/DependencyManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PacqitApp/src/main/java/balbucio/pacqitapp/dependencies/xmlhandler/RepositoryPomHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/PacqitApp/src/main/java/balbucio/pacqitapp/dependencies/xmlhandler/RepositoryPomHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PacqitApp/src/main/java/balbucio/pacqitapp/page/DependencySearchPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/PacqitApp/src/main/java/balbucio/pacqitapp/page/DependencySearchPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +73,7 @@
       <recent name="C:\Users\srbal\Documents\Pacqit\fakeproject\src\main\resource" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.PacqitApp">
     <configuration name="Main No Gui" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="balbucio.pacqit.Main" />
       <module name="Pacqit" />
@@ -131,8 +130,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.PacqitApp" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.ProcessTest" />
       </list>
     </recent_temporary>
@@ -168,14 +167,8 @@
       <workItem from="1690500781476" duration="1791000" />
       <workItem from="1690559796325" duration="1036000" />
       <workItem from="1690563207625" duration="617000" />
-    </task>
-    <task id="LOCAL-00033" summary="Ignorar metodo main;">
-      <option name="closed" value="true" />
-      <created>1690078608888</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1690078608888</updated>
+      <workItem from="1690582322452" duration="243000" />
+      <workItem from="1690762583976" duration="1068000" />
     </task>
     <task id="LOCAL-00034" summary="Manifest funcional no obfuscador;">
       <option name="closed" value="true" />
@@ -561,7 +554,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690499094643</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="Sistema de indexação de dependências pelo PacqitApp.">
+      <option name="closed" value="true" />
+      <created>1690582435446</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1690582435447</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
