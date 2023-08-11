@@ -133,6 +133,17 @@ public class ProjectBuild {
             getModuleLocalLibrariesPath(m).mkdirs();
             getModuleBuildPluginsPath(m).mkdirs();
         });
+
+        try {
+            File pckgP = new File(getSourcePath(), project.getProjectPackage().replace(".", "/"));
+            pckgP.mkdirs();
+            File mainClassP = new File(pckgP, project.getMainClass() + ".java");
+            if (!mainClassP.exists()) {
+                mainClassP.createNewFile();
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -260,12 +271,13 @@ public class ProjectBuild {
         for(ProjectModule smodule : getModulesFromModule(module)){
             compileModule(compiler, smodule);
             if(getModuleJAR(smodule).exists()){
-                BUILD_LOGGER.info(smodule.getModuleName()+"Module JAR not found, was Pacqit able to compile the module?");
                 try {
                     Files.copy(getModuleJAR(smodule).toPath(), new File(getModuleLocalLibrariesPath(module), getModuleJAR(smodule).getName()).toPath());
                 }catch (Exception e){
                     e.printStackTrace();
                 }
+            } else{
+                BUILD_LOGGER.info(smodule.getModuleName()+"Module JAR not found, was Pacqit able to compile the module?");
             }
         }
 
@@ -352,8 +364,6 @@ public class ProjectBuild {
 
     /**
      * Método para compilar as classes do projeto
-     *
-     * Este método utiliza o javac para compilar as classes
      */
     public boolean compileClasses(){
         Compiler projectCompiler = getCompiler(project.getCompilerType());
