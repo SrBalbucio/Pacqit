@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Corrigido em partes o sistema de indexar dependências;">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Correções gerais no código;&#10;Divisão das opções no menu de projetos;">
+      <change afterPath="$PROJECT_DIR$/PacqitApp/src/main/java/balbucio/pacqitapp/page/ProjectCreateDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PacqitApp/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PacqitApp/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/page/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/page/MainPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/settings/PacqitSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/PacqitApp/src/main/java/balbucio/pacqitapp/settings/PacqitSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/ThemeUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/PacqitApp/src/main/java/balbucio/pacqitapp/utils/ThemeUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PacqitApp/src/main/java/balbucio/pacqitapp/PacqitApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/PacqitApp/src/main/java/balbucio/pacqitapp/PacqitApp.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +72,7 @@
       <recent name="C:\Users\srbal\Documents\Pacqit\fakeproject\src\main\resource" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.PacqitApp">
     <configuration name="Main No Gui" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="balbucio.pacqit.Main" />
       <module name="Pacqit" />
@@ -134,8 +129,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.PacqitApp" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.ProcessTest" />
       </list>
     </recent_temporary>
@@ -175,15 +170,7 @@
       <workItem from="1690762583976" duration="1181000" />
       <workItem from="1691756111411" duration="358000" />
       <workItem from="1691863020211" duration="55000" />
-      <workItem from="1692014570082" duration="1286000" />
-    </task>
-    <task id="LOCAL-00035" summary="Ao clicar em OK o pacqit realmente fecha e sai;">
-      <option name="closed" value="true" />
-      <created>1690079215370</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1690079215370</updated>
+      <workItem from="1692014570082" duration="2705000" />
     </task>
     <task id="LOCAL-00036" summary="Classes modificadas substituidas nos imports;">
       <option name="closed" value="true" />
@@ -569,7 +556,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690763729198</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="Correções gerais no código;&#10;Divisão das opções no menu de projetos;">
+      <option name="closed" value="true" />
+      <created>1692016943314</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1692016943314</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -591,7 +586,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Quando o createImplementer for finalizado ele gera as pastas;" />
     <MESSAGE value="Corrigido o getPath do Implementer;" />
     <MESSAGE value="Corrigido bug do implementer não compilar;" />
     <MESSAGE value="Corrigido bug do YAMl;" />
@@ -616,7 +610,8 @@
     <MESSAGE value="Adicionado utils do maven;" />
     <MESSAGE value="Sistema de indexação de dependências pelo PacqitApp." />
     <MESSAGE value="Corrigido em partes o sistema de indexar dependências;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrigido em partes o sistema de indexar dependências;" />
+    <MESSAGE value="Correções gerais no código;&#10;Divisão das opções no menu de projetos;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correções gerais no código;&#10;Divisão das opções no menu de projetos;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
