@@ -1,7 +1,6 @@
-package balbucio.pacqit.settings;
+package balbucio.pacqitapp.settings;
 
-import balbucio.pacqit.model.project.ProjectImplementer;
-import balbucio.pacqit.utils.ThemeUtils;
+import balbucio.pacqitapp.utils.ThemeUtils;
 import com.formdev.flatlaf.intellijthemes.FlatArcDarkOrangeIJTheme;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -52,7 +51,7 @@ public class PacqitSettings {
             options.setIndent(2);
             options.setPrettyFlow(true);
             options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
-            Yaml yml = new Yaml(new Constructor(ProjectImplementer.class, new LoaderOptions()), new Representer(options));
+            Yaml yml = new Yaml(new Constructor(PacqitSettings.class, new LoaderOptions()), new Representer(options));
             yml.dump(this, writer);
         } catch (Exception e){
             e.printStackTrace();

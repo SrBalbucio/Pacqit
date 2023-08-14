@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec2b7dfa-b2cd-4df5-825c-83930f32a99a" name="Changes" comment="Corrigido em partes o sistema de indexar dependências;">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PacqitApp/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PacqitApp/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/page/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/page/MainPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/settings/PacqitSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/PacqitApp/src/main/java/balbucio/pacqitapp/settings/PacqitSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/balbucio/pacqit/utils/ThemeUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/PacqitApp/src/main/java/balbucio/pacqitapp/utils/ThemeUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,6 +174,8 @@
       <workItem from="1690582322452" duration="243000" />
       <workItem from="1690762583976" duration="1181000" />
       <workItem from="1691756111411" duration="358000" />
+      <workItem from="1691863020211" duration="55000" />
+      <workItem from="1692014570082" duration="1286000" />
     </task>
     <task id="LOCAL-00035" summary="Ao clicar em OK o pacqit realmente fecha e sai;">
       <option name="closed" value="true" />

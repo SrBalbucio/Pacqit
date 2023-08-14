@@ -57,11 +57,14 @@ public class MainPage extends JFrame {
         mainPanel.setBorder(new EmptyBorder(15, 15,15 ,5));
         BoxLayout layout = new BoxLayout(mainPanel, BoxLayout.Y_AXIS);
         mainPanel.setLayout(layout);
+
+        //first step
         JPanel label = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel l = new JLabel("Project Options:");
+        JLabel l = new JLabel("Project Actions:");
         l.setFont(l.getFont().deriveFont(Font.BOLD, 16));
         label.add(l);
         mainPanel.add(label);
+
         JPanel panel = new JPanel(new GridLayout(6, 2, 10, 10));
         JButton build = new JButton("Build");
         build.addActionListener(e -> app.getProjectBuild().buildProject(true));
@@ -86,6 +89,16 @@ public class MainPage extends JFrame {
         JButton clean = new JButton("Clean");
         clean.addActionListener(e -> app.getProjectBuild().clean());
         JButton asm = new JButton("Convert to asm and build (alpha)");
+        mainPanel.add(panel);
+        // second step
+
+        JPanel label2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JLabel l2 = new JLabel("Project Options:");
+        l2.setFont(l2.getFont().deriveFont(Font.BOLD, 16));
+        label2.add(l2);
+        mainPanel.add(label2);
+
+        JPanel panel2 = new JPanel(new GridLayout(6, 2, 10, 10));
         JButton openSettings = new JButton("Open project settings");
         openSettings.addActionListener(e -> app.projectSettingsForm());
         JButton dependencies = new JButton("Open dependency manager");
@@ -95,6 +108,7 @@ public class MainPage extends JFrame {
         JButton implementer = new JButton("Open implementer manager");
         implementer.addActionListener(e -> app.implementerManagerForm());
         JButton openInAurora = new JButton("Open in Aurora");
+
         panel.add(build);
         panel.add(buildAndRun);
         panel.add(buildAndObfuscate);
@@ -102,17 +116,18 @@ public class MainPage extends JFrame {
         panel.add(obfuscate);
         panel.add(clean);
         panel.add(asm);
-        panel.add(openSettings);
-        panel.add(dependencies);
-        panel.add(module);
-        panel.add(implementer);
-        panel.add(openInAurora);
-        mainPanel.add(panel);
-        JPanel label2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel l2 = new JLabel("Pacqit Settings:");
-        l2.setFont(l2.getFont().deriveFont(Font.BOLD, 16));
-        label2.add(l2);
-        mainPanel.add(label2);
+        panel2.add(openSettings);
+        panel2.add(dependencies);
+        panel2.add(module);
+        panel2.add(implementer);
+        panel2.add(openInAurora);
+        mainPanel.add(panel2);
+
+        JPanel label3 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JLabel l3 = new JLabel("Pacqit Settings:");
+        l3.setFont(l3.getFont().deriveFont(Font.BOLD, 16));
+        label3.add(l3);
+        mainPanel.add(label3);
         JPanel pacqit = new JPanel(new GridLayout(5, 2, 10, 10));
         JButton repo = new JButton("Manage Repositories");
         JButton settings = new JButton("Open settings");
@@ -136,6 +151,8 @@ public class MainPage extends JFrame {
         pacqit.add(close);
         mainPanel.add(pacqit);
         JScrollPane pane = new JScrollPane(mainPanel);
+        pane.getVerticalScrollBar().setUnitIncrement(10);
+        pane.getVerticalScrollBar().setBlockIncrement(100);
         pane.setBorder(new EmptyBorder(0,0,0,0));
         return pane;
     }

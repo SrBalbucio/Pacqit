@@ -1,4 +1,4 @@
-package balbucio.pacqit.utils;
+package balbucio.pacqitapp.utils;
 
 import com.formdev.flatlaf.IntelliJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatAllIJThemes;
